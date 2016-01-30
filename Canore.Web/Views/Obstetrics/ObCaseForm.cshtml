@@ -40,7 +40,7 @@
                                name="age"
                                ng-model="obstetrics.newData.age"
                                class="form-control ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.age.$valid}"
-                               min="13" max="100"
+                               min="13" max="89"
                                required>
                         <div role="alert" class="help-inline error" style="color:red">
                             <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.age.$error.required">Please enter patient's age</span>
@@ -239,38 +239,52 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-6">
-                    <div class="form-bordered">
-                        APGAR Score<br>
-                        <div class="ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.scoreOne.$valid}">
-                            After 1 min
-                            <input type="radio" name="scoreOne" ng-model="obstetrics.newData.scoreOne" value="1" ng-required="!obstetrics.newData.scoreOne"> 1
-                            <input type="radio" name="scoreOne" ng-model="obstetrics.newData.scoreOne" value="2" ng-required="!obstetrics.newData.scoreOne"> 2
-                            <input type="radio" name="scoreOne" ng-model="obstetrics.newData.scoreOne" value="3" ng-required="!obstetrics.newData.scoreOne"> 3
-                            <input type="radio" name="scoreOne" ng-model="obstetrics.newData.scoreOne" value="4" ng-required="!obstetrics.newData.scoreOne"> 4
-                            <input type="radio" name="scoreOne" ng-model="obstetrics.newData.scoreOne" value="5" ng-required="!obstetrics.newData.scoreOne"> 5
-                            <input type="radio" name="scoreOne" ng-model="obstetrics.newData.scoreOne" value="6" ng-required="!obstetrics.newData.scoreOne"> 6
-                            <input type="radio" name="scoreOne" ng-model="obstetrics.newData.scoreOne" value="7" ng-required="!obstetrics.newData.scoreOne"> 7
-                            <input type="radio" name="scoreOne" ng-model="obstetrics.newData.scoreOne" value="8" ng-required="!obstetrics.newData.scoreOne"> 8
-                            <input type="radio" name="scoreOne" ng-model="obstetrics.newData.scoreOne" value="9" ng-required="!obstetrics.newData.scoreOne"> 9
-                            <input type="radio" name="scoreOne" ng-model="obstetrics.newData.scoreOne" value="10" ng-required="!obstetrics.newData.scoreOne"> 10
+                    <div class="input-group">
+                        <div class="ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.death.$valid}">
+                            Perinatal Death?@*<br>*@
+                            <input type="radio" name="death" ng-model="obstetrics.newData.death" value="Yes" ng-required="!obstetrics.newData.death"> Yes
+                            <input type="radio" name="death" ng-model="obstetrics.newData.death" value="No" ng-required="!obstetrics.newData.death"> No
                             <div role="alert" class="help-inline error" style="color:red">
-                                <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.scoreOne.$error.required">Please enter score</span>
+                                <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.death.$error.required">Please enter answer</span>
                             </div>
                         </div>
-                        <div class="ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.scoreFive.$valid}">
-                            After 5 min
-                            <input type="radio" name="scoreFive" ng-model="obstetrics.newData.scoreFive" value="1" ng-required="!obstetrics.newData.scoreFive"> 1
-                            <input type="radio" name="scoreFive" ng-model="obstetrics.newData.scoreFive" value="2" ng-required="!obstetrics.newData.scoreFive"> 2
-                            <input type="radio" name="scoreFive" ng-model="obstetrics.newData.scoreFive" value="3" ng-required="!obstetrics.newData.scoreFive"> 3
-                            <input type="radio" name="scoreFive" ng-model="obstetrics.newData.scoreFive" value="4" ng-required="!obstetrics.newData.scoreFive"> 4
-                            <input type="radio" name="scoreFive" ng-model="obstetrics.newData.scoreFive" value="5" ng-required="!obstetrics.newData.scoreFive"> 5
-                            <input type="radio" name="scoreFive" ng-model="obstetrics.newData.scoreFive" value="6" ng-required="!obstetrics.newData.scoreFive"> 6
-                            <input type="radio" name="scoreFive" ng-model="obstetrics.newData.scoreFive" value="7" ng-required="!obstetrics.newData.scoreFive"> 7
-                            <input type="radio" name="scoreFive" ng-model="obstetrics.newData.scoreFive" value="8" ng-required="!obstetrics.newData.scoreFive"> 8
-                            <input type="radio" name="scoreFive" ng-model="obstetrics.newData.scoreFive" value="9" ng-required="!obstetrics.newData.scoreFive"> 9
-                            <input type="radio" name="scoreFive" ng-model="obstetrics.newData.scoreFive" value="10" ng-required="!obstetrics.newData.scoreFive"> 10
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <div class="form-bordered">
+                        APGAR Score<br>
+                        <div class="ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.oneMinScore.$valid}">
+                            After 1 min
+                            <input type="radio" name="oneMinScore" ng-model="obstetrics.newData.oneMinScore" value="1" ng-required="!obstetrics.newData.oneMinScore"> 1
+                            <input type="radio" name="oneMinScore" ng-model="obstetrics.newData.oneMinScore" value="2" ng-required="!obstetrics.newData.oneMinScore"> 2
+                            <input type="radio" name="oneMinScore" ng-model="obstetrics.newData.oneMinScore" value="3" ng-required="!obstetrics.newData.oneMinScore"> 3
+                            <input type="radio" name="oneMinScore" ng-model="obstetrics.newData.oneMinScore" value="4" ng-required="!obstetrics.newData.oneMinScore"> 4
+                            <input type="radio" name="oneMinScore" ng-model="obstetrics.newData.oneMinScore" value="5" ng-required="!obstetrics.newData.oneMinScore"> 5
+                            <input type="radio" name="oneMinScore" ng-model="obstetrics.newData.oneMinScore" value="6" ng-required="!obstetrics.newData.oneMinScore"> 6
+                            <input type="radio" name="oneMinScore" ng-model="obstetrics.newData.oneMinScore" value="7" ng-required="!obstetrics.newData.oneMinScore"> 7
+                            <input type="radio" name="oneMinScore" ng-model="obstetrics.newData.oneMinScore" value="8" ng-required="!obstetrics.newData.oneMinScore"> 8
+                            <input type="radio" name="oneMinScore" ng-model="obstetrics.newData.oneMinScore" value="9" ng-required="!obstetrics.newData.oneMinScore"> 9
+                            <input type="radio" name="oneMinScore" ng-model="obstetrics.newData.oneMinScore" value="10" ng-required="!obstetrics.newData.oneMinScore"> 10
                             <div role="alert" class="help-inline error" style="color:red">
-                                <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.scoreFive.$error.required">Please enter score</span>
+                                <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.oneMinScore.$error.required">Please enter score</span>
+                            </div>
+                        </div>
+                        <div class="ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.fiveMinScore.$valid}">
+                            After 5 min
+                            <input type="radio" name="fiveMinScore" ng-model="obstetrics.newData.fiveMinScore" value="1" ng-required="!obstetrics.newData.fiveMinScore"> 1
+                            <input type="radio" name="fiveMinScore" ng-model="obstetrics.newData.fiveMinScore" value="2" ng-required="!obstetrics.newData.fiveMinScore"> 2
+                            <input type="radio" name="fiveMinScore" ng-model="obstetrics.newData.fiveMinScore" value="3" ng-required="!obstetrics.newData.fiveMinScore"> 3
+                            <input type="radio" name="fiveMinScore" ng-model="obstetrics.newData.fiveMinScore" value="4" ng-required="!obstetrics.newData.fiveMinScore"> 4
+                            <input type="radio" name="fiveMinScore" ng-model="obstetrics.newData.fiveMinScore" value="5" ng-required="!obstetrics.newData.fiveMinScore"> 5
+                            <input type="radio" name="fiveMinScore" ng-model="obstetrics.newData.fiveMinScore" value="6" ng-required="!obstetrics.newData.fiveMinScore"> 6
+                            <input type="radio" name="fiveMinScore" ng-model="obstetrics.newData.fiveMinScore" value="7" ng-required="!obstetrics.newData.fiveMinScore"> 7
+                            <input type="radio" name="fiveMinScore" ng-model="obstetrics.newData.fiveMinScore" value="8" ng-required="!obstetrics.newData.fiveMinScore"> 8
+                            <input type="radio" name="fiveMinScore" ng-model="obstetrics.newData.fiveMinScore" value="9" ng-required="!obstetrics.newData.fiveMinScore"> 9
+                            <input type="radio" name="fiveMinScore" ng-model="obstetrics.newData.fiveMinScore" value="10" ng-required="!obstetrics.newData.fiveMinScore"> 10
+                            <div role="alert" class="help-inline error" style="color:red">
+                                <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.fiveMinScore.$error.required">Please enter score</span>
                             </div>
                         </div>
                     </div>
@@ -351,7 +365,7 @@
 
             function _onSubmitForm() {
                 console.log("validating");
-                vm.showFormErrors = true;                
+                vm.showFormErrors = true;
                 if (vm.obForm.$valid) {
                     console.log("form is valid");
                     var form = vm.newData;

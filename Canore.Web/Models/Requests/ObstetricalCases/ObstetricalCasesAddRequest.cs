@@ -39,10 +39,10 @@ namespace Canore.Web.Models.ObstetricalCases
         public string Death { get; set; }
 
         [Required]
-        public string OneMinScore { get; set; }
+        public int OneMinScore { get; set; }
 
         [Required]
-        public string FiveMinScore { get; set; }
+        public int FiveMinScore { get; set; }
 
         [Required]
         public int DaysInHospital { get; set; }

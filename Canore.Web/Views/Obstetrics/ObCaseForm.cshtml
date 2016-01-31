@@ -16,15 +16,15 @@
                         <input type="text"
                                placeholder=""
                                style="width: 150px;"
-                               id="patient"
-                               name="patient"
-                               ng-model="obstetrics.newData.patient"
-                               class="form-control ng-class:{'has-error': obstetrics.obForm.patient.$touched && !obstetrics.obForm.patient.$valid}"
+                               id="patientId"
+                               name="patientId"
+                               ng-model="obstetrics.newData.patientId"
+                               class="form-control ng-class:{'has-error': obstetrics.obForm.patientId.$touched && !obstetrics.obForm.patientId.$valid}"
                                ng-minlength="5"
                                required>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.patient.$error.required">Please enter patient ID</span>
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.patient.$error.minlength">Patient ID is required to be at least 5 characters</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.patientId.$error.required">Please enter patient ID</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.patientId.$error.minlength">Patient ID is required to be at least 5 characters</span>
                         </div>
                     </div>
                 </div>
@@ -76,8 +76,8 @@
                         <input type="number"
                                placeholder=""
                                style="width: 75px;"
-                               id="term"
-                               name="term"
+                               id="parity"
+                               name="parity"
                                ng-model="obstetrics.newData.parity"
                                class="form-control ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.parity.$valid}"
                                min="0"
@@ -94,7 +94,7 @@
                     Complications
                     <div class="input-group">
                         Antepartum
-                        <select class="form-control" name="anteSelect" ng-model="obstetrics.newData.anteSelect" required>
+                        <select class="form-control" name="antepartum" ng-model="obstetrics.newData.antepartum" required>
                             <option value=""></option>
                             <option value="Preconception evaluation, prenatal and genetic diagnoses">Preconception evaluation, prenatal and genetic diagnoses</option>
                             <option value="Ultrasonography">Ultrasonography</option>
@@ -140,12 +140,12 @@
                             <option value="Uncategorized">Uncategorized (cases in this category do not count toward the required 20 cases)</option>
                         </select>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.anteSelect.$error.required">Please enter category</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.antepartum.$error.required">Please enter category</span>
                         </div>
                     </div>
                     <div class="input-group">
                         Delivery/Postpartum
-                        <select class="form-control" name="postSelect" ng-model="obstetrics.newData.postSelect" required>
+                        <select class="form-control" name="postpartum" ng-model="obstetrics.newData.postpartum" required>
                             <option value=""></option>
                             <option value="Preconception evaluation, prenatal and genetic diagnoses">Preconception evaluation, prenatal and genetic diagnoses</option>
                             <option value="Ultrasonography">Ultrasonography</option>
@@ -191,7 +191,7 @@
                             <option value="Uncategorized">Uncategorized (cases in this category do not count toward the required 20 cases)</option>
                         </select>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.postSelect.$error.required">Please enter category</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.postpartum.$error.required">Please enter category</span>
                         </div>
                     </div>
 
@@ -203,15 +203,15 @@
                     <div class="input-group">
                         <input type="text"
                                placeholder=""
-                               id="outcome"
-                               name="outcome"
-                               ng-model="obstetrics.newData.outcome"
-                               class="form-control ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.outcome.$valid}"
+                               id="treatment"
+                               name="treatment"
+                               ng-model="obstetrics.newData.treatment"
+                               class="form-control ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.treatment.$valid}"
                                ng-minlength="5"
                                required>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.outcome.$error.required">Please enter outcome</span>
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.outcome.$error.minlength">Please enter at least 5 characters</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.treatment.$error.required">Please enter treatment</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.treatment.$error.minlength">Please enter at least 5 characters</span>
                         </div>
                     </div>
                 </div>
@@ -223,16 +223,16 @@
                         <div class="left">
                             <input type="number"
                                    style="width: 80px;"
-                                   id="grams"
-                                   name="grams"
-                                   ng-model="obstetrics.newData.grams"
-                                   class="form-control ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.grams.$valid}"
+                                   id="birthWeight"
+                                   name="birthWeight"
+                                   ng-model="obstetrics.newData.birthWeight"
+                                   class="form-control ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.birthWeight.$valid}"
                                    min="500" max="6000"
                                    required> grams
                         </div>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.grams.$error.required || obstetrics.obForm.ounces.$error.required">Please enter baby's birthweight</span>
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.grams.$error.number || obstetrics.obForm.ounces.$error.number">Please enter valid numbers</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.birthWeight.$error.required || obstetrics.obForm.ounces.$error.required">Please enter baby's birthweight</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.birthWeight.$error.number || obstetrics.obForm.ounces.$error.number">Please enter valid numbers</span>
                         </div>
                     </div>
                 </div>
@@ -293,18 +293,18 @@
             <div class="form-group">
                 <div class="col-xs-6">
                     <div class="input-group">
-                        Length of stay<br>
+                        Days in hospital<br>
                         <input type="number"
                                style="width: 80px;"
-                               id="stay"
-                               name="stay"
-                               ng-model="obstetrics.newData.stay"
-                               class="form-control ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.stay.$valid}"
+                               id="daysInHospital"
+                               name="daysInHospital"
+                               ng-model="obstetrics.newData.daysInHospital"
+                               class="form-control ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.daysInHospital.$valid}"
                                min="0"
                                required> days
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.stay.$error.required">Please enter length of stay</span>
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.stay.$error.number">Please enter valid numbers</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.daysInHospital.$error.required">Please enter length of days in hospital</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.daysInHospital.$error.number">Please enter valid numbers</span>
                         </div>
                     </div>
                 </div>

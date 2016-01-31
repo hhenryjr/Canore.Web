@@ -14,7 +14,7 @@ namespace Canore.Web.Services
             return 0;
         }
 
-        public static int CreateObCase(ObstetricalCasesAddRequest model, string caseId)
+        public static int CreateObCase(ObstetricalCasesAddRequest model)//, string caseId)
         {
             var id = 0;
 

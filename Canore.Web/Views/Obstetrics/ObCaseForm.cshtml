@@ -351,6 +351,8 @@
             vm.$scope = $scope;
 
             vm.onSubmitForm = _onSubmitForm;
+            vm.onCreateSuccess = _onCreateSuccess;
+            vm.onCreateError = _onCreateError;
 
             vm.newData = null;
             vm.showFormErrors = false;
@@ -370,11 +372,24 @@
                     console.log("form is valid");
                     var form = vm.newData;
                     console.log(form);
-                    var serForm = $("#obForm").serialize();
-                    console.log(serForm);
+                    //var serForm = $("#obForm").serialize();
+                    //console.log(serForm);
+                    vm.$obstetricsService.createObCase(form, vm.onCreateSuccess, vm.onCreateError);
                 } else {
                     console.log("form is not valid");
                 }
+            }
+
+            function _onCreateSuccess(data, status, xhr) {
+                vm.dataSuccess = "Case saved!";
+                console.log(vm.dataSuccess);
+                window.alert(vm.dataSuccess);
+            }
+
+            function _onCreateError(jqXHR, textStatus, errorThrown) {
+                vm.dataError = "An error has occurred!";
+                console.log(vm.dataError);
+                window.alert(vm.dataError);
             }
         }
 

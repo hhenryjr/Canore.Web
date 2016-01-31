@@ -15,7 +15,7 @@ namespace Canore.Web.Controllers.Api
     public class ObstetricalCasesApiController : ApiController
     {
         
-        [Route("Add"), HttpPost]
+        [Route, HttpPost]
         public HttpResponseMessage AddObstetricalCase(ObstetricalCasesAddRequest model)
         {
             if (!ModelState.IsValid)

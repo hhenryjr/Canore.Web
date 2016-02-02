@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Canore.Web.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,10 +11,13 @@ namespace Canore.Web.Controllers
     public class ObstetricsController : Controller
     {
         // GET: Obstetrics
-        [Route]
-        public ActionResult ObCaseForm()
+        [Route("Add")]
+        [Route("{id:int}/edit")]
+        public ActionResult ObCaseForm(int id = 0)
         {
-            return View();
+            ItemViewModel<int> model = new ItemViewModel<int>();
+            model.Item = id;
+            return View(model);
         }
 
         [Route]

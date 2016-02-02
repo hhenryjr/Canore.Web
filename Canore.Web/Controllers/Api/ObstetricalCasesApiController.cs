@@ -1,4 +1,5 @@
 ﻿using Canore.Web.Models.ObstetricalCases;
+using Canore.Web.Models.Requests.ObstetricalCases;
 using Canore.Web.Models.Responses;
 using Canore.Web.Services;
 using System;
@@ -13,8 +14,7 @@ namespace Canore.Web.Controllers.Api
 {
     [RoutePrefix("api/ObCaseForm")]
     public class ObstetricalCasesApiController : ApiController
-    {
-        
+    {        
         [Route, HttpPost]
         public HttpResponseMessage AddObstetricalCase(ObstetricalCasesAddRequest model)
         {
@@ -26,6 +26,19 @@ namespace Canore.Web.Controllers.Api
             ItemResponse<int> response = new ItemResponse<int>();
             response.Item = ObstetricalCasesService.CreateObCase(model);
 
+            return Request.CreateResponse(response);
+        }
+
+        [Route("{id:int}"), HttpPut]
+        public HttpResponseMessage ModifyObCase(ObstetricalCasesUpdateRequest model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            SuccessResponse response = new SuccessResponse();
+            ObstetricalCasesService.ModifyObCase(model);
             return Request.CreateResponse(response);
         }
     }

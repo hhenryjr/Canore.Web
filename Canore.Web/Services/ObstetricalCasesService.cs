@@ -1,4 +1,5 @@
 ﻿using Canore.Web.Models.ObstetricalCases;
+using Canore.Web.Models.Requests.ObstetricalCases;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -48,6 +49,27 @@ namespace Canore.Web.Services
 
             return id;
 
+        }
+
+        public static void ModifyObCase(ObstetricalCasesUpdateRequest model)
+        {
+            DataProvider.ExecuteNonQuery(GetConnection, "dbo.ObstetricalCases_Update",
+                inputParamMapper: delegate (SqlParameterCollection UpdateObCase)
+                {
+                    UpdateObCase.AddWithValue("@Id", model.Id);
+                    UpdateObCase.AddWithValue("@PatientId", model.PatientId);
+                    UpdateObCase.AddWithValue("@Age", model.Age);
+                    UpdateObCase.AddWithValue("@Gravity", model.Gravity);
+                    UpdateObCase.AddWithValue("@Parity", model.Parity);
+                    UpdateObCase.AddWithValue("@Antepartum", model.Antepartum);
+                    UpdateObCase.AddWithValue("@Postpartum", model.Postpartum);
+                    UpdateObCase.AddWithValue("@Treatment", model.Treatment);
+                    UpdateObCase.AddWithValue("@BirthWeight", model.BirthWeight);
+                    UpdateObCase.AddWithValue("@Death", model.Death);
+                    UpdateObCase.AddWithValue("@OneMinScore", model.OneMinScore);
+                    UpdateObCase.AddWithValue("@FiveMinScore", model.FiveMinScore);
+                    UpdateObCase.AddWithValue("@DaysInHospital", model.DaysInHospital);
+                });
         }
     }
 }

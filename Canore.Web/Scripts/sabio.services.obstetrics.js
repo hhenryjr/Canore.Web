@@ -34,3 +34,19 @@ sabio.services.obstetrics.updateObCase = function (id, obCaseData, onSuccess, on
     $.ajax(url, settings);
     
 }
+
+sabio.services.obstetrics.getObCase = function (id, onSuccess, onError) {
+
+    var url = "/api/ObCaseForm/" + id;
+    var settings = {
+        cache: false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data: obCaseData,
+        dataType: "json",
+        success: onSuccess,
+        error: onError,
+        type: "GET"
+    };
+
+    $.ajax(url, settings);
+}

@@ -12,7 +12,7 @@ namespace Canore.Web.Controllers
     {
         // GET: Obstetrics
         [Route("Add")]
-        [Route("{id:int}/edit")]
+        [Route("{id:int}")]
         public ActionResult ObCaseForm(int id = 0)
         {
             ItemViewModel<int> model = new ItemViewModel<int>();

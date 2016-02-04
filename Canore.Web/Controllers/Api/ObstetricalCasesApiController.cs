@@ -1,4 +1,5 @@
-﻿using Canore.Web.Models.ObstetricalCases;
+﻿using Canore.Web.Domain;
+using Canore.Web.Models.ObstetricalCases;
 using Canore.Web.Models.Requests.ObstetricalCases;
 using Canore.Web.Models.Responses;
 using Canore.Web.Services;
@@ -25,7 +26,6 @@ namespace Canore.Web.Controllers.Api
             //string userId = HttpContext.Current.User.Identity.GetUserId();
             ItemResponse<int> response = new ItemResponse<int>();
             response.Item = ObstetricalCasesService.CreateObCase(model);
-
             return Request.CreateResponse(response);
         }
 
@@ -39,6 +39,27 @@ namespace Canore.Web.Controllers.Api
 
             SuccessResponse response = new SuccessResponse();
             ObstetricalCasesService.ModifyObCase(model);
+            return Request.CreateResponse(response);
+        }
+
+        [Route("{id:int}"), HttpGet]
+        public HttpResponseMessage GetObCase(int id)
+        {
+            ItemResponse<ObstetricalCases> response = new ItemResponse<ObstetricalCases>();
+            response.Item = ObstetricalCasesService.GetObCase(id);
+            return Request.CreateResponse(response);
+        }
+
+        [Route, HttpGet]
+        public HttpResponseMessage GetObCaseList()
+        {
+            if(!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            ItemsResponse<ObstetricalCases> response = new ItemsResponse<ObstetricalCases>();
+            response.Items = ObstetricalCasesService.GetObCaseList();
             return Request.CreateResponse(response);
         }
     }

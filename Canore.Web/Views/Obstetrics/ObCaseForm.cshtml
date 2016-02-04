@@ -10,7 +10,7 @@
     <div data-ng-controller="obstetricsController as obstetrics" id="obstetricsCtrl">
         <div id="formContainer" class="block push-bit form-horizontal form-bordered form-control-borderless">
             <form class="form-horizontal form-bordered form-control-borderless" id="obForm" name="obstetrics.obForm" ng-submit="obstetrics.onSubmitForm()" novalidate>
-                <input type="hidden" id="caseId" name="Id" data-ng-model="obstetrics.newData.Id" value="@Model.Item" />
+                <input type="hidden" id="caseId" name="Id" ng-model="obstetrics.newData.Id" value="@Model.Item" />
                 <div class="form-group">
                     <div class="col-xs-6">
                         Patient ID
@@ -96,7 +96,7 @@
                         Complications
                         <div class="input-group">
                             Antepartum
-                            <select class="form-control" name="antepartum" ng-model="obstetrics.newData.antepartum" required>
+                            <select class="form-control" id="antepartum" name="antepartum" ng-model="obstetrics.newData.antepartum" required>
                                 <option value=""></option>
                                 <option value="Preconception evaluation, prenatal and genetic diagnoses">Preconception evaluation, prenatal and genetic diagnoses</option>
                                 <option value="Ultrasonography">Ultrasonography</option>
@@ -147,7 +147,7 @@
                         </div>
                         <div class="input-group">
                             Delivery/Postpartum
-                            <select class="form-control" name="postpartum" ng-model="obstetrics.newData.postpartum" required>
+                            <select class="form-control" id="postpartum" name="postpartum" ng-model="obstetrics.newData.postpartum" required>
                                 <option value=""></option>
                                 <option value="Preconception evaluation, prenatal and genetic diagnoses">Preconception evaluation, prenatal and genetic diagnoses</option>
                                 <option value="Ultrasonography">Ultrasonography</option>
@@ -355,9 +355,11 @@
             vm.onSubmitForm = _onSubmitForm;
             vm.onCreateSuccess = _onCreateSuccess;
             vm.onUpdateSuccess = _onUpdateSuccess;
+            vm.onGetSuccess = _onGetSuccess;
             vm.onError = _onError;
             vm.getId = _getId;
             vm.addToHiddenId = _addToHiddenId;
+            vm.fillInForm = _fillInForm;
 
             vm.newData = null;
             vm.showFormErrors = false;
@@ -394,12 +396,35 @@
                 }
             }
 
+            function _getForm() {
+                var form = vm.newData;
+                var caseId = form.Id;
+                vm.$obstetricsService.getObCase(caseId, vm.onGetSuccess, vm.onError);
+            }
+
             function _getId(data) {
                 caseId = data;
             }
 
             function _addToHiddenId(data) {
+                console.log("Filling form");
                 $("#caseId").val(data);
+
+            }
+
+            function _fillInForm(data) {
+                $("#caseId").val(data.id);
+                $("#patientId").val(data.patientId);
+                $("#age").val(data.age);
+                $("#gravity").val(data.gravity);
+                $("#parity").val(data.parity);
+                $("#antepartum").val(data.antepartum);
+                $("#poatpartum").val(data.poatpartum);
+                $("#treatment").val(data.treatment);
+                $("#birthWeight").val(data.birthWeight);
+                $("#death").val(data.death);
+                $("#daysInHospital").val(data.daysInHospital);
+
             }
 
             function _onCreateSuccess(data, status, xhr) {
@@ -417,17 +442,17 @@
                 window.alert(vm.success);
             }
 
+            function _onGetSuccess(data, status, xhr) {
+                if (data && data.Item) {
+                    vm.fillInForm(data.Item);
+                }
+            }
+
             function _onError(jqXHR, textStatus, errorThrown) {
                 vm.error = "An error has occurred!";
                 console.log(vm.error);
                 window.alert(vm.error);
             }
-
-            //function _onUpdateError(data, status, xhr) {
-            //    vm.error = "An error has occurred!";
-            //    console.log(vm.error);
-            //    window.alert(vm.error);
-            //}
         }
 
         sabio.ng.addController(sabio.ng.app.module,

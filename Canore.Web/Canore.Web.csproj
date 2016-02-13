@@ -971,7 +971,7 @@
     <Content Include="Scripts\ng\angular.min.js.map" />
     <Content Include="Views\Obstetrics\ObCaseForm.cshtml" />
     <Content Include="Scripts\sabio.services.obstetrics.js" />
-    <Content Include="Views\Obstetrics\Questionnaire.cshtml" />
+    <Content Include="Views\Obstetrics\Questions.cshtml" />
     <Content Include="Views\Obstetrics\ObCaseFormJQ.cshtml" />
   </ItemGroup>
   <ItemGroup>

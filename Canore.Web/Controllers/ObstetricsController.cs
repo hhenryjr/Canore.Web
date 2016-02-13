@@ -20,8 +20,8 @@ namespace Canore.Web.Controllers
             return View(model);
         }
 
-        [Route]
-        public ActionResult Questionnaire()
+        [Route("Questions")]
+        public ActionResult Questions()
         {
             return View();
         }

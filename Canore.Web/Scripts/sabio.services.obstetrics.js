@@ -41,7 +41,6 @@ sabio.services.obstetrics.getObCase = function (id, onSuccess, onError) {
     var settings = {
         cache: false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        data: obCaseData,
         dataType: "json",
         success: onSuccess,
         error: onError,

@@ -62,5 +62,13 @@ namespace Canore.Web.Controllers.Api
             response.Items = ObstetricalCasesService.GetObCaseList();
             return Request.CreateResponse(response);
         }
+
+        [Route("{id:int}"), HttpDelete]
+        public HttpResponseMessage DeleteObCase(int id)
+        {
+            SuccessResponse response = new SuccessResponse();
+            ObstetricalCasesService.DeleteObCase(id);
+            return Request.CreateResponse(response);
+        }
     }
 }

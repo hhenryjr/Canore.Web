@@ -23,7 +23,7 @@ namespace Canore.Web.Services
             var id = 0;
 
             DataProvider.ExecuteNonQuery(GetConnection, "dbo.ObstetricalCases_Insert",
-                inputParamMapper: delegate (SqlParameterCollection InsertObCase)
+                inputParamMapper: delegate(SqlParameterCollection InsertObCase)
                 {
                     InsertObCase.AddWithValue("@PatientId", model.PatientId);
                     InsertObCase.AddWithValue("@Age", model.Age);
@@ -44,7 +44,7 @@ namespace Canore.Web.Services
                     InsertObCase.Add(param);
                 },
 
-                returnParameters: delegate (SqlParameterCollection par)
+                returnParameters: delegate(SqlParameterCollection par)
                 {
                     int.TryParse(par["@Id"].Value.ToString(), out id);
                 }
@@ -57,7 +57,7 @@ namespace Canore.Web.Services
         public static void ModifyObCase(ObstetricalCasesUpdateRequest model)
         {
             DataProvider.ExecuteNonQuery(GetConnection, "dbo.ObstetricalCases_Update",
-                inputParamMapper: delegate (SqlParameterCollection UpdateObCase)
+                inputParamMapper: delegate(SqlParameterCollection UpdateObCase)
                 {
                     UpdateObCase.AddWithValue("@Id", model.Id);
                     UpdateObCase.AddWithValue("@PatientId", model.PatientId);
@@ -80,10 +80,10 @@ namespace Canore.Web.Services
             ObstetricalCases item = null;
 
             DataProvider.ExecuteCmd(GetConnection, "dbo.ObstetricalCases_SelectById",
-                inputParamMapper: delegate (SqlParameterCollection paramCollection)
+                inputParamMapper: delegate(SqlParameterCollection paramCollection)
                 {
                     paramCollection.AddWithValue("@Id", id);
-                }, map: delegate (IDataReader reader, short set)
+                }, map: delegate(IDataReader reader, short set)
                 {
                     item = MapObCase(reader);
                 });
@@ -109,6 +109,15 @@ namespace Canore.Web.Services
                 });
 
             return list;
+        }
+
+        public static void DeleteObCase(int id)
+        {
+            DataProvider.ExecuteNonQuery(GetConnection, "dbo.ObstetricalCases_DeleteById",
+                inputParamMapper: delegate (SqlParameterCollection paramCollection)
+                {
+                    paramCollection.AddWithValue("@Id", id);
+                });
         }
 
         private static ObstetricalCases MapObCase(IDataReader reader)

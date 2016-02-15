@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Obstetrical Case List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <h2>Obstetrical Case List</h2>
+    @Html.ActionLink("Create New Case", "Questions")
+</div>
+
+<div class="container">
+    <div data-ng-controller="obstetricsController as dashboard">
+        <div class="row">
+            <table>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Age</th>
+                    <th>Gravity</th>
+                    <th>Parity</th>
+                    <th>Antepartum</th>
+                    <th>Delivery/Postpartum</th>
+                    <th>Operative Procedures and/or Treatment</th>
+                    <th>Birth Weight</th>
+                    <th>Perinatal Death</th>
+                    <th>APGAR Score (After 1 min)</th>
+                    <th>APGAR Score (After 5 mins)</th>
+                    <th>Days In Hospital</th>
+                </tr>
+                <tr data-ng-repeat="obCase in dashboard.obCases">
+                    <td>{{obCase.PatientId}}</td>
+                    <td>{{obCase.Age}}</td>
+                    <td>{{obCase.Gravity}}</td>
+                    <td>{{obCase.Parity}}</td>
+                    <td>{{obCase.Antepartum}}</td>
+                    <td>{{obCase.Postpartum}}</td>
+                    <td>{{obCase.Treatment}}</td>
+                    <td>{{obCase.BirthWeight}}</td>
+                    <td>{{obCase.Death}}</td>
+                    <td>{{obCase.OneMinScore}}</td>
+                    <td>{{obCase.FiveMinScore}}</td>
+                    <td>{{obCase.DaysInHospital}}</td>
+                    <td><a ng-href="http://canore.dev/obstetrics/{{obCase.Id}}" title="Edit">Edit</a></td>
+                    <td><a ng-href="javascript:void(0)" title="Delete" ng-click="dashboard.onDeleteObCase(obCase)">Delete</a></td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    
+    <script src="~/Scripts/sabio.services.obstetrics.js"></script>
+<script type="text/javascript">
+
+        sabio.page.startUp = function () {
+            sabio.page.userController = sabio.ng.getControllerInstance($("#obstetricsCtrl"));
+        }
+
+        sabio.services.obstetricsFactory = function ($baseService) {
+            var aSabioServiceObject = sabio.services.obstetrics;
+            var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
+            return newService;
+        }
+
+        sabio.ng.addService(sabio.ng.app.module,
+            "$obstetricsService",
+            ["$baseService"],
+            sabio.services.obstetricsFactory);
+
+        sabio.page.obstetricsControllerFactory = function ($scope, $baseController, $obstetricsService) {
+
+            var vm = this;
+
+            $baseController.merge(vm, $baseController);
+
+            vm.$obstetricsService = $obstetricsService;
+            vm.$scope = $scope;
+                        
+            vm.onGetListSuccess = _onGetListSuccess;
+            vm.onDeleteObCase = _onDeleteObCase;
+            vm.onDeleteSuccess = _onDeleteSuccess;
+            vm.onError = _onError;
+
+            vm.obCases = null;
+            vm.deletedObCase = null;
+
+            vm.notify = vm.$obstetricsService.getNotifier($scope);
+
+            render();
+
+            function render() {            
+                vm.$obstetricsService.getObCaseList(vm.onGetListSuccess, vm.onError);
+            };
+
+            function _onGetListSuccess(data) {
+                vm.notify(function () {
+                    vm.obCases = data.Items;
+                    console.log(vm.obCases);
+                });
+            }
+
+            function _onDeleteObCase(obCase) {
+                if(confirm("Are you sure you want to delete this case?") == true){
+                vm.$obstetricsService.deleteObCase(obCase.Id, vm.onDeleteSuccess, vm.onError);
+                vm.deletedObCase = obCase;
+                } else {
+                    console.log("Cancelled");
+                }
+            }
+
+            function _onDeleteSuccess() {
+                console.log("Deleting Case");
+                vm.notify(function () {
+                    var index = vm.obCases.indexOf(vm.deletedObCase);
+                    if (index > -1) {
+                        vm.obCases.splice(index, 1);
+                    }
+                });
+                alert("Case deleted!");
+            }
+
+            function _onError(jqXHR, textStatus, errorThrown) {
+                vm.error = "An error has occurred!";
+                console.log(vm.error);
+                window.alert(vm.error);
+            }
+        }
+
+        sabio.ng.addController(sabio.ng.app.module,
+                "obstetricsController",
+                ['$scope', '$baseController', "$obstetricsService"],
+                sabio.page.obstetricsControllerFactory);
+    </script>
+}

@@ -27,7 +27,7 @@ namespace Canore.Web.Controllers
         }
 
         [Route]
-        public ActionResult ObCaseFormJQ()
+        public ActionResult ObCaseList()
         {
             return View();
         }

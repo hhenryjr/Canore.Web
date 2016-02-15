@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Obstetrical Patient</h2>
+<h2>Obstetrical Patient Case</h2>
 
 <div data-ng-controller="obstetricsController as obstetrics" id="obstetricsCtrl">
     <div id="formContainer" class="block push-bit form-horizontal form-bordered form-control-borderless">
         <form class="form-horizontal form-bordered form-control-borderless" id="obForm" name="obstetrics.obForm" ng-submit="obstetrics.onSubmitForm()" novalidate>
-            <input type="hidden" id="caseId" name="Id" ng-model="obstetrics.newData.Id" value="@Model.Item" />
+            <input type="text" class="hidden" id="caseId" name="Id" ng-model="obstetrics.newData.Id" value="@Model.Item" form-autofill-fix>
             <div class="form-group">
                 <div class="col-xs-6">
                     Patient ID
@@ -332,7 +332,6 @@
 @section Scripts{
 
     <script src="~/Scripts/sabio.services.obstetrics.js"></script>
-
     <script type="text/javascript">
 
         sabio.page.startUp = function () {
@@ -398,7 +397,7 @@
                     if (caseId > 0) {
                         var serForm = $("#obForm").serialize();         // CURRENT ALTERNATIVE; SEE TRELLO NOTES
                         console.log(serForm);
-                        vm.$obstetricsService.updateObCase(caseId, serForm, vm.onUpdateSuccess, vm.onError);
+                        vm.$obstetricsService.updateObCase(caseId, form, vm.onUpdateSuccess, vm.onError);
                         return caseId;
                     } else {
                         vm.$obstetricsService.createObCase(form, vm.onCreateSuccess, vm.onError);
@@ -421,7 +420,6 @@
             function _addToHiddenId(data) {
                 console.log("Adding Id");
                 $("#caseId").val(data);
-
             }
 
             function _fillInForm(data) {
@@ -443,60 +441,50 @@
                 var oneMinScore = document.getElementsByName('oneMinScore');
                 var fiveMinScore = document.getElementsByName('fiveMinScore');
 
-                //if (data.Death == death[0].value) {
-                //    death[0].checked = true;
-                //} else if (data.Death == death[1].value) {
-                //    death[1].checked = true;
-                //}
-
                 for (i = 0; i < death.length; i++) {
                     if (death[i].value == data.Death) {
                         death[i].checked = true;
-                        $("#death").val(death[i].value).trigger('change');
-                    }                    
+                        //$("#death").val(death[i].value).trigger('change');
+                    }
                 }
 
                 for (i = 0; i < oneMinScore.length; i++) {
                     if (oneMinScore[i].value == data.OneMinScore) {
                         oneMinScore[i].checked = true;
-                        $("#oneMinScore").val(oneMinScore[i].value).trigger('change');
+                        //$("#oneMinScore").val(oneMinScore[i].value).trigger('change');
                     }
                 }
 
                 for (i = 0; i < fiveMinScore.length; i++) {
                     if (fiveMinScore[i].value == data.FiveMinScore) {
                         fiveMinScore[i].checked = true;
-                        $("#fiveMinScore").val(fiveMinScore[i].value).trigger('change');
+                        //$("#fiveMinScore").val(fiveMinScore[i].value).trigger('change');
                     }
                 }
 
-                /* for (i = 0; i < death.length; i++) {
-                    if (death[i].value == "Yes") {
-                        death[i].checked = true;
-
-                        //(death[i].checked).trigger('change');
-                    } else if (death[i].value == "No") {
-                        death[i].checked = true;
-                        //(death[i].value).trigger('change');
-                    }
-
-                }*/
-
+                vm.notify(function () {
+                    $("#death").val(data.Death).trigger('change');
+                    $("#oneMinScore").val(data.OneMinScore).trigger('change');
+                    $("#fiveMinScore").val(data.FiveMinScore).trigger('change');
+                });
             }
 
             function _onCreateSuccess(data, status, xhr) {
                 if (data && data.Item) {
                     vm.addToHiddenId(data.Item);
+                    vm.getId(data.Item);
                 }
                 vm.success = "Case saved!";
                 console.log(vm.success);
                 window.alert(vm.success);
+                location.href = 'http://canore.dev/obstetrics';
             }
 
             function _onUpdateSuccess(data, status, xhr) {
                 vm.success = "Case updated!";
                 console.log(vm.success);
                 window.alert(vm.success);
+                location.href = 'http://canore.dev/obstetrics';
             }
 
             function _onGetSuccess(data, status, xhr) {

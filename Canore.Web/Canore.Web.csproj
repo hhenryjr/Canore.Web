@@ -973,6 +973,7 @@
     <Content Include="Scripts\sabio.services.obstetrics.js" />
     <Content Include="Views\Obstetrics\Questions.cshtml" />
     <Content Include="Views\Obstetrics\ObCaseFormJQ.cshtml" />
+    <Content Include="Views\Obstetrics\ObCaseList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

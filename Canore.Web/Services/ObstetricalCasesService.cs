@@ -1,6 +1,7 @@
 ﻿using Canore.Web.Domain;
 using Canore.Web.Models.ObstetricalCases;
 using Canore.Web.Models.Requests.ObstetricalCases;
+using Canore.Web.Services.Interfaces;
 using Sabio.Data;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ using System.Web;
 
 namespace Canore.Web.Services
 {
-    public class ObstetricalCasesService : BaseService
+    public class ObstetricalCasesService : BaseService/*, IObstetricalCasesService*/
     {
-        public int Get()
+        public static int Get()
         {
             return 0;
         }
@@ -138,6 +139,8 @@ namespace Canore.Web.Services
             item.OneMinScore = reader.GetSafeInt32(startingIndex++);
             item.FiveMinScore = reader.GetSafeInt32(startingIndex++);
             item.DaysInHospital = reader.GetSafeInt32(startingIndex++);
+            item.DateAdded = reader.GetSafeDateTime(startingIndex++);
+            item.DateModified = reader.GetSafeDateTime(startingIndex++);
 
             return item;
         }

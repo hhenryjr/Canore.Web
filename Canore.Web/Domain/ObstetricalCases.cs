@@ -32,5 +32,9 @@ namespace Canore.Web.Domain
         public int FiveMinScore { get; set; }
 
         public int DaysInHospital { get; set; }
+
+        public DateTime DateAdded { get; set; }
+
+        public DateTime DateModified { get; set; }
     }
 }

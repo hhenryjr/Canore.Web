@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Canore.Web.Controllers
 {
-    [RoutePrefix("Obstetrics")]
+    [RoutePrefix("ObCases")]
     public class ObstetricsController : Controller
     {
         // GET: Obstetrics

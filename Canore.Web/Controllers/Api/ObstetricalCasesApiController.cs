@@ -3,6 +3,7 @@ using Canore.Web.Models.ObstetricalCases;
 using Canore.Web.Models.Requests.ObstetricalCases;
 using Canore.Web.Models.Responses;
 using Canore.Web.Services;
+using Canore.Web.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,14 @@ namespace Canore.Web.Controllers.Api
 {
     [RoutePrefix("api/ObCaseForm")]
     public class ObstetricalCasesApiController : ApiController
-    {        
+    {
+        //private IObstetricalCasesService _obstetricalCasesService;
+
+        //public ObstetricalCasesApiController(IObstetricalCasesService obstetricalCasesService)
+        //{
+        //    _obstetricalCasesService = obstetricalCasesService;
+        //}
+
         [Route, HttpPost]
         public HttpResponseMessage AddObstetricalCase(ObstetricalCasesAddRequest model)
         {

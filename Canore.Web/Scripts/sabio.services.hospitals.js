@@ -18,13 +18,13 @@ sabio.services.hospitals.addHospital = function (hospitalData, onSuccess, onErro
     $.ajax(url, settings);
 }
 
-sabio.services.hospitals.updateObCase = function (id, obCaseData, onSuccess, onError) {
+sabio.services.hospitals.updateHospital = function (id, hospitalData, onSuccess, onError) {
 
-    var url = "/api/ObCaseForm/" + id;
+    var url = "/api/Hospitals/" + id;
     var settings = {
         cache: false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        data: obCaseData,
+        data: hospitalData,
         dataType: "json",
         success: onSuccess,
         error: onError,

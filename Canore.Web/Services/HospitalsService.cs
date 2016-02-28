@@ -49,6 +49,7 @@ namespace Canore.Web.Services
             DataProvider.ExecuteNonQuery(GetConnection, "dbo.Hospitals_Update",
                 inputParamMapper: delegate (SqlParameterCollection UpdateHospital)
                 {
+                    UpdateHospital.AddWithValue("@Id", model.Id);
                     UpdateHospital.AddWithValue("@HospitalId", model.HospitalId);
                     UpdateHospital.AddWithValue("@Name", model.Name);
                     UpdateHospital.AddWithValue("@Abbrev", model.Abbrev);

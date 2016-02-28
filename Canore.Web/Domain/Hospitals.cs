@@ -7,7 +7,7 @@ namespace Canore.Web.Domain
 {
     public class Hospitals
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string HospitalId { get; set; }
 

@@ -1,4 +1,5 @@
-﻿
+﻿@model Canore.Web.Models.ViewModels.ItemViewModel<int>
+
 @{
     ViewBag.Title = "HospitalForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,7 +9,7 @@
 
 <div data-ng-controller="hospitalsController as hospitals" id="hospitalsCtrl">
     <div id="formContainer" class="block push-bit form-horizontal form-bordered form-control-borderless">
-        <form class="form-horizontal form-bordered form-control-borderless" id="form" name="hospitals.form" ng-submit="hospitals.onSubmitForm()" novalidate>
+        <form class="form-horizontal form-bordered form-control-borderless" id="hospForm" name="hospitals.hospForm" ng-submit="hospitals.onSubmitForm()" novalidate>
             <input type="text" class="hidden" id="hospitalId" name="Id" ng-model="hospitals.newData.Id" value="@Model.Item" form-autofill-fix>
             <div class="form-group">
                 <div class="col-xs-6">
@@ -17,302 +18,188 @@
                         <input type="text"
                                placeholder=""
                                style="width: 150px;"
-                               id="patientId"
-                               name="patientId"
-                               ng-model="hospitals.newData.patientId"
-                               class="form-control ng-class:{'has-error': hospitals.form.patientId.$touched && !hospitals.form.patientId.$valid}"
+                               id="hospitalId"
+                               name="hospitalId"
+                               ng-model="hospitals.newData.hospitalId"
+                               class="form-control ng-class:{'has-error': hospitals.hospForm.hospitalId.$touched && !hospitals.hospForm.hospitalId.$valid}"
                                ng-minlength="5"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.patientId.$error.required">Please enter patient ID</span>
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.patientId.$error.minlength">Patient ID is required to be at least 5 characters</span>
+                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.hospitalId.$error.required">Please enter hospital ID</span>
+                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.hospitalId.$error.minlength">Hospital ID is required to be at least 5 characters</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-xs-6">
-                    Age
-                    <div class="input-group">
-                        <input type="number"
-                               placeholder=""
-                               style="width: 75px;"
-                               id="age"
-                               name="age"
-                               ng-model="hospitals.newData.age"
-                               class="form-control ng-class:{'error': hospitals.showFormErrors && !hospitals.form.age.$valid}"
-                               min="13" max="89"
-                               required
-                               form-autofill-fix>
-                        <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.age.$error.required">Please enter patient's age</span>
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.age.$error.min || hospitals.form.age.$error.max">Not a valid age</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-6">
-                    Gravity
-                    <div class="input-group">
-                        <input type="number"
-                               placeholder=""
-                               style="width: 75px;"
-                               id="gravity"
-                               name="gravity"
-                               ng-model="hospitals.newData.gravity"
-                               class="form-control ng-class:{'error': hospitals.showFormErrors && !hospitals.form.gravity.$valid}"
-                               min="1"
-                               required
-                               form-autofill-fix>
-                        <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.gravity.$error.required">Please enter gravity</span>
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.gravity.$error.min">Patient must have at least 1 pregnancy</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-6">
-                    Parity
-                    <div class="input-group">
-                        <input type="number"
-                               placeholder=""
-                               style="width: 75px;"
-                               id="parity"
-                               name="parity"
-                               ng-model="hospitals.newData.parity"
-                               class="form-control ng-class:{'error': hospitals.showFormErrors && !hospitals.form.parity.$valid}"
-                               min="0"
-                               required
-                               form-autofill-fix>
-                        <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.parity.$error.required">Enter valid # of term deliveries</span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-6">
-                    Complications
-                    <div class="input-group">
-                        Antepartum
-                        <select class="form-control" id="antepartum" name="antepartum" ng-model="hospitals.newData.antepartum" required form-autofill-fix>
-                            <option value=""></option>
-                            <option value="Preconception evaluation, prenatal and genetic diagnoses">Preconception evaluation, prenatal and genetic diagnoses</option>
-                            <option value="Ultrasonography">Ultrasonography</option>
-                            <option value="Premature labor">Premature labor</option>
-                            <option value="Premature rupture of fetal membranes at term">Premature rupture of fetal membranes at term</option>
-                            <option value="Preterm premature rupture of fetal membranes">Preterm premature rupture of fetal membranes</option>
-                            <option value="Cerclage">Cerclage</option>
-                            <option value="Preterm delivery">Preterm delivery (before 37 weeks gestation)</option>
-                            <option value="Late preterm">Late preterm (37 weeks 0 days to 38 weeks 6 days gestation)</option>
-                            <option value="Post term pregnancy and delivery">Post term pregnancy and delivery</option>
-                            <option value="Induction and augmentation abnormalities">Induction and augmentation abnormalities (e.g. variable or late deceleration, absent of poor variability)</option>
-                            <option value="Labor abnormalities">Labor abnormalities (including dystocia)</option>
-                            <option value="Fetal heart rate abnormalities">Fetal heart rate abnormalities (e.g. variable or late deceleration, absent or poor variability, tachycardia, bradycardia)</option>
-                            <option value="Breech and other fetal malpresentations">Breech and other fetal malpresentations</option>
-                            <option value="Cord problems">Cord problems (e.g. prolapsed cord, cord entanglement)</option>
-                            <option value="Operative vaginal delivery">Operative vaginal delivery (e.g. vacuum, forceps)</option>
-                            <option value="Obstetrial hemmorage">Obstetrial hemmorage (e.g. antepartum, intrapartum, postpartum)</option>
-                            <option value="Obstetrical vaginal lacerations">Obstetrical vaginal lacerations (e.g. 3rd and 4th degree lacerations cervical laceration)</option>
-                            <option value="Vaginal or perineal hematoma">Vaginal or perineal hematoma</option>
-                            <option value="Primary cesarean delivery">Primary cesarean delivery</option>
-                            <option value="Repeat cesarean delivery">Repeat cesarean delivery</option>
-                            <option value="Vaginal birth after cesarean delivery">Vaginal birth after cesarean delivery</option>
-                            <option value="Cesarean hysterectomy">Cesarean hysterectomy</option>
-                            <option value="Complications of cesarean delivery">Complications of cesarean delivery (e.g. hemorrhage, wound infection, disruption or hematoma)</option>
-                            <option value="Complications of OB anesthesia">Complications of OB anesthesia</option>
-                            <option value="Intrapartum or intra-amniotic infection">Intrapartum or intra-amniotic infection (e.g. amnionitis, chorioamnionitis)</option>
-                            <option value="Puerperal infection">Puerperal infection (e.g. post cesarean endometritis)</option>
-                            <option value="Second trimester spontaneous abortion">Second trimester spontaneous abortion</option>
-                            <option value="Third trimester fetal loss">Third trimester fetal loss</option>
-                            <option value="Hypertensive disorders of pregnancy">Hypertensive disorders of pregnancy (chronic hypertension, preeclampsia, eclampsia)</option>
-                            <option value="Cardiovascular or pulmonary disease complicating pregnancy">Cardiovascular or pulmonary disease complicating pregnancy</option>
-                            <option value="Renal of neruological disease complicating pregnancy">Renal of neruological disease complicating pregnancy</option>
-                            <option value="Hematological or endocrine diseases complicating pregnancy">Hematological or endocrine diseases complicating pregnancy</option>
-                            <option value="Autoimmune disorders of pregnancy">Autoimmune disorders of pregnancy</option>
-                            <option value="Infectious diesases">Infectious diesases (HIV, Group A streptococcus, etc.)</option>
-                            <option value="Psychiatric disease complicating pregnancy">Psychiatric disease complicating pregnancy</option>
-                            <option value="Pregnancies complicated by human immunodeficiency virus infection (HIV)">Pregnancies complicated by human immunodeficiency virus infection (HIV)</option>
-                            <option value="Abnormal fetal growth">Abnormal fetal growth</option>
-                            <option value="Pregnancies complicated by fetal abnormalities">Pregnancies complicated by fetal abnormalities</option>
-                            <option value="Placental abnormalities">Placental abnormalities</option>
-                            <option value="Thromboembolic complications">Thromboembolic complications</option>
-                            <option value="Trauma in pregnancy">Trauma in pregnancy (e.g. automobile accidents)</option>
-                            <option value="Uncategorized">Uncategorized (cases in this category do not count toward the required 20 cases)</option>
-                        </select>
-                        <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.antepartum.$error.required">Please enter category</span>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        Delivery/Postpartum
-                        <select class="form-control" id="postpartum" name="postpartum" ng-model="hospitals.newData.postpartum" required form-autofill-fix>
-                            <option value=""></option>
-                            <option value="Preconception evaluation, prenatal and genetic diagnoses">Preconception evaluation, prenatal and genetic diagnoses</option>
-                            <option value="Ultrasonography">Ultrasonography</option>
-                            <option value="Premature labor">Premature labor</option>
-                            <option value="Premature rupture of fetal membranes at term">Premature rupture of fetal membranes at term</option>
-                            <option value="Preterm premature rupture of fetal membranes">Preterm premature rupture of fetal membranes</option>
-                            <option value="Cerclage">Cerclage</option>
-                            <option value="Preterm delivery">Preterm delivery (before 37 weeks gestation)</option>
-                            <option value="Late preterm">Late preterm (37 weeks 0 days to 38 weeks 6 days gestation)</option>
-                            <option value="Post term pregnancy and delivery">Post term pregnancy and delivery</option>
-                            <option value="Induction and augmentation abnormalities">Induction and augmentation abnormalities (e.g. variable or late deceleration, absent of poor variability)</option>
-                            <option value="Labor abnormalities">Labor abnormalities (including dystocia)</option>
-                            <option value="Fetal heart rate abnormalities">Fetal heart rate abnormalities (e.g. variable or late deceleration, absent or poor variability, tachycardia, bradycardia)</option>
-                            <option value="Breech and other fetal malpresentations">Breech and other fetal malpresentations</option>
-                            <option value="Cord problems">Cord problems (e.g. prolapsed cord, cord entanglement)</option>
-                            <option value="Operative vaginal delivery">Operative vaginal delivery (e.g. vacuum, forceps)</option>
-                            <option value="Obstetrial hemmorage">Obstetrial hemmorage (e.g. antepartum, intrapartum, postpartum)</option>
-                            <option value="Obstetrical vaginal lacerations">Obstetrical vaginal lacerations (e.g. 3rd and 4th degree lacerations cervical laceration)</option>
-                            <option value="Vaginal or perineal hematoma">Vaginal or perineal hematoma</option>
-                            <option value="Primary cesarean delivery">Primary cesarean delivery</option>
-                            <option value="Repeat cesarean delivery">Repeat cesarean delivery</option>
-                            <option value="Vaginal birth after cesarean delivery">Vaginal birth after cesarean delivery</option>
-                            <option value="Cesarean hysterectomy">Cesarean hysterectomy</option>
-                            <option value="Complications of cesarean delivery">Complications of cesarean delivery (e.g. hemorrhage, wound infection, disruption or hematoma)</option>
-                            <option value="Complications of OB anesthesia">Complications of OB anesthesia</option>
-                            <option value="Intrapartum or intra-amniotic infection">Intrapartum or intra-amniotic infection (e.g. amnionitis, chorioamnionitis)</option>
-                            <option value="Puerperal infection">Puerperal infection (e.g. post cesarean endometritis)</option>
-                            <option value="Second trimester spontaneous abortion">Second trimester spontaneous abortion</option>
-                            <option value="Third trimester fetal loss">Third trimester fetal loss</option>
-                            <option value="Hypertensive disorders of pregnancy">Hypertensive disorders of pregnancy (chronic hypertension, preeclampsia, eclampsia)</option>
-                            <option value="Cardiovascular or pulmonary disease complicating pregnancy">Cardiovascular or pulmonary disease complicating pregnancy</option>
-                            <option value="Renal of neruological disease complicating pregnancy">Renal of neruological disease complicating pregnancy</option>
-                            <option value="Hematological or endocrine diseases complicating pregnancy">Hematological or endocrine diseases complicating pregnancy</option>
-                            <option value="Autoimmune disorders of pregnancy">Autoimmune disorders of pregnancy</option>
-                            <option value="Infectious diesases">Infectious diesases (HIV, Group A streptococcus, etc.)</option>
-                            <option value="Psychiatric disease complicating pregnancy">Psychiatric disease complicating pregnancy</option>
-                            <option value="Pregnancies complicated by human immunodeficiency virus infection (HIV)">Pregnancies complicated by human immunodeficiency virus infection (HIV)</option>
-                            <option value="Abnormal fetal growth">Abnormal fetal growth</option>
-                            <option value="Pregnancies complicated by fetal abnormalities">Pregnancies complicated by fetal abnormalities</option>
-                            <option value="Placental abnormalities">Placental abnormalities</option>
-                            <option value="Thromboembolic complications">Thromboembolic complications</option>
-                            <option value="Trauma in pregnancy">Trauma in pregnancy (e.g. automobile accidents)</option>
-                            <option value="Uncategorized">Uncategorized (cases in this category do not count toward the required 20 cases)</option>
-                        </select>
-                        <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.postpartum.$error.required">Please enter category</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-6">
-                    Operative Procedures And/Or Treatment
+                    Name
                     <div class="input-group">
                         <input type="text"
                                placeholder=""
-                               id="treatment"
-                               name="treatment"
-                               ng-model="hospitals.newData.treatment"
-                               class="form-control ng-class:{'error': hospitals.showFormErrors && !hospitals.form.treatment.$valid}"
+                               style="width: 150px;"
+                               id="name"
+                               name="name"
+                               ng-model="hospitals.newData.name"
+                               class="form-control ng-class:{'has-error': hospitals.hospForm.name.$touched && !hospitals.hospForm.name.$valid}"
                                ng-minlength="5"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.treatment.$error.required">Please enter treatment</span>
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.treatment.$error.minlength">Please enter at least 5 characters</span>
+                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.name.$error.required">Please enter hospital name</span>
+                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.name.$error.minlength">Hospital name is required to be at least 5 characters</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-xs-6">
+                    Abbrev.
                     <div class="input-group">
-                        Birth Weight<br>
-                        <div class="left">
-                            <input type="number"
-                                   style="width: 80px;"
-                                   id="birthWeight"
-                                   name="birthWeight"
-                                   ng-model="hospitals.newData.birthWeight"
-                                   class="form-control ng-class:{'error': hospitals.showFormErrors && !hospitals.form.birthWeight.$valid}"
-                                   min="500" max="6000"
-                                   required
-                                   form-autofill-fix> grams
-                        </div>
-                        <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.birthWeight.$error.required">Please enter baby's birthweight</span>
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.birthWeight.$error.min || hospitals.form.birthWeight.$error.max">Please enter valid weight</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-6">
-                    <div class="input-group">
-                        <div class="ng-class:{'error': hospitals.showFormErrors && !hospitals.form.death.$valid}">
-                            Perinatal Death?@*<br>*@
-                            <input type="radio" name="death" id="death" ng-model="hospitals.newData.death" value="Yes" ng-required="!hospitals.newData.death" form-autofill-fix> Yes
-                            <input type="radio" name="death" id="death" ng-model="hospitals.newData.death" value="No" ng-required="!hospitals.newData.death" form-autofill-fix> No
-                            <div role="alert" class="help-inline error" style="color:red">
-                                <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.death.$error.required">Please enter answer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-6">
-                    <div class="form-bordered">
-                        APGAR Score<br>
-                        <div class="ng-class:{'error': hospitals.showFormErrors && !hospitals.form.oneMinScore.$valid}">
-                            After 1 min
-                            <input type="radio" name="oneMinScore" id="oneMinScore" ng-model="hospitals.newData.oneMinScore" value="1" ng-required="!hospitals.newData.oneMinScore"> 1
-                            <input type="radio" name="oneMinScore" id="oneMinScore" ng-model="hospitals.newData.oneMinScore" value="2" ng-required="!hospitals.newData.oneMinScore"> 2
-                            <input type="radio" name="oneMinScore" id="oneMinScore" ng-model="hospitals.newData.oneMinScore" value="3" ng-required="!hospitals.newData.oneMinScore"> 3
-                            <input type="radio" name="oneMinScore" id="oneMinScore" ng-model="hospitals.newData.oneMinScore" value="4" ng-required="!hospitals.newData.oneMinScore"> 4
-                            <input type="radio" name="oneMinScore" id="oneMinScore" ng-model="hospitals.newData.oneMinScore" value="5" ng-required="!hospitals.newData.oneMinScore"> 5
-                            <input type="radio" name="oneMinScore" id="oneMinScore" ng-model="hospitals.newData.oneMinScore" value="6" ng-required="!hospitals.newData.oneMinScore"> 6
-                            <input type="radio" name="oneMinScore" id="oneMinScore" ng-model="hospitals.newData.oneMinScore" value="7" ng-required="!hospitals.newData.oneMinScore"> 7
-                            <input type="radio" name="oneMinScore" id="oneMinScore" ng-model="hospitals.newData.oneMinScore" value="8" ng-required="!hospitals.newData.oneMinScore"> 8
-                            <input type="radio" name="oneMinScore" id="oneMinScore" ng-model="hospitals.newData.oneMinScore" value="9" ng-required="!hospitals.newData.oneMinScore"> 9
-                            <input type="radio" name="oneMinScore" id="oneMinScore" ng-model="hospitals.newData.oneMinScore" value="10" ng-required="!hospitals.newData.oneMinScore"> 10
-                            <div role="alert" class="help-inline error" style="color:red">
-                                <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.oneMinScore.$error.required">Please enter score</span>
-                            </div>
-                        </div>
-                        <div class="ng-class:{'error': hospitals.showFormErrors && !hospitals.form.fiveMinScore.$valid}">
-                            After 5 min
-                            <input type="radio" name="fiveMinScore" id="fiveMinScore" ng-model="hospitals.newData.fiveMinScore" value="1" ng-required="!hospitals.newData.fiveMinScore"> 1
-                            <input type="radio" name="fiveMinScore" id="fiveMinScore" ng-model="hospitals.newData.fiveMinScore" value="2" ng-required="!hospitals.newData.fiveMinScore"> 2
-                            <input type="radio" name="fiveMinScore" id="fiveMinScore" ng-model="hospitals.newData.fiveMinScore" value="3" ng-required="!hospitals.newData.fiveMinScore"> 3
-                            <input type="radio" name="fiveMinScore" id="fiveMinScore" ng-model="hospitals.newData.fiveMinScore" value="4" ng-required="!hospitals.newData.fiveMinScore"> 4
-                            <input type="radio" name="fiveMinScore" id="fiveMinScore" ng-model="hospitals.newData.fiveMinScore" value="5" ng-required="!hospitals.newData.fiveMinScore"> 5
-                            <input type="radio" name="fiveMinScore" id="fiveMinScore" ng-model="hospitals.newData.fiveMinScore" value="6" ng-required="!hospitals.newData.fiveMinScore"> 6
-                            <input type="radio" name="fiveMinScore" id="fiveMinScore" ng-model="hospitals.newData.fiveMinScore" value="7" ng-required="!hospitals.newData.fiveMinScore"> 7
-                            <input type="radio" name="fiveMinScore" id="fiveMinScore" ng-model="hospitals.newData.fiveMinScore" value="8" ng-required="!hospitals.newData.fiveMinScore"> 8
-                            <input type="radio" name="fiveMinScore" id="fiveMinScore" ng-model="hospitals.newData.fiveMinScore" value="9" ng-required="!hospitals.newData.fiveMinScore"> 9
-                            <input type="radio" name="fiveMinScore" id="fiveMinScore" ng-model="hospitals.newData.fiveMinScore" value="10" ng-required="!hospitals.newData.fiveMinScore"> 10
-                            <div role="alert" class="help-inline error" style="color:red">
-                                <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.fiveMinScore.$error.required">Please enter score</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-6">
-                    <div class="input-group">
-                        Days in hospital<br>
-                        <input type="number"
-                               style="width: 80px;"
-                               id="daysInHospital"
-                               name="daysInHospital"
-                               ng-model="hospitals.newData.daysInHospital"
-                               class="form-control ng-class:{'error': hospitals.showFormErrors && !hospitals.form.daysInHospital.$valid}"
-                               min="0"
+                        <input type="text"
+                               placeholder=""
+                               style="width: 150px;"
+                               id="abbrev"
+                               name="abbrev"
+                               ng-model="hospitals.newData.abbrev"
+                               class="form-control"
+                               ng-maxlength="5"
                                required
-                               form-autofill-fix> days
+                               form-autofill-fix>
+                        @*<div role="alert" class="help-inline error" style="color:red">
+                                <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.abbrev.$error.required">Please enter hospital name</span>
+                                <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.abbrev.$error.maxlength">Patient ID is required to be at least 5 characters</span>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    Address
+                    <div class="input-group">
+                        <input type="text"
+                               placeholder=""
+                               style="width: 150px;"
+                               id="address"
+                               name="address"
+                               ng-model="hospitals.newData.address"
+                               class="form-control ng-class:{'has-error': hospitals.hospForm.address.$touched && !hospitals.hospForm.address.$valid}"
+                               ng-minlength="5"
+                               required
+                               form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.daysInHospital.$error.required">Please enter length of days in hospital</span>
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.form.daysInHospital.$error.number">Please enter valid numbers</span>
+                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.address.$error.required">Please enter hospital address</span>
+                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.address.$error.minlength">Address is required to be at least 5 characters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    City
+                    <div class="input-group">
+                        <input type="text"
+                               placeholder=""
+                               style="width: 150px;"
+                               id="city"
+                               name="city"
+                               ng-model="hospitals.newData.city"
+                               class="form-control ng-class:{'has-error': hospitals.hospForm.city.$touched && !hospitals.hospForm.city.$valid}"
+                               ng-minlength="5"
+                               ng-maxlength="20"
+                               required
+                               form-autofill-fix>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.city.$error.required">Please enter city</span>
+                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.city.$error.minlength">Minimum is 5 characters</span>
+                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.city.$error.maxlength">Maximum is 20 characters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    State
+                    <div class="input-group">
+                        <select class="form-control" id="state" name="state" ng-model="hospitals.newData.state" required form-autofill-fix>
+                            <option value=""></option>
+                            <option value="AL">AL</option>
+                            <option value="AK">AK</option>
+                            <option value="AZ">AZ</option>
+                            <option value="AR">AR</option>
+                            <option value="CA">CA</option>
+                            <option value="CO">CO</option>
+                            <option value="CT">CT</option>
+                            <option value="DE">DE</option>
+                            <option value="DC">DC</option>
+                            <option value="FL">FL</option>
+                            <option value="GA">GA</option>
+                            <option value="HI">HI</option>
+                            <option value="ID">ID</option>
+                            <option value="IL">IL</option>
+                            <option value="IN">IN</option>
+                            <option value="IA">IA</option>
+                            <option value="KS">KS</option>
+                            <option value="KY">KY</option>
+                            <option value="LA">LA</option>
+                            <option value="ME">ME</option>
+                            <option value="MD">MD</option>
+                            <option value="MA">MA</option>
+                            <option value="MI">MI</option>
+                            <option value="MN">MN</option>
+                            <option value="MS">MS</option>
+                            <option value="MO">MO</option>
+                            <option value="MT">MT</option>
+                            <option value="NE">NE</option>
+                            <option value="NV">NV</option>
+                            <option value="NH">NH</option>
+                            <option value="NJ">NJ</option>
+                            <option value="NM">NM</option>
+                            <option value="NY">NY</option>
+                            <option value="NC">NC</option>
+                            <option value="ND">ND</option>
+                            <option value="OH">OH</option>
+                            <option value="OK">OK</option>
+                            <option value="OR">OR</option>
+                            <option value="PA">PA</option>
+                            <option value="RI">RI</option>
+                            <option value="SC">SC</option>
+                            <option value="SD">SD</option>
+                            <option value="TN">TN</option>
+                            <option value="TX">TX</option>
+                            <option value="UT">UT</option>
+                            <option value="VT">VT</option>
+                            <option value="VA">VA</option>
+                            <option value="WA">WA</option>
+                            <option value="WV">WV</option>
+                            <option value="WI">WI</option>
+                            <option value="WY">WY</option>
+                        </select>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.state.$error.required">Please enter state</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    Zip Code
+                    <div class="input-group">
+                        <input type="text"
+                               placeholder=""
+                               style="width: 150px;"
+                               id="zipCode"
+                               name="zipCode"
+                               ng-model="hospitals.newData.zipCode"
+                               class="form-control ng-class:{'has-error': hospitals.hospForm.zipCode.$touched && !hospitals.hospForm.zipCode.$valid}"
+                               ng-minlength="5"
+                               required
+                               form-autofill-fix>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.zipCode.$error.required">Please enter zip code</span>
+                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.zipCode.$error.minlength">Minimum is 5 characters</span>
                         </div>
                     </div>
                 </div>
@@ -327,3 +214,136 @@
     </div>
 
 </div>
+
+@section Scripts{
+
+    <script src="~/Scripts/sabio.services.hospitals.js"></script>
+    <script type="text/javascript">
+
+        sabio.page.startUp = function () {
+            sabio.page.userController = sabio.ng.getControllerInstance($("#hospitalsCtrl"));
+        }
+
+        sabio.services.hospitalsFactory = function ($baseService) {
+            var aSabioServiceObject = sabio.services.hospitals;
+            var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
+            return newService;
+        }
+
+        sabio.ng.addService(sabio.ng.app.module,
+            "$hospitalsService",
+            ["$baseService"],
+            sabio.services.hospitalsFactory);
+
+        sabio.page.hospitalsControllerFactory = function ($scope, $baseController, $hospitalsService) {
+
+            var vm = this;
+
+            $baseController.merge(vm, $baseController);
+
+            vm.$hospitalsService = $hospitalsService;
+            vm.$scope = $scope;
+
+            vm.onSubmitForm = _onSubmitForm;
+            vm.onCreateSuccess = _onCreateSuccess;
+            //vm.onUpdateSuccess = _onUpdateSuccess;
+            //vm.onGetSuccess = _onGetSuccess;
+            vm.onError = _onError;
+            //vm.getForm = _getForm;
+            vm.getId = _getId;
+            vm.addToHiddenId = _addToHiddenId;
+            //vm.fillInForm = _fillInForm;
+
+            vm.newData = null;
+            vm.showFormErrors = false;
+
+            vm.notify = vm.$hospitalsService.getNotifier($scope);
+
+            render();
+
+            function render() {
+                vm.showFormErrors = false;
+                //vm.getForm();
+            };
+
+            function _onSubmitForm() {
+                console.log("validating");
+                vm.showFormErrors = true;
+
+                if (vm.hospForm.$valid) {
+                    console.log("form is valid");
+                    var form = vm.newData;
+                    console.log(form);
+                    var hospId = $("#hospitalId").val();
+
+                    if (hospId > 0) {
+                        var serForm = $("#hospForm").serialize();         // CURRENT ALTERNATIVE; SEE TRELLO NOTES
+                        console.log(serForm);
+                        //vm.$hospitalsService.updateObCase(hospId, form, vm.onUpdateSuccess, vm.onError);
+                        return hospId;
+                    } else {
+                        vm.$hospitalsService.addHospital(form, vm.onCreateSuccess, vm.onError);
+                        $("#cmdSubmit").html("Update Case");
+                    }
+                } else {
+                    console.log("form is not valid");
+                }
+            }
+
+            //function _getForm() {
+            //    var hospId = $("#hospId").val();
+            //    vm.$obstetricsService.getObCase(hospId, vm.onGetSuccess, vm.onError);
+            //}
+
+            function _getId(data) {
+                hospId = data;
+            }
+
+            function _addToHiddenId(data) {
+                console.log("Adding Id");
+                $("#hospId").val(data);
+            }
+
+            function _onCreateSuccess(data, status, xhr) {
+                if (data && data.Item) {
+                    vm.addToHiddenId(data.Item);
+                    vm.getId(data.Item);
+                }
+                vm.success = "Case saved!";
+                console.log(vm.success);
+                window.alert(vm.success);
+                //location.href = 'http://canore.dev/obcases';
+            }
+
+            function _onUpdateSuccess(data, status, xhr) {
+                vm.success = "Case updated!";
+                console.log(vm.success);
+                window.alert(vm.success);
+                //location.href = 'http://canore.dev/obcases';
+            }
+
+            //function _onGetSuccess(data, status, xhr) {
+            //    if (data && data.Item) {
+            //        vm.fillInForm(data.Item);
+            //        $("#cmdSubmit").html("Update Case");
+            //    }
+            //}
+
+            function _onError(jqXHR, textStatus, errorThrown) {
+                vm.error = "An error has occurred!";
+                console.log(vm.error);
+                window.alert(vm.error);
+            }
+
+
+        }
+
+        sabio.ng.addController(sabio.ng.app.module,
+            "hospitalsController",
+            ['$scope', '$baseController', "$hospitalsService"],
+            sabio.page.hospitalsControllerFactory);
+
+
+    </script>
+
+}

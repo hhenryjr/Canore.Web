@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Canore.Web.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,12 +7,16 @@ using System.Web.Mvc;
 
 namespace Canore.Web.Controllers
 {
+    [RoutePrefix("Hospitals")]
     public class HospitalsController : Controller
     {
         // GET: Hospitals
-        public ActionResult Index()
+        [Route("Add")]
+        public ActionResult HospitalForm(int id = 0)
         {
-            return View();
+            ItemViewModel<int> model = new ItemViewModel<int>();
+            model.Item = id;
+            return View(model);
         }
     }
 }

@@ -45,6 +45,9 @@ namespace Canore.Web.Models.ObstetricalCases
         public int FiveMinScore { get; set; }
 
         [Required]
+        public int HospitalId { get; set; }
+
+        [Required]
         public int DaysInHospital { get; set; }
 
     }

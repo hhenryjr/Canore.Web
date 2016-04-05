@@ -1,4 +1,5 @@
-﻿using Canore.Web.Models.Requests.Hospitals;
+﻿using Canore.Web.Domain;
+using Canore.Web.Models.Requests.Hospitals;
 using Canore.Web.Models.Responses;
 using Canore.Web.Services;
 using System;
@@ -39,34 +40,34 @@ namespace Canore.Web.Controllers.Api
             return Request.CreateResponse(response);
         }
 
-        //[Route("{id:int}"), HttpGet]
-        //public HttpResponseMessage GetObCase(int id)
-        //{
-        //    ItemResponse<ObstetricalCases> response = new ItemResponse<ObstetricalCases>();
-        //    response.Item = ObstetricalCasesService.GetObCase(id);
-        //    return Request.CreateResponse(response);
-        //}
+        [Route("{id:int}"), HttpGet]
+        public HttpResponseMessage GetHospital(int id)
+        {
+            ItemResponse<Hospitals> response = new ItemResponse<Hospitals>();
+            response.Item = HospitalsService.GetHospital(id);
+            return Request.CreateResponse(response);
+        }
 
-        //[Route, HttpGet]
-        //public HttpResponseMessage GetObCaseList()
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-        //    }
+        [Route, HttpGet]
+        public HttpResponseMessage GetHospitalList()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
 
-        //    ItemsResponse<ObstetricalCases> response = new ItemsResponse<ObstetricalCases>();
-        //    response.Items = ObstetricalCasesService.GetObCaseList();
-        //    return Request.CreateResponse(response);
-        //}
+            ItemsResponse<Hospitals> response = new ItemsResponse<Hospitals>();
+            response.Items = HospitalsService.GetHospitalList();
+            return Request.CreateResponse(response);
+        }
 
-        //[Route("{id:int}"), HttpDelete]
-        //public HttpResponseMessage DeleteObCase(int id)
-        //{
-        //    SuccessResponse response = new SuccessResponse();
-        //    ObstetricalCasesService.DeleteObCase(id);
-        //    return Request.CreateResponse(response);
-        //}
+        [Route("{id:int}"), HttpDelete]
+        public HttpResponseMessage DeleteHospital(int id)
+        {
+            SuccessResponse response = new SuccessResponse();
+            HospitalsService.DeleteHospital(id);
+            return Request.CreateResponse(response);
+        }
 
     }
 }

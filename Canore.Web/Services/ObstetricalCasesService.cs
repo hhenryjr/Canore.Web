@@ -37,6 +37,7 @@ namespace Canore.Web.Services
                     InsertObCase.AddWithValue("@Death", model.Death);
                     InsertObCase.AddWithValue("@OneMinScore", model.OneMinScore);
                     InsertObCase.AddWithValue("@FiveMinScore", model.FiveMinScore);
+                    InsertObCase.AddWithValue("@HospitalId", model.HospitalId);
                     InsertObCase.AddWithValue("@DaysInHospital", model.DaysInHospital);
 
                     SqlParameter param = new SqlParameter("@Id", System.Data.SqlDbType.Int);
@@ -72,6 +73,7 @@ namespace Canore.Web.Services
                     UpdateObCase.AddWithValue("@Death", model.Death);
                     UpdateObCase.AddWithValue("@OneMinScore", model.OneMinScore);
                     UpdateObCase.AddWithValue("@FiveMinScore", model.FiveMinScore);
+                    UpdateObCase.AddWithValue("@HospitalId", model.HospitalId);
                     UpdateObCase.AddWithValue("@DaysInHospital", model.DaysInHospital);
                 });
         }
@@ -124,6 +126,8 @@ namespace Canore.Web.Services
         private static ObstetricalCases MapObCase(IDataReader reader)
         {
             ObstetricalCases item = new ObstetricalCases();
+            Hospitals hosp = new Hospitals();
+
             int startingIndex = 0;
 
             item.Id = reader.GetSafeInt32(startingIndex++);
@@ -138,10 +142,12 @@ namespace Canore.Web.Services
             item.Death = reader.GetSafeString(startingIndex++);
             item.OneMinScore = reader.GetSafeInt32(startingIndex++);
             item.FiveMinScore = reader.GetSafeInt32(startingIndex++);
+            hosp.Name = reader.GetSafeString(startingIndex++);
             item.DaysInHospital = reader.GetSafeInt32(startingIndex++);
             item.DateAdded = reader.GetSafeDateTime(startingIndex++);
             item.DateModified = reader.GetSafeDateTime(startingIndex++);
 
+            item.Hospital = hosp;
             return item;
         }
     }

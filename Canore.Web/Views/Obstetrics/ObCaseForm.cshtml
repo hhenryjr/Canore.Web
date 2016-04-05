@@ -301,6 +301,21 @@
             <div class="form-group">
                 <div class="col-xs-6">
                     <div class="input-group">
+                        Hospital<br>
+                        <select ui-select2 class="form-control" id="hospital" name="hospital" data-placeholder="Pick a hospital" ng-model="obstetrics.newData.hospitalId" required form-autofill-fix>
+                            <option value=""></option>
+                            <option ng-repeat="hospital in obstetrics.hospitals" value="{{hospital.Id}}">{{hospital.Name}}</option>
+                        </select>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.hospital.$error.required">Please enter hospital</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <div class="input-group">
                         Days in hospital<br>
                         <input type="number"
                                style="width: 80px;"
@@ -362,6 +377,7 @@
             vm.onCreateSuccess = _onCreateSuccess;
             vm.onUpdateSuccess = _onUpdateSuccess;
             vm.onGetSuccess = _onGetSuccess;
+            vm.onGetHospitals = _onGetHospitals;
             vm.onError = _onError;
             vm.getForm = _getForm;
             vm.getId = _getId;
@@ -370,6 +386,12 @@
 
             vm.newData = null;
             vm.showFormErrors = false;
+            vm.hospitals = null;
+            vm.alert = {
+                saved: "Case saved!",
+                updated: "Case updated!",
+                error: "An error has occurred!"
+            };
 
             vm.notify = vm.$obstetricsService.getNotifier($scope);
 
@@ -377,11 +399,8 @@
 
             function render() {
                 vm.showFormErrors = false;
-                //var caseId = $("#caseId").val();
-                //if (caseId > 0) {
-                //    vm.$obstetricsService.getObCase(caseId, vm.onGetSuccess, vm.onError);
-                //}
                 vm.getForm();
+                vm.$obstetricsService.getHospitals(vm.onGetHospitals, vm.onError);
             };
 
             function _onSubmitForm() {
@@ -395,7 +414,7 @@
                     var caseId = $("#caseId").val();
 
                     if (caseId > 0) {
-                        var serForm = $("#obForm").serialize();         // CURRENT ALTERNATIVE; SEE TRELLO NOTES
+                        var serForm = $("#obForm").serialize();
                         console.log(serForm);
                         vm.$obstetricsService.updateObCase(caseId, form, vm.onUpdateSuccess, vm.onError);
                         return caseId;
@@ -436,6 +455,7 @@
                 //$("#death").val(data.Death).trigger('change');
                 //$("#oneMinScore").val(data.OneMinScore).trigger('change');
                 //$("#fiveMinScore").val(data.FiveMinScore).trigger('change');
+                //$("#hospital").val(data.Hospital).trigger('change');
                 $("#daysInHospital").val(data.DaysInHospital).trigger('change');
                 var death = document.getElementsByName('death');
                 var oneMinScore = document.getElementsByName('oneMinScore');
@@ -466,6 +486,14 @@
                     $("#death").val(data.Death).trigger('change');
                     $("#oneMinScore").val(data.OneMinScore).trigger('change');
                     $("#fiveMinScore").val(data.FiveMinScore).trigger('change');
+                    //$("#hospital").val(data.Hospital).trigger('change');
+                });
+            }
+
+            function _onGetHospitals(data) {
+                vm.notify(function () {
+                    vm.hospitals = data.Items;
+                    console.log('Getting hospitals', vm.hospitals);
                 });
             }
 
@@ -474,16 +502,14 @@
                     vm.addToHiddenId(data.Item);
                     vm.getId(data.Item);
                 }
-                vm.success = "Case saved!";
-                console.log(vm.success);
-                window.alert(vm.success);
+                console.log(vm.alert.saved);
+                window.alert(vm.alert.saved);
                 location.href = 'http://canore.dev/obcases';
             }
 
             function _onUpdateSuccess(data, status, xhr) {
-                vm.success = "Case updated!";
-                console.log(vm.success);
-                window.alert(vm.success);
+                console.log(vm.alert.updated);
+                window.alert(vm.alert.updated);
                 location.href = 'http://canore.dev/obcases';
             }
 
@@ -495,9 +521,8 @@
             }
 
             function _onError(jqXHR, textStatus, errorThrown) {
-                vm.error = "An error has occurred!";
-                console.log(vm.error);
-                window.alert(vm.error);
+                console.log(vm.alert.error);
+                window.alert(vm.alert.error);
             }
 
             sabio.ng.app.module.directive('formAutofillFix', function () {

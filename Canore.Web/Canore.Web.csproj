@@ -983,6 +983,7 @@
     <Content Include="Views\Obstetrics\ObCaseFormJQ.cshtml" />
     <Content Include="Views\Obstetrics\ObCaseList.cshtml" />
     <Content Include="Views\Hospitals\HospitalForm.cshtml" />
+    <Content Include="Views\Hospitals\HospitalList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

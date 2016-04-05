@@ -79,3 +79,18 @@ sabio.services.obstetrics.deleteObCase = function (id, onSuccess, onError) {
 
     $.ajax(url, settings);
 }
+
+sabio.services.obstetrics.getHospitals = function (onSuccess, onError) {
+
+    var url = "/api/Hospitals/";
+    var settings = {
+        cache: false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        dataType: "json",
+        success: onSuccess,
+        error: onError,
+        type: "GET"
+    };
+
+    $.ajax(url, settings);
+}

@@ -25,6 +25,7 @@
                     <th>Perinatal Death</th>
                     <th>APGAR Score (After 1 min)</th>
                     <th>APGAR Score (After 5 mins)</th>
+                    <th>Hospital</th>
                     <th>Days In Hospital</th>
                     <th>Date Added</th>
                     <th>Date Modified</th>
@@ -41,6 +42,7 @@
                     <td>{{obCase.Death}}</td>
                     <td>{{obCase.OneMinScore}}</td>
                     <td>{{obCase.FiveMinScore}}</td>
+                    <td>{{obCase.Hospital.Name}}</td>
                     <td>{{obCase.DaysInHospital}}</td>
                     <td>{{obCase.DateAdded | date: "M/d/yyyy"}}</td>
                     <td>{{obCase.DateModified | date: "M/d/yyyy"}}</td>

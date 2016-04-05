@@ -10,8 +10,8 @@
 <div data-ng-controller="hospitalsController as hospitals" id="hospitalsCtrl">
     <div id="formContainer" class="block push-bit form-horizontal form-bordered form-control-borderless">
         <form class="form-horizontal form-bordered form-control-borderless" id="hospForm" name="hospitals.hospForm" ng-submit="hospitals.onSubmitForm()" novalidate>
-            <input type="text" class="hidden" id="hospitalId" name="Id" ng-model="hospitals.newData.Id" value="@Model.Item" form-autofill-fix>
-            <div class="form-group">
+            <input type="text" class="hidden" id="hospId" name="Id" ng-model="hospitals.newData.Id" value="@Model.Item" form-autofill-fix>
+            @*<div class="form-group">
                 <div class="col-xs-6">
                     Hospital ID
                     <div class="input-group">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
             <div class="form-group">
                 <div class="col-xs-6">
                     Name
@@ -246,15 +246,20 @@
             vm.onSubmitForm = _onSubmitForm;
             vm.onCreateSuccess = _onCreateSuccess;
             vm.onUpdateSuccess = _onUpdateSuccess;
-            //vm.onGetSuccess = _onGetSuccess;
+            vm.onGetSuccess = _onGetSuccess;
             vm.onError = _onError;
-            //vm.getForm = _getForm;
+            vm.getForm = _getForm;
             vm.getId = _getId;
             vm.addToHiddenId = _addToHiddenId;
-            //vm.fillInForm = _fillInForm;
+            vm.fillInForm = _fillInForm;
 
             vm.newData = null;
             vm.showFormErrors = false;
+            vm.alert = {
+                saved: "Hospital saved!",
+                updated: "Hospital updated!",
+                error: "An error has occurred!"
+            };
 
             vm.notify = vm.$hospitalsService.getNotifier($scope);
 
@@ -262,7 +267,7 @@
 
             function render() {
                 vm.showFormErrors = false;
-                //vm.getForm();
+                vm.getForm();
             };
 
             function _onSubmitForm() {
@@ -273,12 +278,12 @@
                     console.log("form is valid");
                     var form = vm.newData;
                     console.log(form);
-                    var hospId = $("#hospitalId").val();
+                    var hospId = $("#hospId").val();
 
                     if (hospId > 0) {
                         var serForm = $("#hospForm").serialize();         // CURRENT ALTERNATIVE; SEE TRELLO NOTES
                         console.log(serForm);
-                        vm.$hospitalsService.updateHospital(hospId, serForm, vm.onUpdateSuccess, vm.onError);
+                        vm.$hospitalsService.updateHospital(hospId, form, vm.onUpdateSuccess, vm.onError);
                         return hospId;
                     } else {
                         vm.$hospitalsService.addHospital(form, vm.onCreateSuccess, vm.onError);
@@ -289,10 +294,10 @@
                 }
             }
 
-            //function _getForm() {
-            //    var hospId = $("#hospId").val();
-            //    vm.$obstetricsService.getObCase(hospId, vm.onGetSuccess, vm.onError);
-            //}
+            function _getForm() {
+                var hospId = $("#hospId").val();
+                vm.$hospitalsService.getHospital(hospId, vm.onGetSuccess, vm.onError);
+            }
 
             function _getId(data) {
                 hospId = data;
@@ -300,7 +305,19 @@
 
             function _addToHiddenId(data) {
                 console.log("Adding Id");
-                $("#hospitalId").val(data);
+                $("#hospId").val(data);
+            }
+
+            function _fillInForm(data) {
+                console.log("Filling in form");
+                $("#hospId").val(data.Id).trigger('change');
+                //$("#hospitalId").val(data.HospitalId).trigger('change');
+                $("#name").val(data.Name).trigger('change');
+                $("#abbrev").val(data.Abbrev).trigger('change');
+                $("#address").val(data.Address).trigger('change');
+                $("#city").val(data.City).trigger('change');
+                $("#state").val(data.State).trigger('change');
+                $("#zipCode").val(data.ZipCode).trigger('change');
             }
 
             function _onCreateSuccess(data, status, xhr) {
@@ -308,32 +325,46 @@
                     vm.addToHiddenId(data.Item);
                     vm.getId(data.Item);
                 }
-                vm.success = "Case saved!";
-                console.log(vm.success);
-                window.alert(vm.success);
-                //location.href = 'http://canore.dev/obcases';
+                console.log(vm.alert.saved);
+                window.alert(vm.alert.saved);
+                location.href = 'http://canore.dev/Hospitals';
             }
 
             function _onUpdateSuccess(data, status, xhr) {
-                vm.success = "Case updated!";
-                console.log(vm.success);
-                window.alert(vm.success);
-                //location.href = 'http://canore.dev/obcases';
+                console.log(vm.alert.updated);
+                window.alert(vm.alert.updated);
+                location.href = 'http://canore.dev/Hospitals';
             }
 
-            //function _onGetSuccess(data, status, xhr) {
-            //    if (data && data.Item) {
-            //        vm.fillInForm(data.Item);
-            //        $("#cmdSubmit").html("Update Case");
-            //    }
-            //}
+            function _onGetSuccess(data, status, xhr) {
+                if (data && data.Item) {
+                    vm.fillInForm(data.Item);
+                    $("#cmdSubmit").html("Update Hospital");
+                }
+            }
 
             function _onError(jqXHR, textStatus, errorThrown) {
-                vm.error = "An error has occurred!";
-                console.log(vm.error);
-                window.alert(vm.error);
+                console.log(vm.alert.error);
+                window.alert(vm.alert.error);
             }
 
+            sabio.ng.app.module.directive('formAutofillFix', function () {
+                return function (scope, elem, attrs) {
+                    // Fixes Chrome bug: https://groups.google.com/forum/#!topic/angular/6NlucSskQjY
+                    elem.prop('method', 'POST');
+
+                    // Fix autofill issues where Angular doesn't know about autofilled inputs
+                    if (attrs.ngSubmit) {
+                        setTimeout(function () {
+                            elem.unbind('submit').submit(function (e) {
+                                e.preventDefault();
+                                elem.find('input, textarea, select').trigger('input').trigger('change').trigger('keydown');
+                                scope.$apply(attrs.ngSubmit);
+                            });
+                        }, 0);
+                    }
+                };
+            });
 
         }
 

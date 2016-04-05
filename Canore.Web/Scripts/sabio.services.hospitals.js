@@ -35,9 +35,9 @@ sabio.services.hospitals.updateHospital = function (id, hospitalData, onSuccess,
 
 }
 
-sabio.services.hospitals.getObCase = function (id, onSuccess, onError) {
+sabio.services.hospitals.getHospital = function (id, onSuccess, onError) {
 
-    var url = "/api/ObCaseForm/" + id;
+    var url = "/api/Hospitals/" + id;
     var settings = {
         cache: false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
@@ -50,9 +50,9 @@ sabio.services.hospitals.getObCase = function (id, onSuccess, onError) {
     $.ajax(url, settings);
 }
 
-sabio.services.hospitals.getObCaseList = function (onSuccess, onError) {
+sabio.services.hospitals.getHospitalList = function (onSuccess, onError) {
 
-    var url = "/api/ObCaseForm/";
+    var url = "/api/Hospitals/";
     var settings = {
         cache: false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
@@ -65,9 +65,9 @@ sabio.services.hospitals.getObCaseList = function (onSuccess, onError) {
     $.ajax(url, settings);
 }
 
-sabio.services.hospitals.deleteObCase = function (id, onSuccess, onError) {
+sabio.services.hospitals.deleteHospital = function (id, onSuccess, onError) {
 
-    var url = "/api/ObCaseForm/" + id;
+    var url = "/api/Hospitals/" + id;
     var settings = {
         cache: false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",

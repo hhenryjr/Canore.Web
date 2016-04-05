@@ -12,11 +12,19 @@ namespace Canore.Web.Controllers
     {
         // GET: Hospitals
         [Route("Add")]
+        [Route("{id:int}")]
         public ActionResult HospitalForm(int id = 0)
         {
             ItemViewModel<int> model = new ItemViewModel<int>();
             model.Item = id;
             return View(model);
         }
+
+        [Route]
+        public ActionResult HospitalList()
+        {
+            return View();
+        }
+
     }
 }

@@ -984,6 +984,7 @@
     <Content Include="Views\Obstetrics\ObCaseList.cshtml" />
     <Content Include="Views\Hospitals\HospitalForm.cshtml" />
     <Content Include="Views\Hospitals\HospitalList.cshtml" />
+    <Content Include="Views\Gyn\GynCaseForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

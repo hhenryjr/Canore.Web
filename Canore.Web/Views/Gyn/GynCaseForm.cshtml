@@ -1,0 +1,202 @@
+﻿@model Canore.Web.Models.ViewModels.ItemViewModel<int>
+
+@{
+    ViewBag.Title = "Gynecological Patient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Gynecological Patient Case</h2>
+
+<div data-ng-controller="gynController as gyn" id="gynCtrl">
+    <div id="formContainer" class="block push-bit form-horizontal form-bordered form-control-borderless">
+        <form class="form-horizontal form-bordered form-control-borderless" id="gynForm" name="gyn.gynForm" ng-submit="gyn.onSubmitForm()" novalidate>
+            <input type="text" class="hidden" id="caseId" name="Id" ng-model="gyn.newData.Id" value="@Model.Item" form-autofill-fix>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    Patient ID
+                    <div class="input-group">
+                        <input type="text"
+                               placeholder=""
+                               style="width: 150px;"
+                               id="patientId"
+                               name="patientId"
+                               ng-model="gyn.newData.patientId"
+                               class="form-control ng-class:{'has-error': gyn.gynForm.patientId.$touched && !gyn.gynForm.patientId.$valid}"
+                               ng-minlength="5"
+                               required
+                               form-autofill-fix>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.patientId.$error.required">Please enter patient ID</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.patientId.$error.minlength">Patient ID is required to be at least 5 characters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    Age
+                    <div class="input-group">
+                        <input type="number"
+                               placeholder=""
+                               style="width: 75px;"
+                               id="age"
+                               name="age"
+                               ng-model="gyn.newData.age"
+                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.age.$valid}"
+                               min="13" max="89"
+                               required
+                               form-autofill-fix>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.age.$error.required">Please enter patient's age</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.age.$error.min || gyn.gynForm.age.$error.max">Not a valid age</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    Gravity
+                    <div class="input-group">
+                        <input type="number"
+                               placeholder=""
+                               style="width: 75px;"
+                               id="gravity"
+                               name="gravity"
+                               ng-model="gyn.newData.gravity"
+                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.gravity.$valid}"
+                               min="1"
+                               required
+                               form-autofill-fix>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.gravity.$error.required">Please enter gravity</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.gravity.$error.min">Patient must have at least 1 pregnancy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    Parity
+                    <div class="input-group">
+                        <input type="number"
+                               placeholder=""
+                               style="width: 75px;"
+                               id="parity"
+                               name="parity"
+                               ng-model="gyn.newData.parity"
+                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.parity.$valid}"
+                               min="0"
+                               required
+                               form-autofill-fix>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.parity.$error.required">Enter valid # of term deliveries</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    Complications
+                        <select class="form-control" id="complications" name="complications" ng-model="gyn.newData.complications" required form-autofill-fix>
+                            <option value=""></option>
+                            <option value="Abdominal hysterectomy, any type">Abdominal hysterectomy, any type (e.g. total, subtotal, laparoscopic, robotic)</option>
+                            <option value="Laparotomy">Laparotomy</option>
+                            <option value="Vaginal hysterectomy">Vaginal hysterectomy (including laparoscopically assisted)</option>
+                            <option value="Diagnostic laparoscopy">Diagnostic laparoscopy</option>
+                            <option value="Operative laparoscopy">Operative laparoscopy (other than tubal sterilization and hysterectomy)</option>
+                            <option value="Operative hysteroscopy">Operative hysteroscopy</option>
+                            <option value="Uterine myomas">Uterine myomas</option>
+                            <option value="Repair of pelvic floor defects; prolapse">Repair of pelvic floor defects; prolapse</option>
+                            <option value="Endometriosis and adenomyosis: surgical management">Endometriosis and adenomyosis: surgical management</option>
+                            <option value="Tubal sterilization">Tubal sterilization</option>
+                            <option value="Invasive carcinoma">Invasive carcinoma</option>
+                            <option value="Urinary and fecal incontinence: operative management">Urinary and fecal incontinence: operative management</option>
+                            <option value="Ectopic pregnancy: surgical management">Ectopic pregnancy: surgical management</option>
+                            <option value="Operative management of pelvic pain">Operative management of pelvic pain</option>
+                            <option value="Congenital abnormalities of the reproductive tract">Congenital abnormalities of the reproductive tract</option>
+                            <option value="Pelvic inflammatory disease">Pelvic inflammatory disease</option>
+                            <option value="Adnexal problems">Adnexal problems (excluding ectopic pregnancy and PID)</option>
+                            <option value="Abnormal uterine bleeding">Abnormal uterine bleeding</option>
+                            <option value="Surgical management of VIN, CIN and VAIN">Surgical management of VIN, CIN and VAIN</option>
+                            <option value="Postoperative complications">Postoperative complications (hemorrhage, wound, urinary tract, GI, Pain, thrombiotic, embolic, neurologic, fever, etc.)</option>
+                            <option value="Management of rectovaginal or urinary tract fistula">Management of rectovaginal or urinary tract fistula</option>
+                            <option value="Preoperative evaluation of coexisting conditions">Preoperative evaluation of coexisting conditions (respiratory, cardiac, metabolic diseases)</option>
+                            <option value="Gestational trophoblastic disease">Gestational trophoblastic disease</option>
+                            <option value="Incomplete, septic, complete and other abortion">Incomplete, septic, complete and other abortion</option>
+                            <option value="Intraoperative complications">Intraoperative complications (e.g. blood loss, hemorrhage, bowel injury, urinary tract injury)</option>
+                            <option value="D&amp;C">D&amp;C</option>
+                            <option value="Emergency care">Emergency care</option>
+                            <option value="Uncategorized">Uncategorized (cases in this category do not count toward the required 20 cases)</option>
+                        </select>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.complications.$error.required">Please enter category</span>
+                        </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    Operative Procedures And/Or Treatment
+                    <div class="input-group">
+                        <input type="text"
+                               placeholder=""
+                               id="treatment"
+                               name="treatment"
+                               ng-model="gyn.newData.treatment"
+                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.treatment.$valid}"
+                               ng-minlength="5"
+                               required
+                               form-autofill-fix>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.treatment.$error.required">Please enter treatment</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.treatment.$error.minlength">Please enter at least 5 characters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <div class="input-group ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.hospitalId.$valid}">
+                        Hospital<br>
+                        <select ui-select2 class="form-control" id="hospital" name="hospitalId" data-placeholder="Pick a hospital" ng-model="gyn.newData.hospitalId" required form-autofill-fix>
+                            <option value=""></option>
+                            <option ng-repeat="hospital in gyn.hospitals" name="hospital" value="{{hospital.Id}}">{{hospital.Name}}</option>
+                        </select>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.hospitalId.$error.required">Please enter hospital</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <div class="input-group">
+                        Days in hospital<br>
+                        <input type="number"
+                               style="width: 80px;"
+                               id="daysInHospital"
+                               name="daysInHospital"
+                               ng-model="gyn.newData.daysInHospital"
+                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.daysInHospital.$valid}"
+                               min="0"
+                               required
+                               form-autofill-fix> days
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.daysInHospital.$error.required">Please enter length of days in hospital</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.daysInHospital.$error.number">Please enter valid numbers</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6 text-left">
+                    <button type="submit" id="cmdSubmit" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Submit Case</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

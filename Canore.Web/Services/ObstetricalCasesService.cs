@@ -142,6 +142,7 @@ namespace Canore.Web.Services
             item.Death = reader.GetSafeString(startingIndex++);
             item.OneMinScore = reader.GetSafeInt32(startingIndex++);
             item.FiveMinScore = reader.GetSafeInt32(startingIndex++);
+            hosp.Id = reader.GetSafeInt32(startingIndex++);
             hosp.Name = reader.GetSafeString(startingIndex++);
             item.DaysInHospital = reader.GetSafeInt32(startingIndex++);
             item.DateAdded = reader.GetSafeDateTime(startingIndex++);

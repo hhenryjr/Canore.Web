@@ -249,7 +249,7 @@
                 <div class="col-xs-6">
                     <div class="input-group">
                         <div class="ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.death.$valid}">
-                            Perinatal Death?@*<br>*@
+                            Perinatal Death?
                             <input type="radio" name="death" id="death" ng-model="obstetrics.newData.death" value="Yes" ng-required="!obstetrics.newData.death" form-autofill-fix> Yes
                             <input type="radio" name="death" id="death" ng-model="obstetrics.newData.death" value="No" ng-required="!obstetrics.newData.death" form-autofill-fix> No
                             <div role="alert" class="help-inline error" style="color:red">
@@ -300,14 +300,14 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-6">
-                    <div class="input-group">
+                    <div class="input-group ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.hospitalId.$valid}">
                         Hospital<br>
-                        <select ui-select2 class="form-control" id="hospital" name="hospital" data-placeholder="Pick a hospital" ng-model="obstetrics.newData.hospitalId" required form-autofill-fix>
+                        <select ui-select2 class="form-control" id="hospital" name="hospitalId" data-placeholder="Pick a hospital" ng-model="obstetrics.newData.hospitalId" required form-autofill-fix>
                             <option value=""></option>
-                            <option ng-repeat="hospital in obstetrics.hospitals" value="{{hospital.Id}}">{{hospital.Name}}</option>
+                            <option ng-repeat="hospital in obstetrics.hospitals" name="hospital" value="{{hospital.Id}}">{{hospital.Name}}</option>
                         </select>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.hospital.$error.required">Please enter hospital</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.hospitalId.$error.required">Please enter hospital</span>
                         </div>
                     </div>
 
@@ -380,8 +380,6 @@
             vm.onGetHospitals = _onGetHospitals;
             vm.onError = _onError;
             vm.getForm = _getForm;
-            vm.getId = _getId;
-            vm.addToHiddenId = _addToHiddenId;
             vm.fillInForm = _fillInForm;
 
             vm.newData = null;
@@ -399,8 +397,8 @@
 
             function render() {
                 vm.showFormErrors = false;
-                vm.getForm();
                 vm.$obstetricsService.getHospitals(vm.onGetHospitals, vm.onError);
+                vm.getForm();
             };
 
             function _onSubmitForm() {
@@ -411,7 +409,7 @@
                     console.log("form is valid");
                     var form = vm.newData;
                     console.log(form);
-                    var caseId = $("#caseId").val();
+                    var caseId = @Model.Item;
 
                     if (caseId > 0) {
                         var serForm = $("#obForm").serialize();
@@ -428,17 +426,8 @@
             }
 
             function _getForm() {
-                var caseId = $("#caseId").val();
+                var caseId = @Model.Item;
                 vm.$obstetricsService.getObCase(caseId, vm.onGetSuccess, vm.onError);
-            }
-
-            function _getId(data) {
-                caseId = data;
-            }
-
-            function _addToHiddenId(data) {
-                console.log("Adding Id");
-                $("#caseId").val(data);
             }
 
             function _fillInForm(data) {
@@ -455,39 +444,36 @@
                 //$("#death").val(data.Death).trigger('change');
                 //$("#oneMinScore").val(data.OneMinScore).trigger('change');
                 //$("#fiveMinScore").val(data.FiveMinScore).trigger('change');
-                //$("#hospital").val(data.Hospital).trigger('change');
+                $("#hospital").val(data.Hospital.Id).trigger('change');
                 $("#daysInHospital").val(data.DaysInHospital).trigger('change');
-                var death = document.getElementsByName('death');
-                var oneMinScore = document.getElementsByName('oneMinScore');
-                var fiveMinScore = document.getElementsByName('fiveMinScore');
-
-                for (i = 0; i < death.length; i++) {
-                    if (death[i].value == data.Death) {
-                        death[i].checked = true;
-                        //$("#death").val(death[i].value).trigger('change');
-                    }
-                }
-
-                for (i = 0; i < oneMinScore.length; i++) {
-                    if (oneMinScore[i].value == data.OneMinScore) {
-                        oneMinScore[i].checked = true;
-                        //$("#oneMinScore").val(oneMinScore[i].value).trigger('change');
-                    }
-                }
-
-                for (i = 0; i < fiveMinScore.length; i++) {
-                    if (fiveMinScore[i].value == data.FiveMinScore) {
-                        fiveMinScore[i].checked = true;
-                        //$("#fiveMinScore").val(fiveMinScore[i].value).trigger('change');
-                    }
-                }
-
                 vm.notify(function () {
-                    $("#death").val(data.Death).trigger('change');
-                    $("#oneMinScore").val(data.OneMinScore).trigger('change');
-                    $("#fiveMinScore").val(data.FiveMinScore).trigger('change');
-                    //$("#hospital").val(data.Hospital).trigger('change');
+                    var death = document.getElementsByName('death');
+                    var oneMinScore = document.getElementsByName('oneMinScore');
+                    var fiveMinScore = document.getElementsByName('fiveMinScore');
+
+                    for (i = 0; i < death.length; i++) {
+                        if (death[i].value == data.Death) {
+                            death[i].checked = true;
+                        }
+                    }
+
+                    for (i = 0; i < oneMinScore.length; i++) {
+                        if (oneMinScore[i].value == data.OneMinScore) {
+                            oneMinScore[i].checked = true;
+                        }
+                    }
+
+                    for (i = 0; i < fiveMinScore.length; i++) {
+                        if (fiveMinScore[i].value == data.FiveMinScore) {
+                            fiveMinScore[i].checked = true;
+                        }
+                    }
                 });
+                //vm.notify(function () {
+                //    $("#death").val(data.Death).trigger('change');
+                //    $("#oneMinScore").val(data.OneMinScore).trigger('change');
+                //    $("#fiveMinScore").val(data.FiveMinScore).trigger('change');
+                //});
             }
 
             function _onGetHospitals(data) {
@@ -498,10 +484,6 @@
             }
 
             function _onCreateSuccess(data, status, xhr) {
-                if (data && data.Item) {
-                    vm.addToHiddenId(data.Item);
-                    vm.getId(data.Item);
-                }
                 console.log(vm.alert.saved);
                 window.alert(vm.alert.saved);
                 location.href = 'http://canore.dev/obcases';
@@ -517,6 +499,7 @@
                 if (data && data.Item) {
                     vm.fillInForm(data.Item);
                     $("#cmdSubmit").html("Update Case");
+                    console.log(data.Item);
                 }
             }
 

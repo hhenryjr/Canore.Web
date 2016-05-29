@@ -10,7 +10,7 @@ namespace Canore.Web.Models.ObstetricalCases
     {
         [Required]
         [MinLength(5)]
-        public string PatientId { get; set; }
+        public string PatientID { get; set; }
 
         [Required]
         [Range(13,89)]
@@ -23,10 +23,10 @@ namespace Canore.Web.Models.ObstetricalCases
         public int Parity { get; set; }
 
         [Required]
-        public string Antepartum { get; set; }
+        public string AntepartumID { get; set; }
 
         [Required]
-        public string Postpartum { get; set; }
+        public string PostpartumID { get; set; }
 
         [Required]
         public string Treatment { get; set; }
@@ -45,7 +45,7 @@ namespace Canore.Web.Models.ObstetricalCases
         public int FiveMinScore { get; set; }
 
         [Required]
-        public int HospitalId { get; set; }
+        public int HospitalID { get; set; }
 
         [Required]
         public int DaysInHospital { get; set; }

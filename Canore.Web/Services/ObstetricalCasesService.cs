@@ -26,18 +26,18 @@ namespace Canore.Web.Services
             DataProvider.ExecuteNonQuery(GetConnection, "dbo.ObstetricalCases_Insert",
                 inputParamMapper: delegate(SqlParameterCollection InsertObCase)
                 {
-                    InsertObCase.AddWithValue("@PatientId", model.PatientId);
+                    InsertObCase.AddWithValue("@PatientID", model.PatientID);
                     InsertObCase.AddWithValue("@Age", model.Age);
                     InsertObCase.AddWithValue("@Gravity", model.Gravity);
                     InsertObCase.AddWithValue("@Parity", model.Parity);
-                    InsertObCase.AddWithValue("@Antepartum", model.Antepartum);
-                    InsertObCase.AddWithValue("@Postpartum", model.Postpartum);
+                    InsertObCase.AddWithValue("@AntepartumID", model.AntepartumID);
+                    InsertObCase.AddWithValue("@PostpartumID", model.PostpartumID);
                     InsertObCase.AddWithValue("@Treatment", model.Treatment);
                     InsertObCase.AddWithValue("@BirthWeight", model.BirthWeight);
                     InsertObCase.AddWithValue("@Death", model.Death);
                     InsertObCase.AddWithValue("@OneMinScore", model.OneMinScore);
                     InsertObCase.AddWithValue("@FiveMinScore", model.FiveMinScore);
-                    InsertObCase.AddWithValue("@HospitalId", model.HospitalId);
+                    InsertObCase.AddWithValue("@HospitalID", model.HospitalID);
                     InsertObCase.AddWithValue("@DaysInHospital", model.DaysInHospital);
 
                     SqlParameter param = new SqlParameter("@Id", System.Data.SqlDbType.Int);
@@ -62,18 +62,18 @@ namespace Canore.Web.Services
                 inputParamMapper: delegate(SqlParameterCollection UpdateObCase)
                 {
                     UpdateObCase.AddWithValue("@Id", model.Id);
-                    UpdateObCase.AddWithValue("@PatientId", model.PatientId);
+                    UpdateObCase.AddWithValue("@PatientID", model.PatientID);
                     UpdateObCase.AddWithValue("@Age", model.Age);
                     UpdateObCase.AddWithValue("@Gravity", model.Gravity);
                     UpdateObCase.AddWithValue("@Parity", model.Parity);
-                    UpdateObCase.AddWithValue("@Antepartum", model.Antepartum);
-                    UpdateObCase.AddWithValue("@Postpartum", model.Postpartum);
+                    UpdateObCase.AddWithValue("@AntepartumID", model.AntepartumID);
+                    UpdateObCase.AddWithValue("@PostpartumID", model.PostpartumID);
                     UpdateObCase.AddWithValue("@Treatment", model.Treatment);
                     UpdateObCase.AddWithValue("@BirthWeight", model.BirthWeight);
                     UpdateObCase.AddWithValue("@Death", model.Death);
                     UpdateObCase.AddWithValue("@OneMinScore", model.OneMinScore);
                     UpdateObCase.AddWithValue("@FiveMinScore", model.FiveMinScore);
-                    UpdateObCase.AddWithValue("@HospitalId", model.HospitalId);
+                    UpdateObCase.AddWithValue("@HospitalID", model.HospitalID);
                     UpdateObCase.AddWithValue("@DaysInHospital", model.DaysInHospital);
                 });
         }
@@ -127,16 +127,20 @@ namespace Canore.Web.Services
         {
             ObstetricalCases item = new ObstetricalCases();
             Hospitals hosp = new Hospitals();
+            ObCategories ante = new ObCategories();
+            ObCategories post = new ObCategories();
 
             int startingIndex = 0;
 
             item.Id = reader.GetSafeInt32(startingIndex++);
-            item.PatientId = reader.GetSafeString(startingIndex++);
+            item.PatientID = reader.GetSafeString(startingIndex++);
             item.Age = reader.GetSafeInt32(startingIndex++);
             item.Gravity = reader.GetSafeInt32(startingIndex++);
             item.Parity = reader.GetSafeInt32(startingIndex++);
-            item.Antepartum = reader.GetSafeString(startingIndex++);
-            item.Postpartum = reader.GetSafeString(startingIndex++);
+            ante.Id = reader.GetSafeInt32(startingIndex++);
+            ante.Category = reader.GetSafeString(startingIndex++);
+            post.Id = reader.GetSafeInt32(startingIndex++);
+            post.Category = reader.GetSafeString(startingIndex++);
             item.Treatment = reader.GetSafeString(startingIndex++);
             item.BirthWeight = reader.GetSafeInt32(startingIndex++);
             item.Death = reader.GetSafeString(startingIndex++);
@@ -149,6 +153,8 @@ namespace Canore.Web.Services
             item.DateModified = reader.GetSafeDateTime(startingIndex++);
 
             item.Hospital = hosp;
+            item.Antepartum = ante;
+            item.Postpartum = post;
             return item;
         }
     }

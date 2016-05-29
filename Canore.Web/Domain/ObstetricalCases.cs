@@ -9,17 +9,13 @@ namespace Canore.Web.Domain
     {
         public int Id { get; set; }
 
-        public string PatientId { get; set; }
+        public string PatientID { get; set; }
 
         public int Age { get; set; }
 
         public int Gravity { get; set; }
 
         public int Parity { get; set; }
-
-        public string Antepartum { get; set; }
-
-        public string Postpartum { get; set; }
 
         public string Treatment { get; set; }
 
@@ -32,6 +28,10 @@ namespace Canore.Web.Domain
         public int FiveMinScore { get; set; }
 
         public int DaysInHospital { get; set; }
+
+        public ObCategories Antepartum { get; set; }
+
+        public ObCategories Postpartum { get; set; }
 
         public Hospitals Hospital { get; set; }
 

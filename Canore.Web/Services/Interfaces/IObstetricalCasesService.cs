@@ -15,9 +15,9 @@ namespace Canore.Web.Services.Interfaces
 
         void ModifyObCase(ObstetricalCasesUpdateRequest model);
 
-        ObstetricalCases GetObCase(int id);
+        ObCases GetObCase(int id);
 
-        List<ObstetricalCases> GetObCaseList();
+        List<ObCases> GetObCaseList();
 
         void DeleteObCase(int id);
     }

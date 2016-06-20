@@ -1,6 +1,5 @@
 ﻿using Canore.Web.Domain;
-using Canore.Web.Models.ObstetricalCases;
-using Canore.Web.Models.Requests.ObstetricalCases;
+using Canore.Web.Models.Requests.GynCases;
 using Canore.Web.Models.Responses;
 using Canore.Web.Services;
 using Canore.Web.Services.Interfaces;
@@ -14,18 +13,18 @@ using System.Web.Http;
 
 namespace Canore.Web.Controllers.Api
 {
-    [RoutePrefix("api/ObCaseForm")]
-    public class ObstetricalCasesApiController : ApiController
+    [RoutePrefix("api/GynCaseForm")]
+    public class GynCasesApiController : ApiController
     {
-        //private IObstetricalCasesService _obstetricalCasesService;
+        //private IGynCasesService _obstetricalCasesService;
 
-        //public ObstetricalCasesApiController(IObstetricalCasesService obstetricalCasesService)
+        //public GynCasesApiController(IGynCasesService obstetricalCasesService)
         //{
         //    _obstetricalCasesService = obstetricalCasesService;
         //}
 
         [Route, HttpPost]
-        public HttpResponseMessage AddObstetricalCase(ObstetricalCasesAddRequest model)
+        public HttpResponseMessage AddGynCase(GynCasesAddRequest model)
         {
             if (!ModelState.IsValid)
             {
@@ -33,12 +32,12 @@ namespace Canore.Web.Controllers.Api
             }
             //string userId = HttpContext.Current.User.Identity.GetUserId();
             ItemResponse<int> response = new ItemResponse<int>();
-            response.Item = ObCasesService.CreateObCase(model);
+            response.Item = GynCasesService.CreateGynCase(model);
             return Request.CreateResponse(response);
         }
 
         [Route("{id:int}"), HttpPut]
-        public HttpResponseMessage ModifyObCase(ObstetricalCasesUpdateRequest model)
+        public HttpResponseMessage ModifyGynCase(GynCasesUpdateRequest model)
         {
             if (!ModelState.IsValid)
             {
@@ -46,36 +45,36 @@ namespace Canore.Web.Controllers.Api
             }
 
             SuccessResponse response = new SuccessResponse();
-            ObCasesService.ModifyObCase(model);
+            GynCasesService.ModifyGynCase(model);
             return Request.CreateResponse(response);
         }
 
         [Route("{id:int}"), HttpGet]
-        public HttpResponseMessage GetObCase(int id)
+        public HttpResponseMessage GetGynCase(int id)
         {
-            ItemResponse<ObCases> response = new ItemResponse<ObCases>();
-            response.Item = ObCasesService.GetObCase(id);
+            ItemResponse<GynCases> response = new ItemResponse<GynCases>();
+            response.Item = GynCasesService.GetGynCase(id);
             return Request.CreateResponse(response);
         }
 
         [Route, HttpGet]
-        public HttpResponseMessage GetObCaseList()
+        public HttpResponseMessage GetGynCaseList()
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
 
-            ItemsResponse<ObCases> response = new ItemsResponse<ObCases>();
-            response.Items = ObCasesService.GetObCaseList();
+            ItemsResponse<GynCases> response = new ItemsResponse<GynCases>();
+            response.Items = GynCasesService.GetGynCaseList();
             return Request.CreateResponse(response);
         }
 
         [Route("{id:int}"), HttpDelete]
-        public HttpResponseMessage DeleteObCase(int id)
+        public HttpResponseMessage DeleteGynCase(int id)
         {
             SuccessResponse response = new SuccessResponse();
-            ObCasesService.DeleteObCase(id);
+            GynCasesService.DeleteGynCase(id);
             return Request.CreateResponse(response);
         }
     }

@@ -19,15 +19,15 @@
                                placeholder=""
                                style="width: 150px;"
                                id="patientId"
-                               name="PatientId"
+                               name="PatientID"
                                ng-model="obstetrics.caseData.PatientID"
                                class="form-control ng-class:{'has-error': obstetrics.obForm.PatientId.$touched && !obstetrics.obForm.PatientId.$valid}"
                                ng-minlength="5"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.PatientId.$error.required">Please enter patient ID</span>
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.PatientId.$error.minlength">Patient ID is required to be at least 5 characters</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.PatientID.$error.required">Please enter patient ID</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.PatientID.$error.minlength">Patient ID is required to be at least 5 characters</span>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                                id="parity"
                                name="Parity"
                                ng-model="obstetrics.caseData.Parity"
-                               class="form-control ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.parity.$valid}"
+                               class="form-control ng-class:{'error': obstetrics.showFormErrors && !obstetrics.obForm.Parity.$valid}"
                                min="0"
                                required
                                form-autofill-fix>
@@ -100,22 +100,22 @@
                     Complications
                     <div class="input-group">
                         Antepartum
-                        <select class="form-control" id="antepartum" name="Antepartum" ng-model="obstetrics.caseData.AntepartumID" required form-autofill-fix>
+                        <select class="form-control" id="antepartum" name="AntepartumID" ng-model="obstetrics.caseData.AntepartumID" required form-autofill-fix>
                             <option value="">Choose Category</option>
                             <option ng-repeat="category in obstetrics.categories" name="Hospital" value="{{category.Id}}">{{category.Category}}</option>
                         </select>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.Antepartum.$error.required">Please enter category</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.AntepartumID.$error.required">Please enter category</span>
                         </div>
                     </div>
                     <div class="input-group">
                         Delivery/Postpartum
-                        <select class="form-control" id="postpartum" name="Postpartum" ng-model="obstetrics.caseData.PostpartumID" required form-autofill-fix>
+                        <select class="form-control" id="postpartum" name="PostpartumID" ng-model="obstetrics.caseData.PostpartumID" required form-autofill-fix>
                             <option value="">Choose Category</option>
                             <option ng-repeat="category in obstetrics.categories" name="Hospital" value="{{category.Id}}">{{category.Category}}</option>
                         </select>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.Postpartum.$error.required">Please enter category</span>
+                            <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.PostpartumID.$error.required">Please enter category</span>
                         </div>
                     </div>
 
@@ -316,9 +316,11 @@
             vm.$categoriesService = $categoriesService;
             vm.$scope = $scope;
 
+            //PUBLIC METHODS
             vm.onSubmitForm = _onSubmitForm;
             vm.getForm = _getForm;
 
+            //PUBLIC HANDLERS
             vm.onCreateSuccess = _onCreateSuccess;
             vm.onUpdateSuccess = _onUpdateSuccess;
             vm.onGetSuccess = _onGetSuccess;
@@ -326,6 +328,7 @@
             vm.onCategoriesSuccess = _onCategoriesSuccess;
             vm.onError = _onError;
 
+            //PUBLIC MEMBERS
             vm.caseData = null;
             vm.showFormErrors = false;
             vm.hospitals = null;
@@ -370,14 +373,11 @@
                 vm.$obstetricsService.getObCase(caseId, vm.onGetSuccess, vm.onError);
             }
 
-            function _onGetSuccess(data, status, xhr) {
+            function _onGetSuccess(data) {
 
                 if (data && data.Item) {
                     vm.notify(function () {
                         vm.caseData = data.Item;
-                        vm.caseData.HospitalID = data.Item.Hospital.Id;
-                        vm.caseData.AntepartumID = data.Item.Antepartum.Id;
-                        vm.caseData.PostpartumID = data.Item.Postpartum.Id;
                     });
                     $("#hospital").val(data.Item.Hospital.Id).trigger('change');
                     $("#antepartum").val(data.Item.Antepartum.Id).trigger('change');

@@ -179,23 +179,28 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CategoriesAPIController.cs" />
+    <Compile Include="Controllers\Api\GynCasesAPIController.cs" />
     <Compile Include="Controllers\Api\HospitalsAPIController.cs" />
     <Compile Include="Controllers\Api\ObstetricalCasesApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HospitalsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ObstetricsController.cs" />
+    <Compile Include="Domain\GynCases.cs" />
+    <Compile Include="Domain\GynCategories.cs" />
     <Compile Include="Domain\Hospitals.cs" />
     <Compile Include="Domain\ObCategories.cs" />
-    <Compile Include="Domain\ObstetricalCases.cs" />
+    <Compile Include="Domain\ObCases.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Requests\GynCases\GynCasesUpdateRequest.cs" />
     <Compile Include="Models\Requests\Hospitals\HospitalsAddRequest.cs" />
     <Compile Include="Models\Requests\Hospitals\HospitalsUpdateRequest.cs" />
+    <Compile Include="Models\Requests\GynCases\GynCasesAddRequest.cs" />
     <Compile Include="Models\Requests\ObstetricalCases\ObstetricalCasesAddRequest.cs" />
     <Compile Include="Models\Requests\ObstetricalCases\ObstetricalCasesUpdateRequest.cs" />
     <Compile Include="Models\Responses\BaseResponse.cs" />
@@ -208,9 +213,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\CategoriesService.cs" />
+    <Compile Include="Services\GynCasesService.cs" />
     <Compile Include="Services\HospitalsService.cs" />
     <Compile Include="Services\Interfaces\IObstetricalCasesService.cs" />
-    <Compile Include="Services\ObstetricalCasesService.cs" />
+    <Compile Include="Services\ObCasesService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -932,6 +938,7 @@
     <Content Include="Scripts\sabio.js" />
     <Content Include="Scripts\sabio.ng.app.js" />
     <Content Include="Scripts\sabio.services.categories.js" />
+    <Content Include="Scripts\sabio.services.gyn.js" />
     <Content Include="Scripts\sabio.services.hospitals.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">

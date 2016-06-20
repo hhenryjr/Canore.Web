@@ -13,6 +13,7 @@ namespace Canore.Web.Controllers.Api
     [RoutePrefix("api/Categories")]
     public class CategoriesAPIController : ApiController
     {
+        //OBSTETRICAL
         [Route("ObCategory/{id:int}"), HttpGet]
         public HttpResponseMessage GetObCategory(int id)
         {
@@ -31,6 +32,28 @@ namespace Canore.Web.Controllers.Api
 
             ItemsResponse<ObCategories> response = new ItemsResponse<ObCategories>();
             response.Items = CategoriesService.GetObCategoryList();
+            return Request.CreateResponse(response);
+        }
+
+        //GYNECOLOGICAL
+        [Route("GynCategory/{id:int}"), HttpGet]
+        public HttpResponseMessage GetGynCategory(int id)
+        {
+            ItemResponse<GynCategories> response = new ItemResponse<GynCategories>();
+            response.Item = CategoriesService.GetGynCategory(id);
+            return Request.CreateResponse(response);
+        }
+
+        [Route("GynCategories"), HttpGet]
+        public HttpResponseMessage GetGynCategoryList()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            ItemsResponse<GynCategories> response = new ItemsResponse<GynCategories>();
+            response.Items = CategoriesService.GetGynCategoryList();
             return Request.CreateResponse(response);
         }
     }

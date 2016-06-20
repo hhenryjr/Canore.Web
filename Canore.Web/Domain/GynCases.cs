@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Canore.Web.Domain
 {
-    public class ObstetricalCases
+    public class GynCases
     {
         public int Id { get; set; }
 
@@ -17,21 +17,15 @@ namespace Canore.Web.Domain
 
         public int Parity { get; set; }
 
+        public string Admission { get; set; }
+
         public string Treatment { get; set; }
 
-        public int BirthWeight { get; set; }
-
-        public string Death { get; set; }
-
-        public int OneMinScore { get; set; }
-
-        public int FiveMinScore { get; set; }
+        public string SurgicalPath { get; set; }
 
         public int DaysInHospital { get; set; }
 
-        public ObCategories Antepartum { get; set; }
-
-        public ObCategories Postpartum { get; set; }
+        public GynCategories Complication { get; set; }
 
         public Hospitals Hospital { get; set; }
 

@@ -16,6 +16,7 @@ namespace Canore.Web.Services
             return 0;
         }
 
+        //OBSTETRICAL
         public static ObCategories GetObCategory(int id)
         {
             ObCategories item = null;
@@ -63,5 +64,52 @@ namespace Canore.Web.Services
             return item;
         }
 
+        //GYNECOLOGICAL
+        public static GynCategories GetGynCategory(int id)
+        {
+            GynCategories item = null;
+
+            DataProvider.ExecuteCmd(GetConnection, "dbo.GynCategories_SelectById",
+                inputParamMapper: delegate (SqlParameterCollection paramCollection)
+                {
+                    paramCollection.AddWithValue("@Id", id);
+                }, map: delegate (IDataReader reader, short set)
+                {
+                    item = MapGynCategory(reader);
+                });
+
+            return item;
+        }
+
+        public static List<GynCategories> GetGynCategoryList()
+        {
+            List<GynCategories> list = null;
+
+            DataProvider.ExecuteCmd(GetConnection, "dbo.GynCategories_SelectAll",
+                inputParamMapper: null,
+                map: delegate (IDataReader reader, short set)
+                {
+                    GynCategories item = MapGynCategory(reader);
+                    if (list == null)
+                    {
+                        list = new List<GynCategories>();
+                    }
+
+                    list.Add(item);
+                });
+
+            return list;
+        }
+
+        private static GynCategories MapGynCategory(IDataReader reader)
+        {
+            GynCategories item = new GynCategories();
+            int startingIndex = 0;
+
+            item.Id = reader.GetSafeInt32(startingIndex++);
+            item.Category = reader.GetSafeString(startingIndex++);
+
+            return item;
+        }
     }
 }

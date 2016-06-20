@@ -19,15 +19,15 @@
                                placeholder=""
                                style="width: 150px;"
                                id="patientId"
-                               name="patientId"
-                               ng-model="gyn.newData.patientId"
-                               class="form-control ng-class:{'has-error': gyn.gynForm.patientId.$touched && !gyn.gynForm.patientId.$valid}"
+                               name="PatientID"
+                               ng-model="gyn.newData.PatientID"
+                               class="form-control ng-class:{'has-error': gyn.gynForm.PatientId.$touched && !gyn.gynForm.PatientId.$valid}"
                                ng-minlength="5"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.patientId.$error.required">Please enter patient ID</span>
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.patientId.$error.minlength">Patient ID is required to be at least 5 characters</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.PatientId.$error.required">Please enter patient ID</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.PatientId.$error.minlength">Patient ID is required to be at least 5 characters</span>
                         </div>
                     </div>
                 </div>
@@ -40,15 +40,15 @@
                                placeholder=""
                                style="width: 75px;"
                                id="age"
-                               name="age"
-                               ng-model="gyn.newData.age"
-                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.age.$valid}"
+                               name="Age"
+                               ng-model="gyn.newData.Age"
+                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.Age.$valid}"
                                min="13" max="89"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.age.$error.required">Please enter patient's age</span>
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.age.$error.min || gyn.gynForm.age.$error.max">Not a valid age</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Age.$error.required">Please enter patient's age</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Age.$error.min || gyn.gynForm.Age.$error.max">Not a valid age</span>
                         </div>
                     </div>
                 </div>
@@ -61,15 +61,15 @@
                                placeholder=""
                                style="width: 75px;"
                                id="gravity"
-                               name="gravity"
-                               ng-model="gyn.newData.gravity"
-                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.gravity.$valid}"
+                               name="Gravity"
+                               ng-model="gyn.newData.Gravity"
+                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.Gravity.$valid}"
                                min="1"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.gravity.$error.required">Please enter gravity</span>
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.gravity.$error.min">Patient must have at least 1 pregnancy</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Gravity.$error.required">Please enter gravity</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Gravity.$error.min">Patient must have at least 1 pregnancy</span>
                         </div>
                     </div>
                 </div>
@@ -82,14 +82,14 @@
                                placeholder=""
                                style="width: 75px;"
                                id="parity"
-                               name="parity"
-                               ng-model="gyn.newData.parity"
-                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.parity.$valid}"
+                               name="Parity"
+                               ng-model="gyn.newData.Parity"
+                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.Parity.$valid}"
                                min="0"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.parity.$error.required">Enter valid # of term deliveries</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Parity.$error.required">Enter valid # of term deliveries</span>
                         </div>
 
                     </div>
@@ -97,47 +97,27 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-6">
-                    Complications
-                        <select class="form-control" id="complications" name="complications" ng-model="gyn.newData.complications" required form-autofill-fix>
-                            <option value=""></option>
-                            <option value="Abdominal hysterectomy, any type">Abdominal hysterectomy, any type (e.g. total, subtotal, laparoscopic, robotic)</option>
-                            <option value="Laparotomy">Laparotomy</option>
-                            <option value="Vaginal hysterectomy">Vaginal hysterectomy (including laparoscopically assisted)</option>
-                            <option value="Diagnostic laparoscopy">Diagnostic laparoscopy</option>
-                            <option value="Operative laparoscopy">Operative laparoscopy (other than tubal sterilization and hysterectomy)</option>
-                            <option value="Operative hysteroscopy">Operative hysteroscopy</option>
-                            <option value="Uterine myomas">Uterine myomas</option>
-                            <option value="Repair of pelvic floor defects; prolapse">Repair of pelvic floor defects; prolapse</option>
-                            <option value="Endometriosis and adenomyosis: surgical management">Endometriosis and adenomyosis: surgical management</option>
-                            <option value="Tubal sterilization">Tubal sterilization</option>
-                            <option value="Invasive carcinoma">Invasive carcinoma</option>
-                            <option value="Urinary and fecal incontinence: operative management">Urinary and fecal incontinence: operative management</option>
-                            <option value="Ectopic pregnancy: surgical management">Ectopic pregnancy: surgical management</option>
-                            <option value="Operative management of pelvic pain">Operative management of pelvic pain</option>
-                            <option value="Congenital abnormalities of the reproductive tract">Congenital abnormalities of the reproductive tract</option>
-                            <option value="Pelvic inflammatory disease">Pelvic inflammatory disease</option>
-                            <option value="Adnexal problems">Adnexal problems (excluding ectopic pregnancy and PID)</option>
-                            <option value="Abnormal uterine bleeding">Abnormal uterine bleeding</option>
-                            <option value="Surgical management of VIN, CIN and VAIN">Surgical management of VIN, CIN and VAIN</option>
-                            <option value="Postoperative complications">Postoperative complications (hemorrhage, wound, urinary tract, GI, Pain, thrombiotic, embolic, neurologic, fever, etc.)</option>
-                            <option value="Management of rectovaginal or urinary tract fistula">Management of rectovaginal or urinary tract fistula</option>
-                            <option value="Preoperative evaluation of coexisting conditions">Preoperative evaluation of coexisting conditions (respiratory, cardiac, metabolic diseases)</option>
-                            <option value="Gestational trophoblastic disease">Gestational trophoblastic disease</option>
-                            <option value="Incomplete, septic, complete and other abortion">Incomplete, septic, complete and other abortion</option>
-                            <option value="Intraoperative complications">Intraoperative complications (e.g. blood loss, hemorrhage, bowel injury, urinary tract injury)</option>
-                            <option value="D&amp;C">D&amp;C</option>
-                            <option value="Emergency care">Emergency care</option>
-                            <option value="Uncategorized">Uncategorized (cases in this category do not count toward the required 20 cases)</option>
-                        </select>
+                    Admission
+                    <div class="input-group">
+                        <input type="text"
+                               placeholder=""
+                               id="admission"
+                               name="Admission"
+                               ng-model="gyn.newData.Admission"
+                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.Admission.$valid}"
+                               ng-minlength="5"
+                               required
+                               form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.complications.$error.required">Please enter category</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Admission.$error.required">Please enter admission</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Admission.$error.minlength">Please enter at least 5 characters</span>
                         </div>
-
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-xs-6">
-                    Operative Procedures And/Or Treatment
+                    Treatment
                     <div class="input-group">
                         <input type="text"
                                placeholder=""
@@ -157,14 +137,49 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-6">
+                    Surgical Pathology
+                    <div class="input-group">
+                        <input type="text"
+                               placeholder=""
+                               id="surgicalPath"
+                               name="SurgicalPath"
+                               ng-model="gyn.newData.SurgicalPath"
+                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.SurgicalPath.$valid}"
+                               ng-minlength="5"
+                               required
+                               form-autofill-fix>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.SurgicalPath.$error.required">Please enter pathology</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.SurgicalPath.$error.minlength">Please enter at least 5 characters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <div class="input-group ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.hospitalId.$valid}">
+                        Complications
+                        <select class="form-control" id="complications" name="ComplicationsID" ng-model="gyn.newData.ComplicationsID" required form-autofill-fix>
+                            <option value=""></option>
+                            <option ng-repeat="category in gyn.categories" name="category" value="{{category.Id}}">{{category.Name}}</option>
+                        </select>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.ComplicationsID.$error.required">Please enter category</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-xs-6">
                     <div class="input-group ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.hospitalId.$valid}">
                         Hospital<br>
-                        <select ui-select2 class="form-control" id="hospital" name="hospitalId" data-placeholder="Pick a hospital" ng-model="gyn.newData.hospitalId" required form-autofill-fix>
+                        <select ui-select2 class="form-control" id="hospital" name="HospitalId" data-placeholder="Pick a hospital" ng-model="gyn.newData.HospitalId" required form-autofill-fix>
                             <option value=""></option>
                             <option ng-repeat="hospital in gyn.hospitals" name="hospital" value="{{hospital.Id}}">{{hospital.Name}}</option>
                         </select>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.hospitalId.$error.required">Please enter hospital</span>
+                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.HospitalId.$error.required">Please enter hospital</span>
                         </div>
                     </div>
 
@@ -195,8 +210,191 @@
                     <button type="submit" id="cmdSubmit" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Submit Case</button>
                 </div>
             </div>
-
         </form>
     </div>
-
 </div>
+
+@section Scripts{
+
+    <script src="~/Scripts/sabio.services.obstetrics.js"></script>
+    <script src="~/Scripts/sabio.services.hospitals.js"></script>
+    <script src="~/Scripts/sabio.services.categories.js"></script>
+    <script type="text/javascript">
+
+        sabio.page.startUp = function () {
+            sabio.page.userController = sabio.ng.getControllerInstance($("#obstetricsCtrl"));
+        }
+
+        sabio.services.obstetricsFactory = function ($baseService) {
+            var aSabioServiceObject = sabio.services.obstetrics;
+            var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
+            return newService;
+        }
+
+        sabio.services.hospitalsFactory = function ($baseService) {
+            var aSabioServiceObject = sabio.services.hospitals;
+            var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
+            return newService;
+        }
+        sabio.services.categoriesFactory = function ($baseService) {
+            var aSabioServiceObject = sabio.services.categories;
+            var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
+            return newService;
+        }
+
+        sabio.ng.addService(sabio.ng.app.module,
+            "$obstetricsService",
+            ["$baseService"],
+            sabio.services.obstetricsFactory);
+
+        sabio.ng.addService(sabio.ng.app.module,
+            "$hospitalsService",
+            ["$baseService"],
+            sabio.services.hospitalsFactory);
+
+        sabio.ng.addService(sabio.ng.app.module,
+            "$categoriesService",
+            ["$baseService"],
+            sabio.services.categoriesFactory);
+
+        sabio.page.obstetricsControllerFactory = function ($scope, $baseController, $obstetricsService, $hospitalsService, $categoriesService) {
+
+            var vm = this;
+
+            $baseController.merge(vm, $baseController);
+
+            vm.$obstetricsService = $obstetricsService;
+            vm.$hospitalsService = $hospitalsService;
+            vm.$categoriesService = $categoriesService;
+            vm.$scope = $scope;
+
+            vm.onSubmitForm = _onSubmitForm;
+            vm.getForm = _getForm;
+
+            vm.onCreateSuccess = _onCreateSuccess;
+            vm.onUpdateSuccess = _onUpdateSuccess;
+            vm.onGetSuccess = _onGetSuccess;
+            vm.onGetHospitalSuccess = _onGetHospitalSuccess;
+            vm.onCategoriesSuccess = _onCategoriesSuccess;
+            vm.onError = _onError;
+
+            vm.caseData = null;
+            vm.showFormErrors = false;
+            vm.hospitals = null;
+            vm.alert = {
+                saved: "Case saved!",
+                updated: "Case updated!",
+                error: "An error has occurred!"
+            };
+
+            vm.notify = vm.$obstetricsService.getNotifier($scope);
+
+            render();
+
+            function render() {
+                vm.showFormErrors = false;
+                vm.$hospitalsService.getHospitalList(vm.onGetHospitalSuccess, vm.onError);
+                vm.$categoriesService.getObCategoryList(vm.onCategoriesSuccess, vm.onError);
+                vm.getForm();
+            };
+
+            function _onSubmitForm() {
+                console.log("validating");
+                vm.showFormErrors = true;
+
+                if (vm.obForm.$valid) {
+                    console.log("form is valid");
+                    console.log(vm.caseData);
+                    var caseId = @Model.Item;
+                    if (caseId > 0) {
+                        vm.$obstetricsService.updateObCase(caseId, vm.caseData, vm.onUpdateSuccess, vm.onError);
+                    } else {
+                        vm.$obstetricsService.createObCase(vm.caseData, vm.onCreateSuccess, vm.onError);
+                        $("#cmdSubmit").html("Update Case");
+                    }
+                } else {
+                    console.log("form is not valid");
+                }
+            }
+
+            function _getForm() {
+                var caseId = @Model.Item;
+                vm.$obstetricsService.getObCase(caseId, vm.onGetSuccess, vm.onError);
+            }
+
+            function _onGetSuccess(data) {
+
+                if (data && data.Item) {
+                    vm.notify(function () {
+                        vm.caseData = data.Item;
+                    });
+                    $("#hospital").val(data.Item.Hospital.Id).trigger('change');
+                    $("#antepartum").val(data.Item.Antepartum.Id).trigger('change');
+                    $("#postpartum").val(data.Item.Postpartum.Id).trigger('change');
+                    $("#cmdSubmit").html("Update Case");
+                    console.log(vm.caseData);
+                }
+            }
+
+            function _onGetHospitalSuccess(data) {
+                vm.notify(function () {
+                    vm.hospitals = data.Items;
+                    console.log('HOSPITALS: ', vm.hospitals);
+                });
+            }
+
+            function _onCategoriesSuccess(data){
+                vm.notify(function () {
+                    vm.categories = data.Items;
+                    console.log('CATEGORIES: ', vm.categories);
+                });
+            }
+
+            function _onCreateSuccess(data, status, xhr) {
+                console.log(vm.alert.saved);
+                window.alert(vm.alert.saved);
+                location.href = 'http://canore.dev/obcases';
+            }
+
+            function _onUpdateSuccess(data, status, xhr) {
+                console.log(vm.alert.updated);
+                window.alert(vm.alert.updated);
+                location.href = 'http://canore.dev/obcases';
+            }
+
+
+            function _onError(jqXHR, textStatus, errorThrown) {
+                console.log(vm.alert.error);
+                window.alert(vm.alert.error);
+            }
+
+            sabio.ng.app.module.directive('formAutofillFix', function () {
+                return function (scope, elem, attrs) {
+                    // Fixes Chrome bug: https://groups.google.com/forum/#!topic/angular/6NlucSskQjY
+                    elem.prop('method', 'POST');
+
+                    // Fix autofill issues where Angular doesn't know about autofilled inputs
+                    if (attrs.ngSubmit) {
+                        setTimeout(function () {
+                            elem.unbind('submit').submit(function (e) {
+                                e.preventDefault();
+                                elem.find('input, textarea, select').trigger('input').trigger('change').trigger('keydown');
+                                scope.$apply(attrs.ngSubmit);
+                            });
+                        }, 0);
+                    }
+                };
+            });
+        }
+
+        sabio.ng.addController(sabio.ng.app.module,
+            "obstetricsController",
+            ['$scope', '$baseController', "$obstetricsService", "$hospitalsService", "$categoriesService"],
+            sabio.page.obstetricsControllerFactory);
+
+
+    </script>
+
+}
+
+

@@ -12,7 +12,7 @@ using System.Web;
 
 namespace Canore.Web.Services
 {
-    public class ObstetricalCasesService : BaseService/*, IObstetricalCasesService*/
+    public class ObCasesService : BaseService/*, IObstetricalCasesService*/
     {
         public static int Get()
         {
@@ -40,8 +40,8 @@ namespace Canore.Web.Services
                     InsertObCase.AddWithValue("@HospitalID", model.HospitalID);
                     InsertObCase.AddWithValue("@DaysInHospital", model.DaysInHospital);
 
-                    SqlParameter param = new SqlParameter("@Id", System.Data.SqlDbType.Int);
-                    param.Direction = System.Data.ParameterDirection.Output;
+                    SqlParameter param = new SqlParameter("@Id", SqlDbType.Int);
+                    param.Direction = ParameterDirection.Output;
 
                     InsertObCase.Add(param);
                 },
@@ -78,9 +78,9 @@ namespace Canore.Web.Services
                 });
         }
 
-        public static ObstetricalCases GetObCase(int id)
+        public static ObCases GetObCase(int id)
         {
-            ObstetricalCases item = null;
+            ObCases item = null;
 
             DataProvider.ExecuteCmd(GetConnection, "dbo.ObstetricalCases_SelectById",
                 inputParamMapper: delegate(SqlParameterCollection paramCollection)
@@ -94,18 +94,18 @@ namespace Canore.Web.Services
             return item;
         }
 
-        public static List<ObstetricalCases> GetObCaseList()
+        public static List<ObCases> GetObCaseList()
         {
-            List<ObstetricalCases> list = null;
+            List<ObCases> list = null;
 
             DataProvider.ExecuteCmd(GetConnection, "dbo.ObstetricalCases_SelectAll",
                 inputParamMapper: null,
                 map: delegate (IDataReader reader, short set)
                 {
-                    ObstetricalCases item = MapObCase(reader);
+                    ObCases item = MapObCase(reader);
                     if (list == null)
                     {
-                        list = new List<ObstetricalCases>();
+                        list = new List<ObCases>();
                     }
 
                     list.Add(item);
@@ -123,9 +123,9 @@ namespace Canore.Web.Services
                 });
         }
 
-        private static ObstetricalCases MapObCase(IDataReader reader)
+        private static ObCases MapObCase(IDataReader reader)
         {
-            ObstetricalCases item = new ObstetricalCases();
+            ObCases item = new ObCases();
             Hospitals hosp = new Hospitals();
             ObCategories ante = new ObCategories();
             ObCategories post = new ObCategories();

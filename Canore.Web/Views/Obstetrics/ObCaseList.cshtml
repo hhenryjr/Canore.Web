@@ -83,11 +83,13 @@
             vm.$obstetricsService = $obstetricsService;
             vm.$scope = $scope;
 
+            //PUBLIC HANDLERS
             vm.onGetListSuccess = _onGetListSuccess;
             vm.onDeleteObCase = _onDeleteObCase;
             vm.onDeleteSuccess = _onDeleteSuccess;
             vm.onError = _onError;
 
+            //PUBLIC MEMBERS
             vm.obCases = null;
             vm.deletedObCase = null;
 

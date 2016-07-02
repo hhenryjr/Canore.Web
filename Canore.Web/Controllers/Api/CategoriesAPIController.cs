@@ -13,7 +13,7 @@ namespace Canore.Web.Controllers.Api
     [RoutePrefix("api/Categories")]
     public class CategoriesAPIController : ApiController
     {
-        //OBSTETRICAL
+        //OBSTETRICAL///////////////////////////////////////////////////////
         [Route("ObCategory/{id:int}"), HttpGet]
         public HttpResponseMessage GetObCategory(int id)
         {
@@ -35,7 +35,7 @@ namespace Canore.Web.Controllers.Api
             return Request.CreateResponse(response);
         }
 
-        //GYNECOLOGICAL
+        //GYNECOLOGICAL///////////////////////////////////////////////////////
         [Route("GynCategory/{id:int}"), HttpGet]
         public HttpResponseMessage GetGynCategory(int id)
         {
@@ -54,6 +54,28 @@ namespace Canore.Web.Controllers.Api
 
             ItemsResponse<GynCategories> response = new ItemsResponse<GynCategories>();
             response.Items = CategoriesService.GetGynCategoryList();
+            return Request.CreateResponse(response);
+        }
+
+        //OFFICE PRACTICE///////////////////////////////////////////////////////
+        [Route("OfficeCategory/{id:int}"), HttpGet]
+        public HttpResponseMessage GetOfficeCategory(int id)
+        {
+            ItemResponse<OfficeCategories> response = new ItemResponse<OfficeCategories>();
+            response.Item = CategoriesService.GetOfficeCategory(id);
+            return Request.CreateResponse(response);
+        }
+
+        [Route("OfficeCategories"), HttpGet]
+        public HttpResponseMessage GetOfficeCategoryList()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+            }
+
+            ItemsResponse<OfficeCategories> response = new ItemsResponse<OfficeCategories>();
+            response.Items = CategoriesService.GetOfficeCategoryList();
             return Request.CreateResponse(response);
         }
     }

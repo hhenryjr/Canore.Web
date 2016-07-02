@@ -16,7 +16,7 @@ namespace Canore.Web.Services
             return 0;
         }
 
-        //OBSTETRICAL
+        //OBSTETRICAL///////////////////////////////////////////////////////////////
         public static ObCategories GetObCategory(int id)
         {
             ObCategories item = null;
@@ -64,7 +64,7 @@ namespace Canore.Web.Services
             return item;
         }
 
-        //GYNECOLOGICAL
+        //GYNECOLOGICAL///////////////////////////////////////////////////////////////
         public static GynCategories GetGynCategory(int id)
         {
             GynCategories item = null;
@@ -104,6 +104,54 @@ namespace Canore.Web.Services
         private static GynCategories MapGynCategory(IDataReader reader)
         {
             GynCategories item = new GynCategories();
+            int startingIndex = 0;
+
+            item.Id = reader.GetSafeInt32(startingIndex++);
+            item.Category = reader.GetSafeString(startingIndex++);
+
+            return item;
+        }
+
+        //OFFICE PRACTICE///////////////////////////////////////////////////////////////
+        public static OfficeCategories GetOfficeCategory(int id)
+        {
+            OfficeCategories item = null;
+
+            DataProvider.ExecuteCmd(GetConnection, "dbo.OfficeCategories_SelectById",
+                inputParamMapper: delegate (SqlParameterCollection paramCollection)
+                {
+                    paramCollection.AddWithValue("@Id", id);
+                }, map: delegate (IDataReader reader, short set)
+                {
+                    item = MapOfficeCategory(reader);
+                });
+
+            return item;
+        }
+
+        public static List<OfficeCategories> GetOfficeCategoryList()
+        {
+            List<OfficeCategories> list = null;
+
+            DataProvider.ExecuteCmd(GetConnection, "dbo.OfficeCategories_SelectAll",
+                inputParamMapper: null,
+                map: delegate (IDataReader reader, short set)
+                {
+                    OfficeCategories item = MapOfficeCategory(reader);
+                    if (list == null)
+                    {
+                        list = new List<OfficeCategories>();
+                    }
+
+                    list.Add(item);
+                });
+
+            return list;
+        }
+
+        private static OfficeCategories MapOfficeCategory(IDataReader reader)
+        {
+            OfficeCategories item = new OfficeCategories();
             int startingIndex = 0;
 
             item.Id = reader.GetSafeInt32(startingIndex++);

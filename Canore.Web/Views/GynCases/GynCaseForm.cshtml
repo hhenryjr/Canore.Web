@@ -10,7 +10,7 @@
 <div data-ng-controller="gynController as gyn" id="gynCtrl">
     <div id="formContainer" class="block push-bit form-horizontal form-bordered form-control-borderless">
         <form class="form-horizontal form-bordered form-control-borderless" id="gynForm" name="gyn.gynForm" ng-submit="gyn.onSubmitForm()" novalidate>
-            <input type="text" class="hidden" id="caseId" name="Id" ng-model="gyn.newData.Id" value="@Model.Item" form-autofill-fix>
+            <input type="text" class="hidden" id="caseId" name="Id" ng-model="gyn.caseData.Id" value="@Model.Item" form-autofill-fix>
             <div class="form-group">
                 <div class="col-xs-6">
                     Patient ID
@@ -20,7 +20,7 @@
                                style="width: 150px;"
                                id="patientId"
                                name="PatientID"
-                               ng-model="gyn.newData.PatientID"
+                               ng-model="gyn.caseData.PatientID"
                                class="form-control ng-class:{'has-error': gyn.gynForm.PatientId.$touched && !gyn.gynForm.PatientId.$valid}"
                                ng-minlength="5"
                                required
@@ -41,7 +41,7 @@
                                style="width: 75px;"
                                id="age"
                                name="Age"
-                               ng-model="gyn.newData.Age"
+                               ng-model="gyn.caseData.Age"
                                class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.Age.$valid}"
                                min="13" max="89"
                                required
@@ -62,7 +62,7 @@
                                style="width: 75px;"
                                id="gravity"
                                name="Gravity"
-                               ng-model="gyn.newData.Gravity"
+                               ng-model="gyn.caseData.Gravity"
                                class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.Gravity.$valid}"
                                min="1"
                                required
@@ -83,7 +83,7 @@
                                style="width: 75px;"
                                id="parity"
                                name="Parity"
-                               ng-model="gyn.newData.Parity"
+                               ng-model="gyn.caseData.Parity"
                                class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.Parity.$valid}"
                                min="0"
                                required
@@ -103,7 +103,7 @@
                                placeholder=""
                                id="admission"
                                name="Admission"
-                               ng-model="gyn.newData.Admission"
+                               ng-model="gyn.caseData.Admission"
                                class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.Admission.$valid}"
                                ng-minlength="5"
                                required
@@ -123,7 +123,7 @@
                                placeholder=""
                                id="treatment"
                                name="treatment"
-                               ng-model="gyn.newData.treatment"
+                               ng-model="gyn.caseData.Treatment"
                                class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.treatment.$valid}"
                                ng-minlength="5"
                                required
@@ -143,7 +143,7 @@
                                placeholder=""
                                id="surgicalPath"
                                name="SurgicalPath"
-                               ng-model="gyn.newData.SurgicalPath"
+                               ng-model="gyn.caseData.SurgicalPath"
                                class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.SurgicalPath.$valid}"
                                ng-minlength="5"
                                required
@@ -158,10 +158,10 @@
             <div class="form-group">
                 <div class="col-xs-6">
                     <div class="input-group ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.hospitalId.$valid}">
-                        Complications
-                        <select class="form-control" id="complications" name="ComplicationsID" ng-model="gyn.newData.ComplicationsID" required form-autofill-fix>
+                        Complications<br>
+                        <select class="form-control" id="complications" name="ComplicationsID" ng-model="gyn.caseData.ComplicationsID" required form-autofill-fix>
                             <option value=""></option>
-                            <option ng-repeat="category in gyn.categories" name="category" value="{{category.Id}}">{{category.Name}}</option>
+                            <option ng-repeat="category in gyn.categories" name="category" value="{{category.Id}}">{{category.Category}}</option>
                         </select>
                         <div role="alert" class="help-inline error" style="color:red">
                             <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.ComplicationsID.$error.required">Please enter category</span>
@@ -174,7 +174,7 @@
                 <div class="col-xs-6">
                     <div class="input-group ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.hospitalId.$valid}">
                         Hospital<br>
-                        <select ui-select2 class="form-control" id="hospital" name="HospitalId" data-placeholder="Pick a hospital" ng-model="gyn.newData.HospitalId" required form-autofill-fix>
+                        <select ui-select2 class="form-control" id="hospital" name="HospitalId" data-placeholder="Pick a hospital" ng-model="gyn.caseData.HospitalId" required form-autofill-fix>
                             <option value=""></option>
                             <option ng-repeat="hospital in gyn.hospitals" name="hospital" value="{{hospital.Id}}">{{hospital.Name}}</option>
                         </select>
@@ -193,7 +193,7 @@
                                style="width: 80px;"
                                id="daysInHospital"
                                name="daysInHospital"
-                               ng-model="gyn.newData.daysInHospital"
+                               ng-model="gyn.caseData.DaysInHospital"
                                class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.daysInHospital.$valid}"
                                min="0"
                                required
@@ -216,17 +216,17 @@
 
 @section Scripts{
 
-    <script src="~/Scripts/sabio.services.obstetrics.js"></script>
+    <script src="~/Scripts/sabio.services.gyn.js"></script>
     <script src="~/Scripts/sabio.services.hospitals.js"></script>
     <script src="~/Scripts/sabio.services.categories.js"></script>
     <script type="text/javascript">
 
         sabio.page.startUp = function () {
-            sabio.page.userController = sabio.ng.getControllerInstance($("#obstetricsCtrl"));
+            sabio.page.userController = sabio.ng.getControllerInstance($("#gynCtrl"));
         }
 
-        sabio.services.obstetricsFactory = function ($baseService) {
-            var aSabioServiceObject = sabio.services.obstetrics;
+        sabio.services.gynFactory = function ($baseService) {
+            var aSabioServiceObject = sabio.services.gyn;
             var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
             return newService;
         }
@@ -243,9 +243,9 @@
         }
 
         sabio.ng.addService(sabio.ng.app.module,
-            "$obstetricsService",
+            "$gynService",
             ["$baseService"],
-            sabio.services.obstetricsFactory);
+            sabio.services.gynFactory);
 
         sabio.ng.addService(sabio.ng.app.module,
             "$hospitalsService",
@@ -257,13 +257,13 @@
             ["$baseService"],
             sabio.services.categoriesFactory);
 
-        sabio.page.obstetricsControllerFactory = function ($scope, $baseController, $obstetricsService, $hospitalsService, $categoriesService) {
+        sabio.page.gynControllerFactory = function ($scope, $baseController, $gynService, $hospitalsService, $categoriesService) {
 
             var vm = this;
 
             $baseController.merge(vm, $baseController);
 
-            vm.$obstetricsService = $obstetricsService;
+            vm.$gynService = $gynService;
             vm.$hospitalsService = $hospitalsService;
             vm.$categoriesService = $categoriesService;
             vm.$scope = $scope;
@@ -287,14 +287,14 @@
                 error: "An error has occurred!"
             };
 
-            vm.notify = vm.$obstetricsService.getNotifier($scope);
+            vm.notify = vm.$gynService.getNotifier($scope);
 
             render();
 
             function render() {
                 vm.showFormErrors = false;
                 vm.$hospitalsService.getHospitalList(vm.onGetHospitalSuccess, vm.onError);
-                vm.$categoriesService.getObCategoryList(vm.onCategoriesSuccess, vm.onError);
+                vm.$categoriesService.getGynCategoryList(vm.onCategoriesSuccess, vm.onError);
                 vm.getForm();
             };
 
@@ -302,14 +302,14 @@
                 console.log("validating");
                 vm.showFormErrors = true;
 
-                if (vm.obForm.$valid) {
+                if (vm.gynForm.$valid) {
                     console.log("form is valid");
                     console.log(vm.caseData);
                     var caseId = @Model.Item;
                     if (caseId > 0) {
-                        vm.$obstetricsService.updateObCase(caseId, vm.caseData, vm.onUpdateSuccess, vm.onError);
+                        vm.$gynService.updateGynCase(caseId, vm.caseData, vm.onUpdateSuccess, vm.onError);
                     } else {
-                        vm.$obstetricsService.createObCase(vm.caseData, vm.onCreateSuccess, vm.onError);
+                        vm.$gynService.createGynCase(vm.caseData, vm.onCreateSuccess, vm.onError);
                         $("#cmdSubmit").html("Update Case");
                     }
                 } else {
@@ -318,8 +318,7 @@
             }
 
             function _getForm() {
-                var caseId = @Model.Item;
-                vm.$obstetricsService.getObCase(caseId, vm.onGetSuccess, vm.onError);
+                vm.$gynService.getGynCase(@Model.Item, vm.onGetSuccess, vm.onError);
             }
 
             function _onGetSuccess(data) {
@@ -329,8 +328,7 @@
                         vm.caseData = data.Item;
                     });
                     $("#hospital").val(data.Item.Hospital.Id).trigger('change');
-                    $("#antepartum").val(data.Item.Antepartum.Id).trigger('change');
-                    $("#postpartum").val(data.Item.Postpartum.Id).trigger('change');
+                    $("#complications").val(data.Item.Complication.Id).trigger('change');
                     $("#cmdSubmit").html("Update Case");
                     console.log(vm.caseData);
                 }
@@ -353,13 +351,13 @@
             function _onCreateSuccess(data, status, xhr) {
                 console.log(vm.alert.saved);
                 window.alert(vm.alert.saved);
-                location.href = 'http://canore.dev/obcases';
+                location.href = 'http://canore.dev/gyncases';
             }
 
             function _onUpdateSuccess(data, status, xhr) {
                 console.log(vm.alert.updated);
                 window.alert(vm.alert.updated);
-                location.href = 'http://canore.dev/obcases';
+                location.href = 'http://canore.dev/gyncases';
             }
 
 
@@ -388,9 +386,9 @@
         }
 
         sabio.ng.addController(sabio.ng.app.module,
-            "obstetricsController",
-            ['$scope', '$baseController', "$obstetricsService", "$hospitalsService", "$categoriesService"],
-            sabio.page.obstetricsControllerFactory);
+            "gynController",
+            ['$scope', '$baseController', "$gynService", "$hospitalsService", "$categoriesService"],
+            sabio.page.gynControllerFactory);
 
 
     </script>

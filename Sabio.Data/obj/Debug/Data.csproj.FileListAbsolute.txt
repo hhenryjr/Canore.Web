@@ -15,3 +15,4 @@ C:\SF Code\Canore.Web\Sabio.Data\bin\Debug\Antlr3.Runtime.dll
 C:\SF Code\Canore.Web\Sabio.Data\bin\Debug\SendGrid.SmtpApi.dll
 C:\SF Code\Canore.Web\Sabio.Data\bin\Debug\SendGridMail.dll
 C:\SF Code\Canore.Web\Sabio.Data\bin\Debug\Antlr3.Runtime.pdb
+C:\SF Code\Canore.Web\Sabio.Data\obj\Debug\Data.csprojResolveAssemblyReference.cache

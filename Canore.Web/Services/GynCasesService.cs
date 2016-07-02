@@ -1,5 +1,6 @@
 ﻿using Canore.Web.Domain;
 using Canore.Web.Models.Requests.GynCases;
+using Sabio.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -62,7 +63,6 @@ namespace Canore.Web.Services
                     UpdateGynCase.AddWithValue("@Parity", model.Parity);
                     UpdateGynCase.AddWithValue("@Admission", model.Admission);
                     UpdateGynCase.AddWithValue("@Treatment", model.Treatment);
-                    UpdateGynCase.AddWithValue("@Treatment", model.Treatment);
                     UpdateGynCase.AddWithValue("@SurgicalPath", model.SurgicalPath);
                     UpdateGynCase.AddWithValue("@ComplicationsID", model.ComplicationsID);
                     UpdateGynCase.AddWithValue("@HospitalID", model.HospitalID);
@@ -119,28 +119,28 @@ namespace Canore.Web.Services
         {
             GynCases item = new GynCases();
             Hospitals hosp = new Hospitals();
-            GynCategories comp = new GynCategories();
+            GynCategories cat = new GynCategories();
 
             int startingIndex = 0;
 
-            item.Id = reader.GetInt32(startingIndex++);
-            item.PatientID = reader.GetString(startingIndex++);
-            item.Age = reader.GetInt32(startingIndex++);
-            item.Gravity = reader.GetInt32(startingIndex++);
-            item.Parity = reader.GetInt32(startingIndex++);
-            item.Admission = reader.GetString(startingIndex++);
-            item.Treatment = reader.GetString(startingIndex++);
-            item.SurgicalPath = reader.GetString(startingIndex++);
-            comp.Id = reader.GetInt32(startingIndex++);
-            comp.Category = reader.GetString(startingIndex++);
-            hosp.Id = reader.GetInt32(startingIndex++);
-            hosp.Name = reader.GetString(startingIndex++);
-            item.DaysInHospital = reader.GetInt32(startingIndex++);
-            item.DateAdded = reader.GetDateTime(startingIndex++);
-            item.DateModified = reader.GetDateTime(startingIndex++);
+            item.Id = reader.GetSafeInt32(startingIndex++);
+            item.PatientID = reader.GetSafeString(startingIndex++);
+            item.Age = reader.GetSafeInt32(startingIndex++);
+            item.Gravity = reader.GetSafeInt32(startingIndex++);
+            item.Parity = reader.GetSafeInt32(startingIndex++);
+            item.Admission = reader.GetSafeString(startingIndex++);
+            item.Treatment = reader.GetSafeString(startingIndex++);
+            item.SurgicalPath = reader.GetSafeString(startingIndex++);
+            cat.Id = reader.GetSafeInt32(startingIndex++);
+            cat.Category = reader.GetSafeString(startingIndex++);
+            hosp.Id = reader.GetSafeInt32(startingIndex++);
+            hosp.Name = reader.GetSafeString(startingIndex++);
+            item.DaysInHospital = reader.GetSafeInt32(startingIndex++);
+            item.DateAdded = reader.GetSafeDateTime(startingIndex++);
+            item.DateModified = reader.GetSafeDateTime(startingIndex++);
 
             item.Hospital = hosp;
-            item.Complication = comp;
+            item.Complication = cat;
             return item;
         }
     }

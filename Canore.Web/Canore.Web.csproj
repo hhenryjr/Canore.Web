@@ -182,6 +182,8 @@
     <Compile Include="Controllers\Api\GynCasesAPIController.cs" />
     <Compile Include="Controllers\Api\HospitalsAPIController.cs" />
     <Compile Include="Controllers\Api\ObstetricalCasesApiController.cs" />
+    <Compile Include="Controllers\Api\OfficePracticeCasesAPIController.cs" />
+    <Compile Include="Controllers\GynCasesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HospitalsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -191,6 +193,8 @@
     <Compile Include="Domain\Hospitals.cs" />
     <Compile Include="Domain\ObCategories.cs" />
     <Compile Include="Domain\ObCases.cs" />
+    <Compile Include="Domain\OfficeCategories.cs" />
+    <Compile Include="Domain\OfficePracticeCases.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -203,6 +207,8 @@
     <Compile Include="Models\Requests\GynCases\GynCasesAddRequest.cs" />
     <Compile Include="Models\Requests\ObstetricalCases\ObstetricalCasesAddRequest.cs" />
     <Compile Include="Models\Requests\ObstetricalCases\ObstetricalCasesUpdateRequest.cs" />
+    <Compile Include="Models\Requests\OfficePracticeCases\OfficePracticeCasesAddRequest.cs" />
+    <Compile Include="Models\Requests\OfficePracticeCases\OfficePracticeCasesUpdateRequest.cs" />
     <Compile Include="Models\Responses\BaseResponse.cs" />
     <Compile Include="Models\Responses\ErrorResponse.cs" />
     <Compile Include="Models\Responses\ItemResponse.cs" />
@@ -217,6 +223,7 @@
     <Compile Include="Services\HospitalsService.cs" />
     <Compile Include="Services\Interfaces\IObstetricalCasesService.cs" />
     <Compile Include="Services\ObCasesService.cs" />
+    <Compile Include="Services\OfficePracticeCasesService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -940,6 +947,7 @@
     <Content Include="Scripts\sabio.services.categories.js" />
     <Content Include="Scripts\sabio.services.gyn.js" />
     <Content Include="Scripts\sabio.services.hospitals.js" />
+    <Content Include="Scripts\sabio.services.officePractice.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -995,7 +1003,8 @@
     <Content Include="Views\Obstetrics\ObCaseList.cshtml" />
     <Content Include="Views\Hospitals\HospitalForm.cshtml" />
     <Content Include="Views\Hospitals\HospitalList.cshtml" />
-    <Content Include="Views\Gyn\GynCaseForm.cshtml" />
+    <Content Include="Views\GynCases\GynCaseForm.cshtml" />
+    <Content Include="Views\GynCases\GynCaseList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

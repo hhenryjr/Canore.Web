@@ -1,12 +1,9 @@
-﻿@model Canore.Web.Models.ViewModels.ItemViewModel<int>
-
+﻿﻿@model Canore.Web.Models.ViewModels.ItemViewModel<int>
 @{
     ViewBag.Title = "Obstetrical Patient";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Obstetrical Patient Case</h2>
-
 <div data-ng-controller="obstetricsController as obstetrics" id="obstetricsCtrl">
     <div id="formContainer" class="block push-bit form-horizontal form-bordered form-control-borderless">
         <form class="form-horizontal form-bordered form-control-borderless" id="obForm" name="obstetrics.obForm" ng-submit="obstetrics.onSubmitForm()" novalidate>
@@ -91,7 +88,6 @@
                         <div role="alert" class="help-inline error" style="color:red">
                             <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.Parity.$error.required">Enter valid # of term deliveries</span>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -118,7 +114,6 @@
                             <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.PostpartumID.$error.required">Please enter category</span>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="form-group">
@@ -228,7 +223,6 @@
                             <span class="error" ng-show="obstetrics.showFormErrors && obstetrics.obForm.HospitalId.$error.required">Please enter hospital</span>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="form-group">
@@ -256,14 +250,10 @@
                     <button type="submit" id="cmdSubmit" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Submit Case</button>
                 </div>
             </div>
-
         </form>
     </div>
-
 </div>
-
 @section Scripts{
-
     <script src="~/Scripts/sabio.services.obstetrics.js"></script>
     <script src="~/Scripts/sabio.services.hospitals.js"></script>
     <script src="~/Scripts/sabio.services.categories.js"></script>
@@ -322,7 +312,6 @@
 
             //PUBLIC HANDLERS
             vm.onCreateSuccess = _onCreateSuccess;
-            vm.onUpdateSuccess = _onUpdateSuccess;
             vm.onGetSuccess = _onGetSuccess;
             vm.onGetHospitalSuccess = _onGetHospitalSuccess;
             vm.onCategoriesSuccess = _onCategoriesSuccess;
@@ -358,7 +347,7 @@
                     console.log(vm.caseData);
                     var caseId = @Model.Item;
                     if (caseId > 0) {
-                        vm.$obstetricsService.updateObCase(caseId, vm.caseData, vm.onUpdateSuccess, vm.onError);
+                        vm.$obstetricsService.updateObCase(caseId, vm.caseData, vm.onCreateSuccess, vm.onError);
                     } else {
                         vm.$obstetricsService.createObCase(vm.caseData, vm.onCreateSuccess, vm.onError);
                         $("#cmdSubmit").html("Update Case");
@@ -407,13 +396,6 @@
                 location.href = 'http://canore.dev/obcases';
             }
 
-            function _onUpdateSuccess(data, status, xhr) {
-                console.log(vm.alert.updated);
-                window.alert(vm.alert.updated);
-                location.href = 'http://canore.dev/obcases';
-            }
-
-
             function _onError(jqXHR, textStatus, errorThrown) {
                 console.log(vm.alert.error);
                 window.alert(vm.alert.error);
@@ -445,5 +427,4 @@
 
 
     </script>
-
 }

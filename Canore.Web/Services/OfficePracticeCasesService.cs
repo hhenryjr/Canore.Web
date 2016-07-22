@@ -17,8 +17,7 @@ namespace Canore.Web.Services
             return 0;
         }
 
-        public static int CreateOfficePracticeCase(OfficePracticeCasesAddRequest model
-            )//, string caseId)
+        public static int CreateOfficePracticeCase(OfficePracticeCasesAddRequest model)//, string caseId)
         {
             var id = 0;
 

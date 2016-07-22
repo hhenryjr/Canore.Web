@@ -94,6 +94,28 @@ namespace Canore.Web.Services
             return item;
         }
 
+        public static List<ObCases> GetObCaseByHospital(int hospitalId)
+        {
+            List<ObCases> list = null;
+
+            DataProvider.ExecuteCmd(GetConnection, "dbo.ObstetricalCases_SelectByHospitalID",
+                inputParamMapper: delegate (SqlParameterCollection paramCollection)
+                {
+                    paramCollection.AddWithValue("@HospitalID", hospitalId);
+                }, map: delegate (IDataReader reader, short set)
+                {
+                    ObCases item = MapObCase(reader);
+                    if (list == null)
+                    {
+                        list = new List<ObCases>();
+                    }
+
+                    list.Add(item);
+                });
+
+            return list;
+        }
+
         public static List<ObCases> GetObCaseList()
         {
             List<ObCases> list = null;

@@ -86,6 +86,29 @@ namespace Canore.Web.Services
             return item;
         }
 
+        public static List<GynCases> GetGynCaseByHospital(int hospitalId)
+        {
+            List<GynCases> list = null;
+
+            DataProvider.ExecuteCmd(GetConnection, "dbo.GynCases_SelectByHospitalID",
+                inputParamMapper: delegate (SqlParameterCollection paramCollection)
+                {
+                    paramCollection.AddWithValue("@HospitalID", hospitalId);
+                }, map: delegate (IDataReader reader, short set)
+                {
+                    GynCases item = MapGynCase(reader);
+                    if (list == null)
+                    {
+                        list = new List<GynCases>();
+                    }
+
+                    list.Add(item);
+                    //list = MapGynCase(reader);
+                });
+
+            return list;
+        }
+
         public static List<GynCases> GetGynCaseList()
         {
             List<GynCases> list = null;

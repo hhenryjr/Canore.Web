@@ -5,33 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Hospitals</h2>
+<header class="content">
+    <h2>Hospital Info</h2>
+    <p><a ng-href="http://canore.dev/Hospitals">Back to Hospitals</a></p>
+</header>
 
-<div data-ng-controller="hospitalsController as hospitals" id="hospitalsCtrl">
+
+<div data-ng-controller="hospitalsController as hospital" id="hospitalsCtrl">
     <div id="formContainer" class="block push-bit form-horizontal form-bordered form-control-borderless">
-        <form class="form-horizontal form-bordered form-control-borderless" id="hospForm" name="hospitals.hospForm" ng-submit="hospitals.onSubmitForm()" novalidate>
-            <input type="text" class="hidden" id="hospId" name="Id" ng-model="hospitals.newData.Id" value="@Model.Item" form-autofill-fix>
-            @*<div class="form-group">
-                <div class="col-xs-6">
-                    Hospital ID
-                    <div class="input-group">
-                        <input type="text"
-                               placeholder=""
-                               style="width: 150px;"
-                               id="hospitalId"
-                               name="hospitalId"
-                               ng-model="hospitals.newData.hospitalId"
-                               class="form-control ng-class:{'has-error': hospitals.hospForm.hospitalId.$touched && !hospitals.hospForm.hospitalId.$valid}"
-                               ng-minlength="5"
-                               required
-                               form-autofill-fix>
-                        <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.hospitalId.$error.required">Please enter hospital ID</span>
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.hospitalId.$error.minlength">Hospital ID is required to be at least 5 characters</span>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
+        <form class="form-horizontal form-bordered form-control-borderless" id="hospForm" name="hospital.hospForm" ng-if="hospital.editingForm" ng-submit="hospital.onSubmitForm()" novalidate>
+            <input type="text" class="hidden" id="hospId" name="Id" ng-model="hospital.newData.Id" value="@Model.Item" form-autofill-fix>
             <div class="form-group">
                 <div class="col-xs-6">
                     Name
@@ -41,14 +24,14 @@
                                style="width: 150px;"
                                id="name"
                                name="name"
-                               ng-model="hospitals.newData.name"
-                               class="form-control ng-class:{'has-error': hospitals.hospForm.name.$touched && !hospitals.hospForm.name.$valid}"
+                               ng-model="hospital.newData.Name"
+                               class="form-control ng-class:{'has-error': hospital.hospForm.name.$touched && !hospital.hospForm.name.$valid}"
                                ng-minlength="5"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.name.$error.required">Please enter hospital name</span>
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.name.$error.minlength">Hospital name is required to be at least 5 characters</span>
+                            <span class="error" ng-show="hospital.showFormErrors && hospital.hospForm.name.$error.required">Please enter hospital name</span>
+                            <span class="error" ng-show="hospital.showFormErrors && hospital.hospForm.name.$error.minlength">Hospital name is required to be at least 5 characters</span>
                         </div>
                     </div>
                 </div>
@@ -62,13 +45,13 @@
                                style="width: 150px;"
                                id="abbrev"
                                name="abbrev"
-                               ng-model="hospitals.newData.abbrev"
+                               ng-model="hospital.newData.Abbrev"
                                class="form-control"
                                ng-maxlength="5"
                                form-autofill-fix>
                         @*<div role="alert" class="help-inline error" style="color:red">
-                                <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.abbrev.$error.required">Please enter hospital name</span>
-                                <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.abbrev.$error.maxlength">Patient ID is required to be at least 5 characters</span>
+                                <span class="error" ng-show="hospital.showFormErrors && hospital.hospForm.abbrev.$error.required">Please enter hospital name</span>
+                                <span class="error" ng-show="hospital.showFormErrors && hospital.hospForm.abbrev.$error.maxlength">Patient ID is required to be at least 5 characters</span>
                             </div>*@
                     </div>
                 </div>
@@ -82,14 +65,14 @@
                                style="width: 150px;"
                                id="address"
                                name="address"
-                               ng-model="hospitals.newData.address"
-                               class="form-control ng-class:{'has-error': hospitals.hospForm.address.$touched && !hospitals.hospForm.address.$valid}"
+                               ng-model="hospital.newData.Address"
+                               class="form-control ng-class:{'has-error': hospital.hospForm.address.$touched && !hospital.hospForm.address.$valid}"
                                ng-minlength="5"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.address.$error.required">Please enter hospital address</span>
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.address.$error.minlength">Address is required to be at least 5 characters</span>
+                            <span class="error" ng-show="hospital.showFormErrors && hospital.hospForm.address.$error.required">Please enter hospital address</span>
+                            <span class="error" ng-show="hospital.showFormErrors && hospital.hospForm.address.$error.minlength">Address is required to be at least 5 characters</span>
                         </div>
                     </div>
                 </div>
@@ -103,16 +86,16 @@
                                style="width: 150px;"
                                id="city"
                                name="city"
-                               ng-model="hospitals.newData.city"
-                               class="form-control ng-class:{'has-error': hospitals.hospForm.city.$touched && !hospitals.hospForm.city.$valid}"
+                               ng-model="hospital.newData.City"
+                               class="form-control ng-class:{'has-error': hospital.hospForm.city.$touched && !hospital.hospForm.city.$valid}"
                                ng-minlength="5"
                                ng-maxlength="20"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.city.$error.required">Please enter city</span>
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.city.$error.minlength">Minimum is 5 characters</span>
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.city.$error.maxlength">Maximum is 20 characters</span>
+                            <span class="error" ng-show="hospital.showFormErrors && hospital.hospForm.city.$error.required">Please enter city</span>
+                            <span class="error" ng-show="hospital.showFormErrors && hospital.hospForm.city.$error.minlength">Minimum is 5 characters</span>
+                            <span class="error" ng-show="hospital.showFormErrors && hospital.hospForm.city.$error.maxlength">Maximum is 20 characters</span>
                         </div>
                     </div>
                 </div>
@@ -121,7 +104,7 @@
                 <div class="col-xs-6">
                     State
                     <div class="input-group">
-                        <select class="form-control" id="state" name="state" ng-model="hospitals.newData.state" required form-autofill-fix>
+                        <select class="form-control ng-class:{'has-error': hospital.hospForm.state.$touched && !hospital.hospForm.state.$valid}" id="state" name="state" ng-model="hospital.newData.State" required form-autofill-fix>
                             <option value=""></option>
                             <option value="AL">AL</option>
                             <option value="AK">AK</option>
@@ -176,7 +159,7 @@
                             <option value="WY">WY</option>
                         </select>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.state.$error.required">Please enter state</span>
+                            <span class="error" ng-show="hospital.showFormErrors && hospital.hospForm.state.$error.required">Please enter state</span>
                         </div>
                     </div>
 
@@ -191,25 +174,180 @@
                                style="width: 150px;"
                                id="zipCode"
                                name="zipCode"
-                               ng-model="hospitals.newData.zipCode"
-                               class="form-control ng-class:{'has-error': hospitals.hospForm.zipCode.$touched && !hospitals.hospForm.zipCode.$valid}"
+                               ng-model="hospital.newData.ZipCode"
+                               class="form-control ng-class:{'has-error': hospital.hospForm.zipCode.$touched && !hospital.hospForm.zipCode.$valid}"
                                ng-minlength="5"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.zipCode.$error.required">Please enter zip code</span>
-                            <span class="error" ng-show="hospitals.showFormErrors && hospitals.hospForm.zipCode.$error.minlength">Minimum is 5 characters</span>
+                            <span class="error" ng-show="hospital.showFormErrors && hospital.hospForm.zipCode.$error.required">Please enter zip code</span>
+                            <span class="error" ng-show="hospital.showFormErrors && hospital.hospForm.zipCode.$error.minlength">Minimum is 5 characters</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-xs-6 text-left">
-                    <button type="submit" id="cmdSubmit" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Add Hospital</button>
+                    <button type="submit" id="cmdSubmit" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Save</button>
+                    <button ng-if="!hospital.newData.Id" type="reset" class="btn btn-sm btn-warning"><i class="fa fa-plus"></i> Reset</button>
                 </div>
             </div>
 
         </form>
+
+        <form class="form-horizontal form-bordered form-control-borderless" ng-if="!hospital.editingForm">
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <p><strong>Name:</strong></p>
+                    <div class="input-group">
+                        <p>{{hospital.newData.Name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <p><strong>Abbrev:</strong></p>
+                    <div class="input-group">
+                        <p>{{hospital.newData.Abbrev}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <p><strong>Address:</strong></p>
+                    <div class="input-group">
+                        <p>{{hospital.newData.Address}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <p><strong>City:</strong></p>
+                    <div class="input-group">
+                        <p>{{hospital.newData.City}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <p><strong>State:</strong></p>
+                    <div class="input-group">
+                        <p>{{hospital.newData.State}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <p><strong>Zip Code:</strong></p>
+                    <div class="input-group">
+                        <p>{{hospital.newData.ZipCode}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6 text-left">
+                    <button id="cmdSubmit" class="btn btn-sm btn-primary" ng-click="hospital.onEditForm()"><i class="fa fa-plus"></i> Edit Hospital</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="container">
+            <div class="block" ng-if="hospital.gynCases || hospital.obCases || hospital.deliveries">
+                <div class="content">
+                    <h3>Total Cases: {{hospital.gynCases.length + hospital.obCases.length + hospital.deliveries.length}}</h3>
+                </div>
+            </div>
+
+            <div class="block" ng-if="hospital.obCases">
+                <div class="content">
+                    <h4>Obstetrical Cases: {{hospital.obCases.length}}</h4>
+                </div>
+                <table>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Age</th>
+                        <th>Gravity</th>
+                        <th>Parity</th>
+                        <th>Antepartum</th>
+                        <th>Delivery/Postpartum</th>
+                        <th>Operative Procedures and/or Treatment</th>
+                        <th>Birth Weight</th>
+                        <th>Perinatal Death</th>
+                        <th>APGAR Score (After 1 min)</th>
+                        <th>APGAR Score (After 5 mins)</th>
+                        <th>Hospital</th>
+                        <th>Days In Hospital</th>
+                        <th>Date Added</th>
+                        <th>Date Modified</th>
+                    </tr>
+                    <tr ng-repeat="obCase in hospital.obCases">
+                        <td>{{obCase.PatientID}}</td>
+                        <td>{{obCase.Age}}</td>
+                        <td>{{obCase.Gravity}}</td>
+                        <td>{{obCase.Parity}}</td>
+                        <td>{{obCase.Antepartum.Category}}</td>
+                        <td>{{obCase.Postpartum.Category}}</td>
+                        <td>{{obCase.Treatment}}</td>
+                        <td>{{obCase.BirthWeight}}</td>
+                        <td>{{obCase.Death}}</td>
+                        <td>{{obCase.OneMinScore}}</td>
+                        <td>{{obCase.FiveMinScore}}</td>
+                        <td>{{obCase.Hospital.Name}}</td>
+                        <td>{{obCase.DaysInHospital}}</td>
+                        <td>{{obCase.DateAdded | date: "M/d/yyyy"}}</td>
+                        <td>{{obCase.DateModified | date: "M/d/yyyy"}}</td>
+                        <td><a ng-href="http://canore.dev/obcases/{{obCase.Id}}" title="Edit">Edit</a></td>
+                        <td><a ng-href="javascript:void(0)" title="Delete" ng-click="dashboard.onDeleteObCase(obCase)">Delete</a></td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="block" ng-if="hospital.gynCases">
+                <div class="content">
+                    <h4>Gynecological Cases: {{hospital.gynCases.length}}</h4>
+                </div>
+                <table>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Age</th>
+                        <th>Gravity</th>
+                        <th>Parity</th>
+                        <th>Admission</th>
+                        <th>Treatment</th>
+                        <th>Surgical Pathology</th>
+                        <th>Complications</th>
+                        <th>Hospital</th>
+                        <th>Days In Hospital</th>
+                        <th>Date Added</th>
+                        <th>Date Modified</th>
+                    </tr>
+                    <tr ng-repeat="gynCase in hospital.gynCases">
+                        <td>{{gynCase.PatientID}}</td>
+                        <td>{{gynCase.Age}}</td>
+                        <td>{{gynCase.Gravity}}</td>
+                        <td>{{gynCase.Parity}}</td>
+                        <td>{{gynCase.Admission}}</td>
+                        <td>{{gynCase.Treatment}}</td>
+                        <td>{{gynCase.SurgicalPath}}</td>
+                        <td>{{gynCase.Complication.Category}}</td>
+                        <td>{{gynCase.Hospital.Name}}</td>
+                        <td>{{gynCase.DaysInHospital}}</td>
+                        <td>{{gynCase.DateAdded | date: "M/d/yyyy"}}</td>
+                        <td>{{gynCase.DateModified | date: "M/d/yyyy"}}</td>
+                        <td><a ng-href="http://canore.dev/gyncases/{{gynCase.Id}}" title="Edit">Edit</a></td>
+                        <td><a ng-href="javascript:void(0)" title="Delete" ng-click="dashboard.onDeleteGynCase(gynCase)">Delete</a></td>
+                    </tr>
+
+                </table>
+            </div>
+            <div class="block" ng-if="hospital.deliveries">
+                <div class="content">
+                    <h4>Deliveries: {{hospital.deliveries.length}}</h4>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </div>
@@ -217,6 +355,9 @@
 @section Scripts{
 
     <script src="~/Scripts/sabio.services.hospitals.js"></script>
+    <script src="~/Scripts/sabio.services.gyn.js"></script>
+    <script src="~/Scripts/sabio.services.obstetrics.js"></script>
+    <script src="~/Scripts/sabio.services.uncomplicated.js"></script>
     <script type="text/javascript">
 
         sabio.page.startUp = function () {
@@ -229,30 +370,71 @@
             return newService;
         }
 
+        sabio.services.gynFactory = function ($baseService) {
+            var aSabioServiceObject = sabio.services.gyn;
+            var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
+            return newService;
+        }
+
+        sabio.services.obstetricsFactory = function ($baseService) {
+            var aSabioServiceObject = sabio.services.obstetrics;
+            var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
+            return newService;
+        }
+
+        sabio.services.uncomplicatedFactory = function ($baseService) {
+            var aSabioServiceObject = sabio.services.uncomplicated;
+            var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
+            return newService;
+        }
+
         sabio.ng.addService(sabio.ng.app.module,
             "$hospitalsService",
             ["$baseService"],
             sabio.services.hospitalsFactory);
 
-        sabio.page.hospitalsControllerFactory = function ($scope, $baseController, $hospitalsService) {
+        sabio.ng.addService(sabio.ng.app.module,
+            "$gynService",
+            ["$baseService"],
+            sabio.services.gynFactory);
+
+        sabio.ng.addService(sabio.ng.app.module,
+            "$obstetricsService",
+            ["$baseService"],
+            sabio.services.obstetricsFactory);
+
+        sabio.ng.addService(sabio.ng.app.module,
+            "$uncomplicatedService",
+            ["$baseService"],
+            sabio.services.uncomplicatedFactory);
+
+        sabio.page.hospitalsControllerFactory = function ($scope, $baseController, $hospitalsService, $gynService, $obstetricsService, $uncomplicatedService) {
 
             var vm = this;
 
             $baseController.merge(vm, $baseController);
 
             vm.$hospitalsService = $hospitalsService;
+            vm.$gynService = $gynService;
+            vm.$obstetricsService = $obstetricsService;
+            vm.$uncomplicatedService = $uncomplicatedService;
             vm.$scope = $scope;
 
-            vm.onSubmitForm = _onSubmitForm;
-            vm.onCreateSuccess = _onCreateSuccess;
-            vm.onUpdateSuccess = _onUpdateSuccess;
-            vm.onGetSuccess = _onGetSuccess;
-            vm.onError = _onError;
+            //PUBLIC METHODS///////////////////////
             vm.getForm = _getForm;
-            vm.getId = _getId;
-            vm.addToHiddenId = _addToHiddenId;
-            vm.fillInForm = _fillInForm;
+            vm.onSubmitForm = _onSubmitForm;
+            vm.onEditForm = _onEditForm;
+            vm.onCancelForm = _onCancelForm;
 
+            //PUBLIC HANDLERS//////////////////////
+            vm.onCreateSuccess = _onCreateSuccess;
+            vm.onGetSuccess = _onGetSuccess;
+            vm.onGetGynCaseSuccess = _onGetGynCaseSuccess;
+            vm.onGetObCaseSuccess = _onGetObCaseSuccess;
+            vm.onGetUncompCaseSuccess = _onGetUncompCaseSuccess;
+            vm.onError = _onError;
+
+            //PUBLIC MEMBERS/////////////////////
             vm.newData = null;
             vm.showFormErrors = false;
             vm.alert = {
@@ -265,9 +447,11 @@
 
             render();
 
+            //PRIVATE METHODS////////////////////
             function render() {
                 vm.showFormErrors = false;
-                vm.getForm();
+                if (@Model.Item > 0) vm.getForm();
+                else vm.editingForm = true;
             };
 
             function _onSubmitForm() {
@@ -276,18 +460,12 @@
 
                 if (vm.hospForm.$valid) {
                     console.log("form is valid");
-                    var form = vm.newData;
-                    console.log(form);
-                    var hospId = $("#hospId").val();
-
+                    var hospId = @Model.Item;
                     if (hospId > 0) {
-                        var serForm = $("#hospForm").serialize();         // CURRENT ALTERNATIVE; SEE TRELLO NOTES
-                        console.log(serForm);
-                        vm.$hospitalsService.updateHospital(hospId, form, vm.onUpdateSuccess, vm.onError);
-                        return hospId;
+                        vm.$hospitalsService.updateHospital(hospId, vm.newData, vm.onCreateSuccess, vm.onError);
                     } else {
-                        vm.$hospitalsService.addHospital(form, vm.onCreateSuccess, vm.onError);
-                        $("#cmdSubmit").html("Update Hospital");
+                        vm.$hospitalsService.addHospital(vm.newData, vm.onCreateSuccess, vm.onError);
+                        //$("#cmdSubmit").html("Update Hospital");
                     }
                 } else {
                     console.log("form is not valid");
@@ -295,51 +473,68 @@
             }
 
             function _getForm() {
-                var hospId = $("#hospId").val();
-                vm.$hospitalsService.getHospital(hospId, vm.onGetSuccess, vm.onError);
+                vm.$hospitalsService.getHospital(@Model.Item, vm.onGetSuccess, vm.onError);
+                vm.$gynService.getGynCaseByHospital(@Model.Item, vm.onGetGynCaseSuccess, vm.onError);
+                vm.$obstetricsService.getObCaseByHospital(@Model.Item, vm.onGetObCaseSuccess, vm.onError);
+                vm.$uncomplicatedService.getUncompCaseByHospital(@Model.Item, vm.onGetUncompCaseSuccess, vm.onError);
             }
 
-            function _getId(data) {
-                hospId = data;
+            function _onEditForm(){
+                vm.editingForm = true;
             }
 
-            function _addToHiddenId(data) {
-                console.log("Adding Id");
-                $("#hospId").val(data);
+            function _onCancelForm(){
+                if (vm.newData.Id) vm.editingForm = false;
+                else vm.newData = null;
             }
 
-            function _fillInForm(data) {
-                console.log("Filling in form");
-                $("#hospId").val(data.Id).trigger('change');
-                //$("#hospitalId").val(data.HospitalId).trigger('change');
-                $("#name").val(data.Name).trigger('change');
-                $("#abbrev").val(data.Abbrev).trigger('change');
-                $("#address").val(data.Address).trigger('change');
-                $("#city").val(data.City).trigger('change');
-                $("#state").val(data.State).trigger('change');
-                $("#zipCode").val(data.ZipCode).trigger('change');
+            //PRIVATE HANDLERS////////////////////////
+            function _onCreateSuccess(data) {
+                vm.notify(function(){
+                    if (data && data.Item) {
+                        vm.newData = data.Item;
+                    }
+                    vm.editingForm = false;
+                    console.log(vm.alert.saved);
+                    window.alert(vm.alert.saved);
+                });
             }
 
-            function _onCreateSuccess(data, status, xhr) {
+            function _onGetSuccess(data) {
                 if (data && data.Item) {
-                    vm.addToHiddenId(data.Item);
-                    vm.getId(data.Item);
+                    vm.notify(function () {
+                        vm.newData = data.Item;
+                        console.log("HOSPITAL:", vm.newData);
+                    });
+                    vm.editingForm = false;
+                    //$("#cmdSubmit").html("Update Hospital");
                 }
-                console.log(vm.alert.saved);
-                window.alert(vm.alert.saved);
-                location.href = 'http://canore.dev/Hospitals';
             }
 
-            function _onUpdateSuccess(data, status, xhr) {
-                console.log(vm.alert.updated);
-                window.alert(vm.alert.updated);
-                location.href = 'http://canore.dev/Hospitals';
+            function _onGetGynCaseSuccess(data){
+                if (data && data.Items) {
+                    vm.notify(function () {
+                        vm.gynCases = data.Items;
+                        console.log("GYN CASES:", vm.gynCases);
+                    });
+                }
             }
 
-            function _onGetSuccess(data, status, xhr) {
-                if (data && data.Item) {
-                    vm.fillInForm(data.Item);
-                    $("#cmdSubmit").html("Update Hospital");
+            function _onGetObCaseSuccess(data){
+                if (data && data.Items) {
+                    vm.notify(function () {
+                        vm.obCases = data.Items;
+                        console.log("OB CASES:", vm.obCases);
+                    });
+                }
+            }
+
+            function _onGetUncompCaseSuccess(data){
+                if (data && data.Items) {
+                    vm.notify(function () {
+                        vm.deliveries = data.Items;
+                        console.log("DELIVERIES:", vm.deliveries);
+                    });
                 }
             }
 
@@ -365,12 +560,11 @@
                     }
                 };
             });
-
         }
 
         sabio.ng.addController(sabio.ng.app.module,
             "hospitalsController",
-            ['$scope', '$baseController', "$hospitalsService"],
+            ['$scope', '$baseController', "$hospitalsService", "$gynService", "$obstetricsService", "$uncomplicatedService"],
             sabio.page.hospitalsControllerFactory);
 
 

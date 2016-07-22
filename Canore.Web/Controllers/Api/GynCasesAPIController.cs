@@ -57,6 +57,14 @@ namespace Canore.Web.Controllers.Api
             return Request.CreateResponse(response);
         }
 
+        [Route("Hospital/{hospitalId:int}"), HttpGet]
+        public HttpResponseMessage GetGynCaseByHospital(int hospitalId)
+        {
+            ItemsResponse<GynCases> response = new ItemsResponse<GynCases>();
+            response.Items = GynCasesService.GetGynCaseByHospital(hospitalId);
+            return Request.CreateResponse(response);
+        }
+
         [Route, HttpGet]
         public HttpResponseMessage GetGynCaseList()
         {

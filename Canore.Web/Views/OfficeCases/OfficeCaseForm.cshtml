@@ -1,16 +1,16 @@
 ﻿@model Canore.Web.Models.ViewModels.ItemViewModel<int>
 
 @{
-    ViewBag.Title = "Gynecological Patient";
+    ViewBag.Title = "Office Practice";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Gynecological Patient Case</h2>
+<h2>Office Practice Case</h2>
 
-<div data-ng-controller="gynController as gyn" id="gynCtrl">
+<div data-ng-controller="officeController as office" id="officeCtrl">
     <div id="formContainer" class="block push-bit form-horizontal form-bordered form-control-borderless">
-        <form class="form-horizontal form-bordered form-control-borderless" id="gynForm" name="gyn.gynForm" ng-submit="gyn.onSubmitForm()" novalidate>
-            <input type="text" class="hidden" id="caseId" name="Id" ng-model="gyn.caseData.Id" value="@Model.Item" form-autofill-fix>
+        <form class="form-horizontal form-bordered form-control-borderless" id="officeForm" name="office.officeForm" ng-submit="office.onSubmitForm()" novalidate>
+            <input type="text" class="hidden" id="caseId" name="Id" ng-model="office.caseData.Id" value="@Model.Item" form-autofill-fix>
             <div class="form-group">
                 <div class="col-xs-6">
                     Patient ID
@@ -20,14 +20,14 @@
                                style="width: 150px;"
                                id="patientId"
                                name="PatientID"
-                               ng-model="gyn.caseData.PatientID"
-                               class="form-control ng-class:{'has-error': gyn.gynForm.PatientId.$touched && !gyn.gynForm.PatientId.$valid}"
+                               ng-model="office.caseData.PatientID"
+                               class="form-control ng-class:{'has-error': office.officeForm.PatientId.$touched && !office.officeForm.PatientId.$valid}"
                                ng-minlength="5"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.PatientId.$error.required">Please enter patient ID</span>
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.PatientId.$error.minlength">Patient ID is required to be at least 5 characters</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.PatientId.$error.required">Please enter patient ID</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.PatientId.$error.minlength">Patient ID is required to be at least 5 characters</span>
                         </div>
                     </div>
                 </div>
@@ -41,14 +41,14 @@
                                style="width: 75px;"
                                id="age"
                                name="Age"
-                               ng-model="gyn.caseData.Age"
-                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.Age.$valid}"
+                               ng-model="office.caseData.Age"
+                               class="form-control ng-class:{'error': office.showFormErrors && !office.officeForm.Age.$valid}"
                                min="13" max="89"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Age.$error.required">Please enter patient's age</span>
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Age.$error.min || gyn.gynForm.Age.$error.max">Not a valid age</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.Age.$error.required">Please enter patient's age</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.Age.$error.min || office.officeForm.Age.$error.max">Not a valid age</span>
                         </div>
                     </div>
                 </div>
@@ -62,14 +62,14 @@
                                style="width: 75px;"
                                id="gravity"
                                name="Gravity"
-                               ng-model="gyn.caseData.Gravity"
-                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.Gravity.$valid}"
+                               ng-model="office.caseData.Gravity"
+                               class="form-control ng-class:{'error': office.showFormErrors && !office.officeForm.Gravity.$valid}"
                                min="1"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Gravity.$error.required">Please enter gravity</span>
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Gravity.$error.min">Patient must have at least 1 pregnancy</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.Gravity.$error.required">Please enter gravity</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.Gravity.$error.min">Patient must have at least 1 pregnancy</span>
                         </div>
                     </div>
                 </div>
@@ -83,13 +83,13 @@
                                style="width: 75px;"
                                id="parity"
                                name="Parity"
-                               ng-model="gyn.caseData.Parity"
-                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.Parity.$valid}"
+                               ng-model="office.caseData.Parity"
+                               class="form-control ng-class:{'error': office.showFormErrors && !office.officeForm.Parity.$valid}"
                                min="0"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Parity.$error.required">Enter valid # of term deliveries</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.Parity.$error.required">Enter valid # of term deliveries</span>
                         </div>
 
                     </div>
@@ -97,20 +97,74 @@
             </div>
             <div class="form-group">
                 <div class="col-xs-6">
-                    Admission
+                    Visits
+                    <div class="input-group">
+                        <input type="number"
+                               placeholder=""
+                               style="width: 75px;"
+                               id="visits"
+                               name="Visits"
+                               ng-model="office.caseData.Visits"
+                               class="form-control ng-class:{'error': office.showFormErrors && !office.officeForm.Visits.$valid}"
+                               required
+                               form-autofill-fix>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.Visits.$error.required">Please enter admission</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.Visits.$error.minlength">Please enter at least 5 characters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    Problem
                     <div class="input-group">
                         <input type="text"
                                placeholder=""
-                               id="admission"
-                               name="Admission"
-                               ng-model="gyn.caseData.Admission"
-                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.Admission.$valid}"
+                               id="problem"
+                               name="problem"
+                               ng-model="office.caseData.Problem"
+                               class="form-control ng-class:{'error': office.showFormErrors && !office.officeForm.problem.$valid}"
                                ng-minlength="5"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Admission.$error.required">Please enter admission</span>
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.Admission.$error.minlength">Please enter at least 5 characters</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.problem.$error.required">Please enter problem</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.problem.$error.minlength">Please enter at least 5 characters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    Diagnostic Procedures
+                    <div class="input-group">
+                        <input type="text"
+                               placeholder=""
+                               id="diagnosticProc"
+                               name="diagnosticProc"
+                               ng-model="office.caseData.DiagnosticProc"
+                               class="form-control ng-class:{'error': office.showFormErrors && !office.officeForm.diagnosticProc.$valid}"
+                               ng-minlength="5"
+                               required
+                               form-autofill-fix>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.diagnosticProc.$error.required">Please enter diagnosticProc</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.diagnosticProc.$error.minlength">Please enter at least 5 characters</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-6">
+                    <div class="input-group ng-class:{'error': office.showFormErrors && !office.officeForm.hospitalId.$valid}">
+                        Complications<br>
+                        <select class="form-control" id="complication" name="ComplicationID" ng-model="office.caseData.ComplicationID" required form-autofill-fix>
+                            <option value=""></option>
+                            <option ng-repeat="category in office.categories" name="category" value="{{category.Id}}">{{category.Category}}</option>
+                        </select>
+                        <div role="alert" class="help-inline error" style="color:red">
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.ComplicationID.$error.required">Please enter category</span>
                         </div>
                     </div>
                 </div>
@@ -123,84 +177,34 @@
                                placeholder=""
                                id="treatment"
                                name="treatment"
-                               ng-model="gyn.caseData.Treatment"
-                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.treatment.$valid}"
+                               ng-model="office.caseData.Treatment"
+                               class="form-control ng-class:{'error': office.showFormErrors && !office.officeForm.treatment.$valid}"
                                ng-minlength="5"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.treatment.$error.required">Please enter treatment</span>
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.treatment.$error.minlength">Please enter at least 5 characters</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.treatment.$error.required">Please enter treatment</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.treatment.$error.minlength">Please enter at least 5 characters</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-xs-6">
-                    Surgical Pathology
+                    Result
                     <div class="input-group">
                         <input type="text"
                                placeholder=""
-                               id="surgicalPath"
-                               name="SurgicalPath"
-                               ng-model="gyn.caseData.SurgicalPath"
-                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.SurgicalPath.$valid}"
+                               id="result"
+                               name="Result"
+                               ng-model="office.caseData.Result"
+                               class="form-control ng-class:{'error': office.showFormErrors && !office.officeForm.Result.$valid}"
                                ng-minlength="5"
                                required
                                form-autofill-fix>
                         <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.SurgicalPath.$error.required">Please enter pathology</span>
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.SurgicalPath.$error.minlength">Please enter at least 5 characters</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-6">
-                    <div class="input-group ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.hospitalId.$valid}">
-                        Complications<br>
-                        <select class="form-control" id="complications" name="ComplicationsID" ng-model="gyn.caseData.ComplicationsID" required form-autofill-fix>
-                            <option value=""></option>
-                            <option ng-repeat="category in gyn.categories" name="category" value="{{category.Id}}">{{category.Category}}</option>
-                        </select>
-                        <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.ComplicationsID.$error.required">Please enter category</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <div class="col-xs-6">
-                    <div class="input-group ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.hospitalId.$valid}">
-                        Hospital<br>
-                        <select ui-select2 class="form-control" id="hospital" name="HospitalId" data-placeholder="Pick a hospital" ng-model="gyn.caseData.HospitalId" required form-autofill-fix>
-                            <option value=""></option>
-                            <option ng-repeat="hospital in gyn.hospitals" name="hospital" value="{{hospital.Id}}">{{hospital.Name}}</option>
-                        </select>
-                        <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.HospitalId.$error.required">Please enter hospital</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-xs-6">
-                    <div class="input-group">
-                        Days in hospital<br>
-                        <input type="number"
-                               style="width: 80px;"
-                               id="daysInHospital"
-                               name="daysInHospital"
-                               ng-model="gyn.caseData.DaysInHospital"
-                               class="form-control ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.daysInHospital.$valid}"
-                               min="0"
-                               required
-                               form-autofill-fix> days
-                        <div role="alert" class="help-inline error" style="color:red">
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.daysInHospital.$error.required">Please enter length of days in hospital</span>
-                            <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.daysInHospital.$error.number">Please enter valid numbers</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.Result.$error.required">Please enter pathology</span>
+                            <span class="error" ng-show="office.showFormErrors && office.officeForm.Result.$error.minlength">Please enter at least 5 characters</span>
                         </div>
                     </div>
                 </div>
@@ -216,17 +220,17 @@
 
 @section Scripts{
 
-    <script src="~/Scripts/sabio.services.gyn.js"></script>
+    <script src="~/Scripts/sabio.services.officePractice.js"></script>
     <script src="~/Scripts/sabio.services.hospitals.js"></script>
     <script src="~/Scripts/sabio.services.categories.js"></script>
     <script type="text/javascript">
 
         sabio.page.startUp = function () {
-            sabio.page.userController = sabio.ng.getControllerInstance($("#gynCtrl"));
+            sabio.page.userController = sabio.ng.getControllerInstance($("#officeCtrl"));
         }
 
-        sabio.services.gynFactory = function ($baseService) {
-            var aSabioServiceObject = sabio.services.gyn;
+        sabio.services.officeFactory = function ($baseService) {
+            var aSabioServiceObject = sabio.services.officePractice;
             var newService = $baseService.merge(true, {}, aSabioServiceObject, $baseService);
             return newService;
         }
@@ -243,9 +247,9 @@
         }
 
         sabio.ng.addService(sabio.ng.app.module,
-            "$gynService",
+            "$officeService",
             ["$baseService"],
-            sabio.services.gynFactory);
+            sabio.services.officeFactory);
 
         sabio.ng.addService(sabio.ng.app.module,
             "$hospitalsService",
@@ -257,13 +261,13 @@
             ["$baseService"],
             sabio.services.categoriesFactory);
 
-        sabio.page.gynControllerFactory = function ($scope, $baseController, $gynService, $hospitalsService, $categoriesService) {
+        sabio.page.officeControllerFactory = function ($scope, $baseController, $officeService, $hospitalsService, $categoriesService) {
 
             var vm = this;
 
             $baseController.merge(vm, $baseController);
 
-            vm.$gynService = $gynService;
+            vm.$officeService = $officeService;
             vm.$hospitalsService = $hospitalsService;
             vm.$categoriesService = $categoriesService;
             vm.$scope = $scope;
@@ -286,29 +290,29 @@
                 error: "An error has occurred!"
             };
 
-            vm.notify = vm.$gynService.getNotifier($scope);
+            vm.notify = vm.$officeService.getNotifier($scope);
 
             render();
 
             function render() {
                 vm.showFormErrors = false;
                 vm.$hospitalsService.getHospitalList(vm.onGetHospitalSuccess, vm.onError);
-                vm.$categoriesService.getGynCategoryList(vm.onCategoriesSuccess, vm.onError);
-                vm.getForm();
+                vm.$categoriesService.getOfficeCategoryList(vm.onCategoriesSuccess, vm.onError);
+                if (@Model.Item > 0) vm.getForm();
             };
 
             function _onSubmitForm() {
                 console.log("validating");
                 vm.showFormErrors = true;
 
-                if (vm.gynForm.$valid) {
+                if (vm.officeForm.$valid) {
                     console.log("form is valid");
                     console.log(vm.caseData);
                     var caseId = @Model.Item;
                     if (caseId > 0) {
-                        vm.$gynService.updateGynCase(caseId, vm.caseData, vm.onCreateSuccess, vm.onError);
+                        vm.$officeService.updateOfficePracticeCase(caseId, vm.caseData, vm.onCreateSuccess, vm.onError);
                     } else {
-                        vm.$gynService.createGynCase(vm.caseData, vm.onCreateSuccess, vm.onError);
+                        vm.$officeService.createOfficePracticeCase(vm.caseData, vm.onCreateSuccess, vm.onError);
                         $("#cmdSubmit").html("Update Case");
                     }
                 } else {
@@ -317,9 +321,10 @@
             }
 
             function _getForm() {
-                vm.$gynService.getGynCase(@Model.Item, vm.onGetSuccess, vm.onError);
+                vm.$officeService.getOfficePracticeCase(@Model.Item, vm.onGetSuccess, vm.onError);
             }
 
+            //PRIVATE HANDLERS///////////////////////////////////////////////////////
             function _onGetSuccess(data) {
 
                 if (data && data.Item) {
@@ -327,7 +332,7 @@
                         vm.caseData = data.Item;
                     });
                     $("#hospital").val(data.Item.Hospital.Id).trigger('change');
-                    $("#complications").val(data.Item.Complication.Id).trigger('change');
+                    $("#complication").val(data.Item.Complication.Id).trigger('change');
                     $("#cmdSubmit").html("Update Case");
                     console.log(vm.caseData);
                 }
@@ -350,7 +355,7 @@
             function _onCreateSuccess(data, status, xhr) {
                 console.log(vm.alert.saved);
                 window.alert(vm.alert.saved);
-                location.href = 'http://canore.dev/gyncases';
+                location.href = 'http://canore.dev/officecases';
             }
 
             function _onError(jqXHR, textStatus, errorThrown) {
@@ -378,9 +383,9 @@
         }
 
         sabio.ng.addController(sabio.ng.app.module,
-            "gynController",
-            ['$scope', '$baseController', "$gynService", "$hospitalsService", "$categoriesService"],
-            sabio.page.gynControllerFactory);
+            "officeController",
+            ['$scope', '$baseController', "$officeService", "$hospitalsService", "$categoriesService"],
+            sabio.page.officeControllerFactory);
 
 
     </script>

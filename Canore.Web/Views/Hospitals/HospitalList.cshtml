@@ -23,7 +23,7 @@
                     <th>Zip Code</th>
                     <th>Gynecological Exams</th>
                     <th>Obstetrical Exams</th>
-                    <th>Uncomplicate Deliveries</th>
+                    <th>Uncomplicated Deliveries</th>
                 </tr>
                 <tr data-ng-repeat="hospital in dashboard.hospitals">
                     <td>{{hospital.Id}}</td>
@@ -36,7 +36,7 @@
                     <td>{{hospital.GynExams}}</td>
                     <td>{{hospital.ObExams}}</td>
                     <td>{{hospital.Deliveries}}</td>
-                    <td><a ng-href="http://canore.dev/hospitals/{{hospital.Id}}" title="Edit">Edit</a></td>
+                    <td><a ng-href="http://canore.dev/hospitals/{{hospital.Id}}" title="Info">Info</a></td>
                     <td><a ng-href="javascript:void(0)" title="Delete" ng-click="dashboard.onDeleteHospital(hospital)">Delete</a></td>
                 </tr>
 

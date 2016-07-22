@@ -58,6 +58,14 @@ namespace Canore.Web.Controllers.Api
             return Request.CreateResponse(response);
         }
 
+        [Route("Hospital/{hospitalId:int}"), HttpGet]
+        public HttpResponseMessage GetObCaseByHospital(int hospitalId)
+        {
+            ItemsResponse<ObCases> response = new ItemsResponse<ObCases>();
+            response.Items = ObCasesService.GetObCaseByHospital(hospitalId);
+            return Request.CreateResponse(response);
+        }
+
         [Route, HttpGet]
         public HttpResponseMessage GetObCaseList()
         {

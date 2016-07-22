@@ -1,6 +1,4 @@
-﻿if (!sabio.services.gyn) {
-    sabio.services.gyn = {};
-}
+﻿if (!sabio.services.gyn) sabio.services.gyn = {};
 
 sabio.services.gyn.createGynCase = function (gynCaseData, onSuccess, onError) {
 
@@ -38,6 +36,21 @@ sabio.services.gyn.updateGynCase = function (id, gynCaseData, onSuccess, onError
 sabio.services.gyn.getGynCase = function (id, onSuccess, onError) {
 
     var url = "/api/GynCaseForm/" + id;
+    var settings = {
+        cache: false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        dataType: "json",
+        success: onSuccess,
+        error: onError,
+        type: "GET"
+    };
+
+    $.ajax(url, settings);
+}
+
+sabio.services.gyn.getGynCaseByHospital = function (hospitalId, onSuccess, onError) {
+
+    var url = "/api/GynCaseForm/Hospital/" + hospitalId;
     var settings = {
         cache: false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",

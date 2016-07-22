@@ -114,7 +114,6 @@ namespace Canore.Web.Services
             int startingIndex = 0;
 
             item.Id = reader.GetSafeInt32(startingIndex++);
-            //item.HospitalId = reader.GetSafeString(startingIndex++);
             item.Name = reader.GetSafeString(startingIndex++);
             item.Abbrev = reader.GetSafeString(startingIndex++);
             item.Address = reader.GetSafeString(startingIndex++);

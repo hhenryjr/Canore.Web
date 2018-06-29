@@ -159,10 +159,10 @@
                 <div class="col-xs-6">
                     <div class="input-group ng-class:{'error': gyn.showFormErrors && !gyn.gynForm.hospitalId.$valid}">
                         Complications<br>
-                        <select class="form-control" id="complications" name="ComplicationsID" ng-model="gyn.caseData.ComplicationsID" required form-autofill-fix>
+                        @*<select class="form-control" id="complications" name="ComplicationsID" ng-model="gyn.caseData.ComplicationsID" required form-autofill-fix>
                             <option value=""></option>
                             <option ng-repeat="category in gyn.categories" name="category" value="{{category.Id}}">{{category.Category}}</option>
-                        </select>
+                        </select>*@
                         <div role="alert" class="help-inline error" style="color:red">
                             <span class="error" ng-show="gyn.showFormErrors && gyn.gynForm.ComplicationsID.$error.required">Please enter category</span>
                         </div>

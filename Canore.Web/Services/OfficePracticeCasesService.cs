@@ -31,7 +31,7 @@ namespace Canore.Web.Services
                     InsertOfficePracticeCase.AddWithValue("@Visits", model.Visits);
                     InsertOfficePracticeCase.AddWithValue("@Problem", model.Problem);
                     InsertOfficePracticeCase.AddWithValue("@DiagnosticProc", model.DiagnosticProc);
-                    InsertOfficePracticeCase.AddWithValue("@ComplicationID", model.ComplicationID);
+                    //InsertOfficePracticeCase.AddWithValue("@ComplicationID", model.ComplicationID);
                     InsertOfficePracticeCase.AddWithValue("@Treatment", model.Treatment);
                     InsertOfficePracticeCase.AddWithValue("@Result", model.Result);
 
@@ -64,7 +64,7 @@ namespace Canore.Web.Services
                     UpdateOfficePracticeCase.AddWithValue("@Visits", model.Visits);
                     UpdateOfficePracticeCase.AddWithValue("@Problem", model.Problem);
                     UpdateOfficePracticeCase.AddWithValue("@DiagnosticProc", model.DiagnosticProc);
-                    UpdateOfficePracticeCase.AddWithValue("@ComplicationID", model.ComplicationID);
+                    //UpdateOfficePracticeCase.AddWithValue("@ComplicationID", model.ComplicationID);
                     UpdateOfficePracticeCase.AddWithValue("@Treatment", model.Treatment);
                     UpdateOfficePracticeCase.AddWithValue("@Result", model.Result);
                 });

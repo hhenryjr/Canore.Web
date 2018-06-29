@@ -17,7 +17,7 @@
     <AssemblyName>Canore.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -866,6 +866,8 @@
     <Content Include="js\vendor\bootstrap.min.js" />
     <Content Include="js\vendor\jquery-1.11.3.min.js" />
     <Content Include="js\vendor\modernizr-respond.min.js" />
+    <Content Include="Partials\Categories\GynCategories.html" />
+    <Content Include="Partials\Categories\ObCategories.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="js\helpers\ckeditorstandard\CHANGES.md" />
@@ -945,6 +947,7 @@
     <Content Include="Scripts\ng\dirPagination.js" />
     <Content Include="Scripts\ng\isteven-multi-select.js" />
     <Content Include="Scripts\ng\ng-tags-input.min.js" />
+    <Content Include="Scripts\ng\partials.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sabio.js" />
@@ -1016,6 +1019,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\ng\Directives\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1049,9 +1053,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>65309</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://canore.dev</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://canore.dev</IISAppRootUrl>
+          <IISUrl>http://localhost:53203/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
